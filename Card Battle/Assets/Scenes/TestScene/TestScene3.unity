@@ -1712,14 +1712,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: weapon
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1689797716386783912, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 44bc22e752a59fb4e810a3fd590b3f2c, type: 3}
     - target: {fileID: 1819509623144792694, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
       propertyPath: m_Name
       value: Character
