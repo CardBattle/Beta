@@ -950,42 +950,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: hp
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: id
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 1453073742251471924, guid: af035b9a15a6e424ba02352d76c41956, type: 3}
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: _name
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: level
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: defense
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: cardDATA
-      value: 
-      objectReference: {fileID: 5207043119744086873, guid: 5a6cd18f8f4105b4aae296cbc7bc594f, type: 3}
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: attackDmg
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2572840271167720161, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
-      propertyPath: cards.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2572840271216764963, guid: 2b7c9765061dbc3409b864bc000ced3a, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1749,37 +1713,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: hp
-      value: 0
+      propertyPath: weapon
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: data
+    - target: {fileID: 1689797716386783912, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2038502859531863969, guid: 75753aa904219b94a991208126221636, type: 3}
-    - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: _name
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: level
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: defense
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: cardDATA
-      value: 
-      objectReference: {fileID: 5207043119744086873, guid: 5a6cd18f8f4105b4aae296cbc7bc594f, type: 3}
-    - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: attackDmg
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501314690357840585, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
-      propertyPath: cards.Array.size
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 44bc22e752a59fb4e810a3fd590b3f2c, type: 3}
     - target: {fileID: 1819509623144792694, guid: 3ab729df1133a2f4cb6b2964009b400f, type: 3}
       propertyPath: m_Name
       value: Character
