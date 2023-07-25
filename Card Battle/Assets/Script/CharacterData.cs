@@ -10,7 +10,7 @@ public class CharacterData : MonoBehaviour
     public int chrMaxHp = 20;
     public int chrAttackDmg = 1;
     public int chrDefense = 1;
-    public List<int> chrCard = new List<int> { 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3 };
+    public List<int> chrCard;
     public string WeaponName = "SWORD";
     public int imgNum = 1;
 }

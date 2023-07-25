@@ -39,14 +39,21 @@ public class Character : MonoBehaviour
 
     public void CharDATA()
     {
+
+        cards.Clear();
         _name = data.chrName;
         id = data.chrId;
         hp = data.chrMaxHp;
         level = data.chrLv;
         defense = data.chrDefense;
         attackDmg = data.chrAttackDmg;
+<<<<<<< HEAD
+        
+        foreach(var card in data.chrCard)
+=======
 
         foreach (var card in data.chrCard)
+>>>>>>> 906562933c4f7fe8510124523b6966d894f3a438
         {
             cards.Add(cardDATA.cardPrefabs[card]);
         }

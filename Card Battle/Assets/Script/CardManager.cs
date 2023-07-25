@@ -19,8 +19,13 @@ public class CardManager : MonoBehaviour
 
     public void Init()
     {
-        playerCardPrefabs = player.GetComponent<Character>().cards;
-        enemyCardPrefabs = enemy.GetComponent<Character>().cards;
+        playerCardPrefabs = BattleManager.Bm.player.cards;
+        enemyCardPrefabs = BattleManager.Bm.enemy.cards;
+
+        player = BattleManager.Bm.player.gameObject;
+        enemy = BattleManager.Bm.enemy.gameObject;
+        /* playerCardPrefabs = player.GetComponent<Character>().cards;
+         enemyCardPrefabs = enemy.GetComponent<Character>().cards;*/
 
         Load(playerCardPrefabs, playerCardObjs);
         Load(enemyCardPrefabs, enemyCardObjs);

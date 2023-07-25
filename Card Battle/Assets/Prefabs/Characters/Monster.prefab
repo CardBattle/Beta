@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 1868476041}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,11 +183,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: "\uB9C8\uC655"
-  id: 20
-  level: 10
-  defense: 20
-  hp: 90
-  attackDmg: 10
+  id: 1
+  level: 25
+  defense: 300
+  hp: 3000
+  attackDmg: 250
   weapon: 4
   img: {fileID: 21300000, guid: 9125c204f566db048a92ebcb64d9d14a, type: 3}
   buffs: []
@@ -198,12 +198,7 @@ MonoBehaviour:
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
-  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
-  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
-  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
-  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
-  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
-  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
+  - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
@@ -230,7 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2572840271216764972}
   m_Layer: 0
-  m_Name: Boss
+  m_Name: Monster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

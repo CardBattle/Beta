@@ -54,6 +54,12 @@ public class CardUse : MonoBehaviour
 
     protected void AttackAnim(Character sender, Character receiver)
     {
+        print(sender.gameObject);
+        print(receiver.gameObject);
+
+        print(sender.gameObject.activeSelf);
+        print(receiver.gameObject.activeSelf);
+        print("컷!");
         sender.GetComponent<Animator>().SetTrigger("Attack");
 
         StartCoroutine(HurtAnim(receiver));

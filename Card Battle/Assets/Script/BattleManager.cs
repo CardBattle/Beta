@@ -44,9 +44,9 @@ public class BattleManager : MonoBehaviour
 
     //플레이어, 적 정보와 덱 체크
     [SerializeField]
-    private Character player;
+    public Character player;
     [SerializeField]
-    private Character enemy;
+    public Character enemy;
 
     //플레이어, 적 카드 정보 체크
     [SerializeField]
@@ -64,6 +64,9 @@ public class BattleManager : MonoBehaviour
     // 전에 쓴 카드들 삭제하기 위한 리스트
     public List<Card> playerDeleteCards;
     public List<Card> enemyDeleteCards;
+
+    public List<GameObject> characterPrefabs;
+
 
     //카드매니저
     [SerializeField]
@@ -109,12 +112,16 @@ public class BattleManager : MonoBehaviour
     public int playerDice = 0;
     public int enemyDice = 0;
 
+    public int stage = 2;
+
     //전체체력 퍼뎀
     public int playerHpPercent;
     public int enemyHpPercent;
 
     // 타이머
     public float timer;
+    public GameObject playerParent;
+    public GameObject enemyParent;
 
     // 플레이어 동작
     public State state;
@@ -138,25 +145,8 @@ public class BattleManager : MonoBehaviour
             Bm = this;
         }
 
-        player.CharDATA();
-        enemy.CharDATA();
-        player.Init();
-        enemy.Init();
-
-        playerHpSlider.maxValue = player.info.MaxHp;
-        enemyHpSlider.maxValue = enemy.info.MaxHp;
-
-        playerHpView.text = player.info.MaxHp.ToString();
-        enemyHpView.text = enemy.info.MaxHp.ToString();
-
-        playerHpPercent = player.info.MaxHp / 10;
-        enemyHpPercent = enemy.info.MaxHp / 10;
-
-        playerHpSlider.value = player.info.Hp;
-        enemyHpSlider.value = enemy.info.Hp;
-
-
-        cardManager.Init();
+        PrefabsCharacterInformation();
+        CharcterDataInfomation();      
         OnAddCard = Add;
 
         state = State.CardDecision;
@@ -586,6 +576,45 @@ public class BattleManager : MonoBehaviour
         }
 
     }
+    void PrefabsCharacterInformation()
+    {
+        Instantiate(characterPrefabs[0]);
+        Instantiate(characterPrefabs[stage]); 
+
+        player = GameObject.FindWithTag("Player").GetComponentInChildren<Character>();
+        enemy = GameObject.FindWithTag("Enemy").GetComponentInChildren<Character>();
+
+        playerParent = player.transform.parent.gameObject;
+        enemyParent = enemy.transform.parent.gameObject;
+
+        myDeckPosition = playerParent.gameObject.transform.GetChild(1);
+        enemyDeckPosition = enemyParent.gameObject.transform.GetChild(1);
+        myCardUp = playerParent.gameObject.transform.GetChild(3);
+        myCardDown = playerParent.gameObject.transform.GetChild(4);
+        enemyCardUp = enemyParent.gameObject.transform.GetChild(3);
+        enemyCardDown = enemyParent.gameObject.transform.GetChild(4);
+    }
+    void CharcterDataInfomation()
+    {
+        player.CharDATA();
+        enemy.CharDATA();
+        player.Init();
+        enemy.Init();
+
+        playerHpSlider.maxValue = player.info.MaxHp;
+        enemyHpSlider.maxValue = enemy.info.MaxHp;
+
+        playerHpView.text = player.info.MaxHp.ToString();
+        enemyHpView.text = enemy.info.MaxHp.ToString();
+
+        playerHpPercent = player.info.MaxHp / 10;
+        enemyHpPercent = enemy.info.MaxHp / 10;
+
+        playerHpSlider.value = player.info.Hp;
+        enemyHpSlider.value = enemy.info.Hp;
+
+        cardManager.Init();
+    }
 
     public void CardSelectDown(Card card)
     {
@@ -611,6 +640,7 @@ public class BattleManager : MonoBehaviour
     {
         card.GetComponent<Order>().DragOrder(false);
     }
+
 
     IEnumerator WaitTimer()
     {
