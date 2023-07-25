@@ -62,13 +62,7 @@ public class CardUse : MonoBehaviour
         print("컷!");
         sender.GetComponent<Animator>().SetTrigger("Attack");
 
-        StartCoroutine(HurtAnim(receiver));
-    }
-
-    protected IEnumerator HurtAnim(Character receiver)
-    {
-        yield return new WaitForSeconds(1f);
-        receiver.GetComponent<Animator>().SetTrigger("Hurt");
+        StartCoroutine(receiver.HurtAnim());
     }
 
     protected void DefenseAnim(Character sender, Character receiver)

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -47,13 +48,8 @@ public class Character : MonoBehaviour
         level = data.chrLv;
         defense = data.chrDefense;
         attackDmg = data.chrAttackDmg;
-<<<<<<< HEAD
-        
+      
         foreach(var card in data.chrCard)
-=======
-
-        foreach (var card in data.chrCard)
->>>>>>> 906562933c4f7fe8510124523b6966d894f3a438
         {
             cards.Add(cardDATA.cardPrefabs[card]);
         }
@@ -83,6 +79,12 @@ public class Character : MonoBehaviour
                 return;
         }
         ;
+    }
+
+    public IEnumerator HurtAnim()
+    {
+        yield return new WaitForSeconds(1f);
+        GetComponent<Animator>().SetTrigger("Hurt");
     }
 
     public void DieAnim()
