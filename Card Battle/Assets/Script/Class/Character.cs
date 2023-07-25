@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -21,14 +21,16 @@ public class Character : MonoBehaviour
     [SerializeField]
     private WeaponType weapon;
     [SerializeField]
+    private SpriteRenderer weaponSprite;
+    [SerializeField]
     private Sprite img;
-    
+
     public List<Buff> buffs;
 
     public Data cardDATA;
     public CharacterData data;
 
-    
+
 
     public List<GameObject> cards; //카드 매니저에서 캐릭터가 소유한 카드 프리팹을 접근해야하기 때문에 public
 
@@ -45,8 +47,13 @@ public class Character : MonoBehaviour
         level = data.chrLv;
         defense = data.chrDefense;
         attackDmg = data.chrAttackDmg;
+<<<<<<< HEAD
         
         foreach(var card in data.chrCard)
+=======
+
+        foreach (var card in data.chrCard)
+>>>>>>> 906562933c4f7fe8510124523b6966d894f3a438
         {
             cards.Add(cardDATA.cardPrefabs[card]);
         }
@@ -57,6 +64,25 @@ public class Character : MonoBehaviour
         buffs = new List<Buff>();
         info = new(id, _name, level, hp, attackDmg, defense, cards, buffs, weapon, img);
         anim = GetComponent<Animator>();
+        
+        switch (weapon)
+        {
+            case WeaponType.BOW:
+                weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Bow");
+                anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Anim/Bow");
+                break;
+            case WeaponType.SWORD:
+                weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
+                anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Anim/Sword");
+                break;
+            case WeaponType.WAND:
+                weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Wand");
+                anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Anim/Wand");
+                break;
+            default:
+                return;
+        }
+        ;
     }
 
     public void DieAnim()
