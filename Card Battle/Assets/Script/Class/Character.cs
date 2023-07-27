@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -78,6 +79,12 @@ public class Character : MonoBehaviour
                 return;
         }
         ;
+    }
+
+    public IEnumerator HurtAnim()
+    {
+        yield return new WaitForSeconds(1f);
+        GetComponent<Animator>().SetTrigger("Hurt");
     }
 
     public void DieAnim()
