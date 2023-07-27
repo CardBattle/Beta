@@ -48,8 +48,8 @@ public class Character : MonoBehaviour
         level = data.chrLv;
         defense = data.chrDefense;
         attackDmg = data.chrAttackDmg;
-      
-        foreach(var card in data.chrCard)
+
+        foreach (var card in data.chrCard)
         {
             cards.Add(cardDATA.cardPrefabs[card]);
         }
