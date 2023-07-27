@@ -43,13 +43,13 @@ public class BattleManager : MonoBehaviour
 
 
     //플레이어, 적 정보와 덱 체크
-    [SerializeField]
     public Character player;
-    [SerializeField]
     public Character enemy;
 
-    //플레이어, 적 카드 정보 체크
     [SerializeField]
+    private GameObject UIObject;
+
+    //플레이어, 적 카드 정보 체크
     public Decision playerDecision;
     public EnemyDecision enemyDecision;
 
@@ -106,13 +106,13 @@ public class BattleManager : MonoBehaviour
     private int enemySortingCard = 0;
 
     // 전전에 쓴 카드 오브젝트 삭제하기 위한 변수
-    private int turnCount = 0;
+    public int turnCount = 0;
 
     // 다이스 체크
     public int playerDice = 0;
     public int enemyDice = 0;
 
-    public int stage = 2;
+    public int stage;
 
     //전체체력 퍼뎀
     public int playerHpPercent;
@@ -144,7 +144,19 @@ public class BattleManager : MonoBehaviour
         {
             Bm = this;
         }
+        
+        if (PlayerPrefs.GetInt("Stage") >= 2)
+        {
+            stage = PlayerPrefs.GetInt("Stage");         
+        }
+        else
+        {
+            stage = 1;
+        }
+      
+        print(stage);
 
+        Time.timeScale = 1;
         PrefabsCharacterInformation();
         CharcterDataInfomation();      
         OnAddCard = Add;
@@ -220,6 +232,9 @@ public class BattleManager : MonoBehaviour
 
         if (enemyDecision.card != null)
             enemyDecision.card.EnemyCardFront();
+
+        StartCoroutine(UIManager.Um.Dice(playerDice, true));
+        StartCoroutine(UIManager.Um.Dice(enemyDice, false));
 
         if (playerDecision.card != null && playerDecision.card.info.Property == PropertyType.DEFENSE)
         {
@@ -342,9 +357,9 @@ public class BattleManager : MonoBehaviour
             {
                 if (playerDecision.card.info.Property == PropertyType.ATTACK)
                 {
-                    enemyDecision.card.info.use(player, enemy);
+                    enemyDecision.card.info.use(enemy, player);
                     print("적 방어");
-                    playerDecision.card.info.use(enemy, player);
+                    playerDecision.card.info.use(player, enemy); 
                     print("아군 공격");
 
                     playerHpSlider.value = player.info.Hp;
@@ -506,9 +521,23 @@ public class BattleManager : MonoBehaviour
 
     private void BattleResult(int result)
     {
-        if (result == 0) { timerText.text = "패배"; }
-        if (result == 1) { timerText.text = "승리"; }
-        if (result == 2) { timerText.text = "무승부"; }
+        if (result == 0) 
+        {
+            UIObject.SetActive(true);
+            UIManager.Um.result.text = "패배";
+            UIManager.Um.Defeat();
+        }
+        if (result == 1) 
+        {
+            UIObject.SetActive(true);
+            UIManager.Um.result.text = "승리";
+            UIManager.Um.Victory();
+        }
+        if (result == 2)
+        {
+            UIObject.SetActive(true);
+            UIManager.Um.result.text = "무승부";
+        }
 
         StopAllCoroutines();
     }
@@ -596,8 +625,7 @@ public class BattleManager : MonoBehaviour
     }
     void CharcterDataInfomation()
     {
-        player.CharDATA();
-        enemy.CharDATA();
+        player.CharDATA();      
         player.Init();
         enemy.Init();
 
@@ -686,7 +714,7 @@ public class BattleManager : MonoBehaviour
         {
             BattleResult(2);
         }
-
+       
         OnAddCard?.Invoke(true);
         OnAddCard?.Invoke(false);
 
@@ -695,6 +723,9 @@ public class BattleManager : MonoBehaviour
 
 
         yield return new WaitForSeconds(0.5f);
+
+        playerDecision.button.gameObject.SetActive(true);
+        playerDecision.timerText.SetActive(true);
 
         ++turnCount;
 

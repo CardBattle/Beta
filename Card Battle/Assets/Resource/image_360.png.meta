@@ -1,27 +1,9 @@
 fileFormatVersion: 2
-guid: f85c0b0d6e5acd64185eafcda5d6cba8
+guid: 22b75e2ec198b7e47ade1f2851a6f68b
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 8799829423701521183
-    second: Steampunk_UI_Buttons_2_0
-  - first:
-      213: -6613772995676377648
-    second: Steampunk_UI_Buttons_2_2
-  - first:
-      213: -6513349321188212269
-    second: Steampunk_UI_Buttons_2_5
-  - first:
-      213: 6912372366057910295
-    second: Steampunk_UI_Buttons_2_4
-  - first:
-      213: -1388602495020635306
-    second: Steampunk_UI_Buttons_2_3
-  - first:
-      213: 2191966642830837830
-    second: Steampunk_UI_Buttons_2_1
+  internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -81,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -107,7 +90,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -119,7 +102,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -134,127 +117,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Steampunk_UI_Buttons_2_0
+      name: image_360_0
       rect:
         serializedVersion: 2
-        x: 44
-        y: 818
-        width: 346
-        height: 219
+        x: 6
+        y: 141
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 84, y: 52, z: 102, w: 36}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1372c3cc364f1a70800000000000000
-      internalID: 8799829423701521183
+      spriteID: b54a41714e8fe9440b03836b8d953540
+      internalID: -274115045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Steampunk_UI_Buttons_2_1
+      name: image_360_1
       rect:
         serializedVersion: 2
-        x: 442
-        y: 816
-        width: 346
-        height: 219
+        x: 25
+        y: 141
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 84, y: 52, z: 102, w: 36}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64800715c0e6b6e10800000000000000
-      internalID: 2191966642830837830
+      spriteID: 4cafdcc5c85a6914ca8053c17e77ed56
+      internalID: 351695555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Steampunk_UI_Buttons_2_2
+      name: image_360_2
       rect:
         serializedVersion: 2
-        x: 845
-        y: 814
-        width: 346
-        height: 219
+        x: 57
+        y: 141
+        width: 19
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 84, y: 52, z: 102, w: 36}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dd63af60882734a0800000000000000
-      internalID: -6613772995676377648
+      spriteID: 1003495fea5f2e8419cad2dec7382e6e
+      internalID: 1093425826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Steampunk_UI_Buttons_2_3
+      name: image_360_3
       rect:
         serializedVersion: 2
-        x: 61
-        y: 449
-        width: 688
-        height: 271
+        x: 25
+        y: 114
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 80, y: 80, z: 90, w: 50}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65be21e4361babce0800000000000000
-      internalID: -1388602495020635306
+      spriteID: d49280c67ecd93f47aed1b1ff2577420
+      internalID: -4808718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Steampunk_UI_Buttons_2_4
+      name: image_360_4
       rect:
         serializedVersion: 2
-        x: 839
-        y: 443
-        width: 688
-        height: 271
+        x: 25
+        y: 88
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 80, y: 80, z: 90, w: 50}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 710bb1a2b0eadef50800000000000000
-      internalID: 6912372366057910295
+      spriteID: 509001008e053fc48b870baad5135c18
+      internalID: -1331798636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Steampunk_UI_Buttons_2_5
+      name: image_360_5
       rect:
         serializedVersion: 2
-        x: 59
-        y: 98
-        width: 688
-        height: 271
+        x: 25
+        y: 61
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 80, y: 80, z: 90, w: 50}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d18b843d4feb95a0800000000000000
-      internalID: -6513349321188212269
+      spriteID: 1ed55d710cefedf4d9527a6b6928c4c4
+      internalID: -1981325870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: image_360_6
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 35
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22196e8e3d034a340835b3c7c4d1c431
+      internalID: -1237618019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: image_360_7
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 8
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9237429a8894b0448bbb49efe39de6a5
+      internalID: -1771503117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: image_360_8
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 141
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3871a4bf550702948834ec32223f69ea
+      internalID: -1220768648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: image_360_9
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 141
+        width: 19
+        height: 19
+      alignment: 9
+      pivot: {x: 0.40042195, y: 0.39488983}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e8cbfb5be46a5742be5b7437bb7285e
+      internalID: 1005338926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: image_360_10
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 141
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e90dc51bad07bb746bc68666451a6e57
+      internalID: 1605480838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: image_360_11
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 141
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd6f0402d505df24b884c4796f813b84
+      internalID: -1127701909
       vertices: []
       indices: 
       edges: []
@@ -270,12 +379,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Steampunk_UI_Buttons_2_0: 8799829423701521183
-      Steampunk_UI_Buttons_2_2: -6613772995676377648
-      Steampunk_UI_Buttons_2_5: -6513349321188212269
-      Steampunk_UI_Buttons_2_4: 6912372366057910295
-      Steampunk_UI_Buttons_2_3: -1388602495020635306
-      Steampunk_UI_Buttons_2_1: 2191966642830837830
+      image_360_0: -274115045
+      image_360_1: 351695555
+      image_360_10: 1605480838
+      image_360_11: -1127701909
+      image_360_2: 1093425826
+      image_360_3: -4808718
+      image_360_4: -1331798636
+      image_360_5: -1981325870
+      image_360_6: -1237618019
+      image_360_7: -1771503117
+      image_360_8: -1220768648
+      image_360_9: 1005338926
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
