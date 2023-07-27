@@ -43,7 +43,12 @@ public class CardUse : MonoBehaviour
             bool isExist = false;
             foreach (var buff in card.info.buffs)
             {
-                foreach (var exist in receiver.info.buffs)
+                Character c;
+                if (buff.info.Type == BuffType.BUFF)
+                    c = sender;
+                else
+                    c = receiver;
+                foreach (var exist in c.info.buffs)
                 {
                     if (exist.info.Id == buff.info.Id)
                     {
@@ -53,7 +58,7 @@ public class CardUse : MonoBehaviour
                     }
                 }
                 if (!isExist)
-                    receiver.info.buffs.Add(buff);
+                    c.info.buffs.Add(buff);
             }
         }
         sender.GetComponent<SFXVFX>().play += PlaySFX;

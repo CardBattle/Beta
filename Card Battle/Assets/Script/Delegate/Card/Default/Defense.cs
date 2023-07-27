@@ -9,6 +9,7 @@ public class Defense : CardUse
         if (senderCard.info.Dice < receiverCard.info.Dice)
             receiverCard.info.EffVal -= 1;
         else receiverCard.info.EffVal -= 2;
+        
     }
 
 }

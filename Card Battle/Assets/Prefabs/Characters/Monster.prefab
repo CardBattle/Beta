@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 1868476041}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
   hp: 3000
   attackDmg: 250
   weapon: 4
+  weaponSprite: {fileID: 0}
   img: {fileID: 21300000, guid: 9125c204f566db048a92ebcb64d9d14a, type: 3}
   buffs: []
   cardDATA: {fileID: 5207043119744086873, guid: 5a6cd18f8f4105b4aae296cbc7bc594f, type: 3}

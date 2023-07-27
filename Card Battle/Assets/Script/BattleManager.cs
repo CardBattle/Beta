@@ -291,6 +291,9 @@ public class BattleManager : MonoBehaviour
                 if (enemyDecision.card.info.Property == PropertyType.ATTACK)
                 {
                     playerDecision.card.info.use(player, enemy);
+
+                    Debug.Log($"{playerDecision.card.info.Name}: EffVal = {playerDecision.card.info.EffVal}");
+                    Debug.Log($"{enemyDecision.card.info.Name}: EffVal = {enemyDecision.card.info.EffVal}");
                     print("플레이어 방어");
                     enemyDecision.card.info.use(enemy, player);
                     print("적 공격");
