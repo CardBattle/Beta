@@ -778,11 +778,9 @@ GameObject:
   - component: {fileID: 6467222491020728267}
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
-  - component: {fileID: 1268825576960294303}
-  - component: {fileID: 1830646085763184782}
-  - component: {fileID: 8717993092894963132}
+  - component: {fileID: -1685377280170404196}
   m_Layer: 0
-  m_Name: ShieldStrike Card
+  m_Name: CombinationCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,15 +877,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 7
-  property: 1
+  id: 8
+  property: 0
   type: 1
-  _name: Shield Strike
+  _name: Combination
   _buff: 
-  effVal: 1
-  level: 1
+  effVal: 6
+  level: 2
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
-  cardimg: {fileID: -1119638910, guid: 91ece539279118a438c900dfb08582ed, type: 3}
+  cardimg: {fileID: -963042467, guid: 91ece539279118a438c900dfb08582ed, type: 3}
   cardTypeSpaceimg: {fileID: 380853605, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   cardNameSpaceimg: {fileID: -690418764, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardBuffimg: {fileID: -1097064367, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
@@ -983,7 +981,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b7b5a6156961bac44a67504d42ce6fcf, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 88b1cbe3caa3fee4b8b103b5edd7aba9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1069,7 +1067,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1268825576960294303
+--- !u!114 &-1685377280170404196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1078,41 +1076,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3230438190971658476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c007fdff98d59124f975c482b7818c12, type: 3}
+  m_Script: {fileID: 11500000, guid: 97efec830e9130a43811400edcb9e862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
   sfx: {fileID: 0}
-  vfx: {fileID: 5824670795371433373, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
---- !u!114 &1830646085763184782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 3
-  type: 1
-  _name: Stun
-  turns: 1
-  buffUse: {fileID: 8717993092894963132}
---- !u!114 &8717993092894963132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5db33ca26ffee01439738fca963ac630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  vfx: {fileID: 2504214343621411470, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
 --- !u!1 &4326520001256105577
 GameObject:
   m_ObjectHideFlags: 0
