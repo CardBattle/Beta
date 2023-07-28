@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 public class UiManager : MonoBehaviour
 {
     enum StudyState
@@ -42,20 +44,25 @@ public class UiManager : MonoBehaviour
     public GameObject upgradeCardUi;
     public GameObject fstCard1;
     public GameObject fstCard2;
+    public GameObject endStudy;
 
     public Transform player;
 
     private List<int> selectStudy;
     public List<Image> getCardList;
     private List<int> cardList;
+    private List<GameObject> cardListData;
 
     private int playerHp;
     private int playerAttack;
-    private int playerDepense;
+    private int playerDefense;
     private int DefaultPlayerHp;
     private int DefaultPlayerAttack;
-    private int DefaultPlayerDepense;
+    private int DefaultPlayerDefense;
     private int studyViewNum;
+    private int order;
+    private CharacterData data;
+    private DefaultCharacterData saveData;
 
 
     public void Awake()
@@ -68,7 +75,8 @@ public class UiManager : MonoBehaviour
         studyViewNum = 0;
         studyViewImage.sprite = studyViewResources[studyViewNum];
         selectStudy = new List<int>();
-        cardList = new List<int>();
+        cardList = new List<int> { 0, 1, 2, 3, 4, 5 };
+        cardListData = new List<GameObject>();
         player.position = new Vector3(-0.86f, 0.56f, 0.0f);
         mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
         studyUi.SetActive(true);
@@ -80,16 +88,34 @@ public class UiManager : MonoBehaviour
         cardUi.SetActive(false);
         getCardUi.SetActive(false);
         upgradeCardUi.SetActive(false);
-        playerHp = 20;
-        playerAttack = 1;
-        playerDepense = 1;
-        DefaultPlayerHp = 20;
-        DefaultPlayerAttack = 1;
-        DefaultPlayerDepense = 1;
+        endStudy.SetActive(false);
+        /*if(GameObject.FindGameObjectWithTag("PlayerData")!=null)
+        {
+            GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
+            data = dataObject.GetComponent<CharacterData>();
+            playerHp = data.chrMaxHp;
+            playerAttack = data.chrAttackDmg;
+            playerDefense = data.chrDefense;
+            DefaultPlayerHp = data.chrMaxHp;
+            DefaultPlayerAttack = data.chrAttackDmg;
+            DefaultPlayerDefense = data.chrDefense;
+            cardListData = data.chrCard;
+        }
+        else*/
+  //      {
+            playerHp = 20;
+            playerAttack = 1;
+            playerDefense = 1;
+            DefaultPlayerHp = 20;
+            DefaultPlayerAttack = 1;
+            DefaultPlayerDefense = 1;
+//        }
+        
         studingResult[0].text = "1회차";
         studingResult[1].text = null;
         studingResult[2].text = null;
         studyState = StudyState.first;
+        order = 0;
     }
     public void ChangeStudyImageBtn()
     {
@@ -182,6 +208,7 @@ public class UiManager : MonoBehaviour
                 statUi.SetActive(true);
                 startButton.SetActive(true); ;
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
+                player.position = new Vector3(4.0f, 12.0f, 0.0f);
             }
             else if (selectStudy[0] == 2)
             {
@@ -190,6 +217,7 @@ public class UiManager : MonoBehaviour
                 statUi.SetActive(true);
                 startButton.SetActive(true); ;
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
+                player.position = new Vector3(4.0f, 12.0f, 0.0f);
             }
         }
     }
@@ -236,7 +264,7 @@ public class UiManager : MonoBehaviour
         studyResult[0].text = "결과";
         studyResult[1].text = "체력"+(playerHp- DefaultPlayerHp).ToString()+"↑ "
             + "공격" + (playerAttack - DefaultPlayerAttack).ToString() + "↑ "
-            + "방어" + (playerDepense - DefaultPlayerDepense).ToString() + "↑";
+            + "방어" + (playerDefense - DefaultPlayerDefense).ToString() + "↑";
     }
 
     IEnumerator SwordStudy(int num)
@@ -267,7 +295,7 @@ public class UiManager : MonoBehaviour
         }
         else if (randomNum == 2)
         {
-            playerDepense++;
+            playerDefense++;
             studingResult[1].text = "방어↑";
             studingResult[2].text = "방어를 잘하게 된 것 같다.";
         }
@@ -282,14 +310,14 @@ public class UiManager : MonoBehaviour
         else if (randomNum == 4)
         {
             playerHp++;
-            playerDepense++;
+            playerDefense++;
             studingResult[1].text = "체력↑ 방어↑";
             studingResult[2].text = "방어를 열심히 연습했다.";
 
         }
         else if (randomNum == 5)
         {
-            playerDepense++;
+            playerDefense++;
             playerAttack++;
             playerHp++;
             studingResult[1].text = "체력↑ 공격↑ 방어↑";
@@ -392,7 +420,7 @@ public class UiManager : MonoBehaviour
     {
         if (selectStudy[num] == 0)
         {
-            cardList.Add(0);
+            cardList.Add(3);
             message.SetActive(true);
             messageText.text = "Cut카드를 얻었다.";
         }
@@ -618,12 +646,17 @@ public class UiManager : MonoBehaviour
 
     public void DeckList()
     {
+        endStudy.SetActive(true);
+
         int count = 0;
         foreach (int targetId in cardList)
         {
             GameObject getCard = Instantiate(FindPrefabById(targetId));
             Vector3 cardPosition = PositionCheck(count);
             getCard.transform.position = cardPosition;
+            var card = getCard.GetComponent<Card>();
+            card.CardFront(true);
+            card.GetComponent<Order>().SetOriginOrder(order++);
             count++;
         }
     }
@@ -632,20 +665,21 @@ public class UiManager : MonoBehaviour
     {
         float positionX = -5.0f;
         float positionY = -9.2f;
-        if (count < 8)
+        if (count < 7)
         {
             positionX = -5.0f + (count * 1.6f);
             positionY = -9.2f;
         }
         else
         {
-            positionX = -5.0f + (count * 1.6f);
+            positionX = -5.0f + ((count-7)  * 1.6f);
             positionY = -11.2f;
         }
 
         Vector3 position = new Vector3(positionX, positionY, 0.0f);
         return position;
     }
+
     public GameObject FindPrefabById(int targetId)
     {
         string searchFolderPath = "Assets/Prefabs/Cards";
@@ -658,15 +692,12 @@ public class UiManager : MonoBehaviour
 
             // 프리팹을 가져오기
             GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-
+            cardListData.Add(prefab);
             // 프리팹이 유효하고, 해당 프리팹이 해당 조건을 만족하는 경우 반환
             if (prefab != null)
             {
                 Card myScriptComponent = prefab.GetComponent<Card>();
                 myScriptComponent.Init();
-                Debug.Log(myScriptComponent);
-                Debug.Log(myScriptComponent.info.Id);
-                Debug.Log(targetId);
 
                 // 스크립트 컴포넌트가 존재하고, targetId와 일치하는 경우 해당 프리팹 반환
                 if (myScriptComponent != null && myScriptComponent.info.Id == targetId)
@@ -676,6 +707,79 @@ public class UiManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void EndStudy()
+    {
+        GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
+
+        Debug.Log(dataObject);
+        data = dataObject.GetComponent<CharacterData>();
+        data.DataInit(0, "test", 1, DefaultPlayerHp + playerHp, DefaultPlayerAttack + playerAttack, DefaultPlayerDefense + playerDefense, cardListData
+                        ,WeaponType.SWORD, null, cardList);
+        data.Init();
+        SaveData();
+        SceneManager.LoadScene("TestScene2");
+    }
+
+
+    public void SaveData()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string filePath = Path.Combine(Application.persistentDataPath, "Save");
+        FileStream fileStream = File.Create(filePath);
+        saveData = data.info;
+        Debug.Log(saveData.chrId);
+        Debug.Log(data.info.chrMaxHp);
+        Debug.Log(data.info.chrDefense);
+
+
+        // 이제 SaveData() 메서드 내에서 직렬화할 데이터는 DefaultCharacterData 인스턴스인 info입니다.
+        formatter.Serialize(fileStream, saveData);
+        fileStream.Close();
+        string dataPath = Application.persistentDataPath;
+        Debug.Log("Persistent Data Path: " + dataPath);
+        Debug.Log("캐릭터 데이터를 바이너리로 저장했습니다.");
+    }
+
+    private void LoadCharacterData()
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, "Save");
+
+        if (File.Exists(filePath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream fileStream = File.Open(filePath, FileMode.Open);
+
+            data = (CharacterData)formatter.Deserialize(fileStream);
+            fileStream.Close();
+
+            Debug.Log("캐릭터 데이터를 바이너리에서 로드했습니다.");
+        }
+        else
+        {
+            // 바이너리 파일이 없으면 새로운 CharacterData 클래스 생성
+            data = new CharacterData();
+
+            // 예제용 초기화 데이터 적용
+            data.DataInit(0, "test", 1, 1, 1, 1, cardListData
+                        , WeaponType.SWORD, null, cardList);
+            
+
+            Debug.Log("저장된 캐릭터 데이터가 없어서 새로 생성했습니다.");
+        }
+    }
+
+    // CharacterData 클래스의 데이터를 설정
+    public void SetCharacterData(int id, string name, int lv, int maxHp, int attackDmg, int defense, List<GameObject> cardList, WeaponType weaponName, Sprite imgNum, List<int> chrCardnum)
+    {
+        data.DataInit(id, name, lv, maxHp, attackDmg, defense, cardList, weaponName, imgNum, chrCardnum);
+    }
+
+    // CharacterData 클래스 반환
+    public CharacterData GetCharacterData()
+    {
+        return data;
     }
 }
 

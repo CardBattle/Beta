@@ -30,9 +30,7 @@ public class Character : MonoBehaviour
 
     public Data cardDATA;
     public CharacterData data;
-
-
-
+    
     public List<GameObject> cards; //카드 매니저에서 캐릭터가 소유한 카드 프리팹을 접근해야하기 때문에 public
 
 
@@ -40,19 +38,37 @@ public class Character : MonoBehaviour
 
     public void CharDATA()
     {
-
+        if (GameObject.FindGameObjectWithTag("PlayerData") != null)//플레이어데이터 테스트용 if문 빌드시 else를 삭제
+        {
+            cards.Clear();
+            GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
+            data = dataObject.GetComponent<CharacterData>();
+            _name = data.chrName;
+            id = data.chrId;
+            hp = data.chrMaxHp;
+            level = data.chrLv;
+            defense = data.chrDefense;
+            attackDmg = data.chrAttackDmg;
+            cards = data.chrCard;
+            weapon = data.weapon;
+        }
+        else
+        {
+            _name = "test";
+            id = 1;
+            hp = 20;
+            level = 1;
+            defense = 1;
+            attackDmg = 1;
+            weapon = WeaponType.SWORD;
+        }
+        /*
         cards.Clear();
-        _name = data.chrName;
-        id = data.chrId;
-        hp = data.chrMaxHp;
-        level = data.chrLv;
-        defense = data.chrDefense;
-        attackDmg = data.chrAttackDmg;
 
         foreach (var card in data.chrCard)
         {
             cards.Add(cardDATA.cardPrefabs[card]);
-        }
+        }*/
     }
 
     public void Init()
