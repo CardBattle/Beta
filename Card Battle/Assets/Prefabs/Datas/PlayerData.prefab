@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chrId: 1
   chrName: "\uC804\uC0AC"
-  chrLv: 1
-  chrMaxHp: 20
+  chrLv: 200
+  chrMaxHp: 200
   chrAttackDmg: 1
   chrDefense: 1
-  chrCard: 0f00000010000000110000001200000013000000
+  chrCard: 0300000003000000020000000200000002000000
   WeaponName: SWORD
   imgNum: 1
