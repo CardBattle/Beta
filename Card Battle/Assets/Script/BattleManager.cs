@@ -616,7 +616,7 @@ public class BattleManager : MonoBehaviour
 
             originalPlace = card.originPRS;
 
-            card.originPRS = new PRS(new Vector2(-1.8f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            card.originPRS = new PRS(new Vector2(-1.2f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
             card.MoveTransform(card.originPRS, false);
 
             card.cardSelect = true;
@@ -632,7 +632,7 @@ public class BattleManager : MonoBehaviour
             originalPlace = card.originPRS;
             selectCard = card;
 
-            card.originPRS = new PRS(new Vector2(-1.8f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            card.originPRS = new PRS(new Vector2(-1.2f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
             card.MoveTransform(card.originPRS, false);
 
             card.cardSelect = true;
@@ -768,7 +768,7 @@ public class BattleManager : MonoBehaviour
 
         if (enemyCards.Count != 0)
         {
-            enemyCards[0].originPRS = new PRS(new Vector2(1.8f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            enemyCards[0].originPRS = new PRS(new Vector2(1.2f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
         }
 
         CardSelectionTurn();
@@ -870,9 +870,9 @@ public class BattleManager : MonoBehaviour
         }
 
         if (playerDecision.card != null)
-            playerDecision.card.originPRS = new PRS(new Vector2(-4.3f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            playerDecision.card.originPRS = new PRS(new Vector2(-3.5f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
         if (enemyDecision.card != null)
-            enemyDecision.card.originPRS = new PRS(new Vector2(4.3f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            enemyDecision.card.originPRS = new PRS(new Vector2(3.5f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
 
         if (playerDecision.card != null)
             playerDecision.card.GetComponent<Order>().SettingOrder(sortingCard++);
@@ -936,9 +936,9 @@ public class BattleManager : MonoBehaviour
         List<PRS> originCardPRSs = new List<PRS>();
 
         if (isMine)
-            originCardPRSs = RoundAlignment(myCardUp, myCardDown, playerCards.Count, -6.74f, Vector3.one); ;
+            originCardPRSs = RoundAlignment(myCardUp, myCardDown, playerCards.Count, -5.5f, Vector3.one); ;
         if (!isMine)
-            originCardPRSs = RoundAlignment(enemyCardUp, enemyCardDown, enemyCards.Count, 6.74f, Vector3.one);
+            originCardPRSs = RoundAlignment(enemyCardUp, enemyCardDown, enemyCards.Count, 5.5f, Vector3.one);
 
         var targetCards = isMine ? playerCards : enemyCards;
 

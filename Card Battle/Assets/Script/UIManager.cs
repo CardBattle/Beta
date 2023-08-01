@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     public Slider soundEffVol;
 
     private int row = 7;
-    private float xDistance = 2.3f;
+    private float xDistance = 2.05f;
 
     public void Awake()
     {
@@ -167,7 +167,9 @@ public class UIManager : MonoBehaviour
         if (BattleManager.Bm.stage == 2)
         {
             battleUI.transform.GetChild(3).gameObject.SetActive(false);
-            victoryText.text = "모든 스테이지를 클리어 하신걸 축하합니다.";
+            battleUI.transform.GetChild(4).gameObject.SetActive(false);
+
+            victoryText.text = $"모든 스테이지를 클리어 하신걸\n 축하합니다.";
             canvasUITransform.GetChild(0).gameObject.SetActive(false);
             canvasUITransform.GetChild(1).gameObject.SetActive(false);
             victoryUITransform.GetChild(4).gameObject.SetActive(false);
@@ -177,6 +179,7 @@ public class UIManager : MonoBehaviour
         {
             canvasUITransform.GetChild(0).gameObject.SetActive(false);
             battleUI.transform.GetChild(3).gameObject.SetActive(false);
+            battleUI.transform.GetChild(4).gameObject.SetActive(false);
             menuUI.SetActive(true);
         }
 
@@ -187,6 +190,7 @@ public class UIManager : MonoBehaviour
     public void Defeat()
     {
         battleUI.transform.GetChild(3).gameObject.SetActive(false);
+        battleUI.transform.GetChild(4).gameObject.SetActive(false);
         menuUI.SetActive(true);
         defeatUI.transform.GetChild(1).
             gameObject.GetComponent<Text>().text = $"지나간 턴 수: {BattleManager.Bm.turnCount}";
@@ -321,7 +325,7 @@ public class UIManager : MonoBehaviour
         {
             if (cardIndex == 0)
             {
-                result = new PRS(new Vector2(-6.9f, 3.2f), Utlis.Qi, Vector3.one);
+                result = new PRS(new Vector2(-6.2f, 3.2f), Utlis.Qi, Vector3.one);
             }
             else
             {
@@ -333,7 +337,7 @@ public class UIManager : MonoBehaviour
         {
             if (cardIndex == 7)
             {
-                result = new PRS(new Vector2(-6.9f, 0.5f), Utlis.Qi, Vector3.one);
+                result = new PRS(new Vector2(-6.2f, 0.5f), Utlis.Qi, Vector3.one);
             }
             else
             {
@@ -345,7 +349,7 @@ public class UIManager : MonoBehaviour
         {
             if (cardIndex == 14)
             {
-                result = new PRS(new Vector2(-6.9f, -2.2f), Utlis.Qi, Vector3.one);
+                result = new PRS(new Vector2(-6.2f, -2.2f), Utlis.Qi, Vector3.one);
             }
             else
             {
