@@ -50,3 +50,6 @@ TagManager:
   - name: DeckCard
     uniqueID: 518476469
     locked: 0
+  - name: Tutorial
+    uniqueID: 3753759135
+    locked: 0
