@@ -31,11 +31,21 @@ public class CardManager : MonoBehaviour
         Load(enemyCardPrefabs, enemyCardObjs);
     }
 
+    public void DeckCardInit()
+    {
+        foreach (var DeckList in playerCardPrefabs)
+        {
+            UIManager.Um.deckList.Add(Instantiate(DeckList));
+        }
+        UIManager.Um.deckList.Sort((x, y) => x.GetComponent<Card>().id.CompareTo(y.GetComponent<Card>().id));
+        UIManager.Um.DeckCardTransform();
+    }
+
     void Load(List<GameObject> cardPrefabs, List<GameObject> cardObjs)
     {
         foreach (var cardPrefab in cardPrefabs)
         {
-            cardObjs.Add(cardPrefab);        
+            cardObjs.Add(cardPrefab);
         }
     }
 

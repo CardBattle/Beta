@@ -22,6 +22,10 @@ public class BattleManager : MonoBehaviour
 
         //카드 정리
         DestroyCard,
+
+        Menu,
+
+        SelectMenu,
     }
 
     public enum ReadyStart
@@ -144,21 +148,21 @@ public class BattleManager : MonoBehaviour
         {
             Bm = this;
         }
-        
+
         if (PlayerPrefs.GetInt("Stage") >= 2)
         {
-            stage = PlayerPrefs.GetInt("Stage");         
+            stage = PlayerPrefs.GetInt("Stage");
         }
         else
         {
             stage = 1;
         }
-      
+
         print(stage);
 
         Time.timeScale = 1;
         PrefabsCharacterInformation();
-        CharcterDataInfomation();      
+        CharcterDataInfomation();
         OnAddCard = Add;
 
         state = State.CardDecision;
@@ -211,6 +215,42 @@ public class BattleManager : MonoBehaviour
     }
     private void DiceTurn()
     {
+        if (playerDecision.card != null && enemyDecision.card != null &&
+            (playerDecision.card.info.Property == PropertyType.HEAL || enemyDecision.card.info.Property == PropertyType.HEAL))
+        {
+            print("으아1");
+            BattleTurn();
+
+            if (enemyDecision.card != null)
+                enemyDecision.card.EnemyCardFront();
+        }
+        else if (playerDecision.card == null || enemyDecision.card == null)
+        {
+            print("으아2");
+            BattleTurn();
+
+            if (enemyDecision.card != null)
+                enemyDecision.card.EnemyCardFront();
+        }
+        else
+        {
+            print("으아3");
+            if (playerDecision.card == null && playerDice == 0) { playerDice = 0; }
+            if (enemyDecision.card == null && enemyDice == 0) { enemyDice = 0; }
+
+            if (enemyDecision.card != null)
+                enemyDecision.card.EnemyCardFront();
+
+            StartCoroutine(UIManager.Um.ShufflingDice());
+        }
+    }
+    public void DiceResult()
+    {
+        StartCoroutine(UIManager.Um.Dice(playerDice, true));
+        StartCoroutine(UIManager.Um.Dice(enemyDice, false));
+    }
+    public void BattleTurn()
+    {
         //존재하는 버프 사용
         if (player.info.buffs.Count > 0)
         {
@@ -226,15 +266,6 @@ public class BattleManager : MonoBehaviour
                 buff.buffUse.Use(enemy);
             }
         }
-
-        if (playerDecision.card == null && playerDice == 0) { playerDice = 0; }
-        if (enemyDecision.card == null && enemyDice == 0) { enemyDice = 0; }
-
-        if (enemyDecision.card != null)
-            enemyDecision.card.EnemyCardFront();
-
-        StartCoroutine(UIManager.Um.Dice(playerDice, true));
-        StartCoroutine(UIManager.Um.Dice(enemyDice, false));
 
         if (playerDecision.card != null && playerDecision.card.info.Property == PropertyType.DEFENSE)
         {
@@ -359,7 +390,7 @@ public class BattleManager : MonoBehaviour
                 {
                     enemyDecision.card.info.use(enemy, player);
                     print("적 방어");
-                    playerDecision.card.info.use(player, enemy); 
+                    playerDecision.card.info.use(player, enemy);
                     print("아군 공격");
 
                     playerHpSlider.value = player.info.Hp;
@@ -467,9 +498,9 @@ public class BattleManager : MonoBehaviour
             {
                 if (playerDecision.card.info.Property == PropertyType.ATTACK)
                 {
-                    enemyDecision.card.info.use(player, enemy);
+                    enemyDecision.card.info.use(enemy, player);
                     print("적 회복");
-                    playerDecision.card.info.use(enemy, player);
+                    playerDecision.card.info.use(player, enemy);
                     print("아군 공격");
 
                     playerHpSlider.value = player.info.Hp;
@@ -521,20 +552,23 @@ public class BattleManager : MonoBehaviour
 
     private void BattleResult(int result)
     {
-        if (result == 0) 
+        if (result == 0)
         {
+            state = State.Menu;
             UIObject.SetActive(true);
             UIManager.Um.result.text = "패배";
             UIManager.Um.Defeat();
         }
-        if (result == 1) 
+        if (result == 1)
         {
+            state = State.Menu;
             UIObject.SetActive(true);
             UIManager.Um.result.text = "승리";
             UIManager.Um.Victory();
         }
         if (result == 2)
         {
+            state = State.Menu;
             UIObject.SetActive(true);
             UIManager.Um.result.text = "무승부";
         }
@@ -570,7 +604,7 @@ public class BattleManager : MonoBehaviour
 
     public void CardMoustDown(Card card)
     {
-        if (state == State.CardDecision)
+        if (state == State.CardDecision || state == State.Menu || state == State.SelectMenu)
             return;
 
         battleManagerAudio.clip = cardClickClip;
@@ -608,7 +642,7 @@ public class BattleManager : MonoBehaviour
     void PrefabsCharacterInformation()
     {
         Instantiate(characterPrefabs[0]);
-        Instantiate(characterPrefabs[stage]); 
+        Instantiate(characterPrefabs[stage]);
 
         player = GameObject.FindWithTag("Player").GetComponentInChildren<Character>();
         enemy = GameObject.FindWithTag("Enemy").GetComponentInChildren<Character>();
@@ -625,7 +659,7 @@ public class BattleManager : MonoBehaviour
     }
     void CharcterDataInfomation()
     {
-        player.CharDATA();      
+        player.CharDATA();
         player.Init();
         enemy.Init();
 
@@ -635,13 +669,14 @@ public class BattleManager : MonoBehaviour
         playerHpView.text = player.info.MaxHp.ToString();
         enemyHpView.text = enemy.info.MaxHp.ToString();
 
-        playerHpPercent = player.info.MaxHp / 10;
-        enemyHpPercent = enemy.info.MaxHp / 10;
+        playerHpPercent = Mathf.RoundToInt(player.info.MaxHp / 10);
+        enemyHpPercent = Mathf.RoundToInt(enemy.info.MaxHp / 10);
 
         playerHpSlider.value = player.info.Hp;
         enemyHpSlider.value = enemy.info.Hp;
 
         cardManager.Init();
+        cardManager.DeckCardInit();
     }
 
     public void CardSelectDown(Card card)
@@ -660,7 +695,7 @@ public class BattleManager : MonoBehaviour
         battleManagerAudio2.Play();
     }
     public void CardMouseOver(Card card)
-    {         
+    {
         card.GetComponent<Order>().DragOrder(true);
 
     }
@@ -714,7 +749,7 @@ public class BattleManager : MonoBehaviour
         {
             BattleResult(2);
         }
-       
+
         OnAddCard?.Invoke(true);
         OnAddCard?.Invoke(false);
 
@@ -813,14 +848,22 @@ public class BattleManager : MonoBehaviour
     {
         if (playerCards.Count == 0 && playerDeck.Count == 0)
         {
-            player.info.Hp -= playerHpPercent;
+            if (playerHpPercent == 0)
+                player.info.Hp -= 1;
+            else
+                player.info.Hp -= playerHpPercent;
+
             playerHpSlider.value = player.info.Hp;
             playerHpView.text = player.info.Hp.ToString();
             CardCombine(true);
         }
         if (enemyCards.Count == 0 && enemyDeck.Count == 0)
         {
-            enemy.info.Hp -= enemyHpPercent;
+            if (enemyHpPercent == 0)
+                enemy.info.Hp -= 1;
+            else
+                enemy.info.Hp -= enemyHpPercent;
+
             enemyHpSlider.value = enemy.info.Hp;
             enemyHpView.text = enemy.info.Hp.ToString();
             CardCombine(false);
@@ -856,6 +899,7 @@ public class BattleManager : MonoBehaviour
     {
         battleManagerAudio.clip = cardDrawClip;
         battleManagerAudio.Play();
+
         if (myCard && playerDeck.Count != 0 && playerCards.Count < 9)
         {
             var cardObject = Instantiate(playerDeck[0], new Vector2(myDeckPosition.transform.position.x, myDeckPosition.transform.position.y), Utlis.Qi);
