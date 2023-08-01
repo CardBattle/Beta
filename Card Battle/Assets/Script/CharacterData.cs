@@ -4,16 +4,17 @@ using UnityEngine;
 public class CharacterData : MonoBehaviour
 {
     public DefaultCharacterData info;
-    public int chrId = 1;
-    public string chrName = "test1";
-    public int chrLv = 1;
-    public int chrMaxHp = 20;
-    public int chrAttackDmg = 1;
-    public int chrDefense = 1;
+    public UiManager ui;
+
+    public int chrId;
+    public string chrName;
+    public int chrLv;
+    public int chrMaxHp;
+    public int chrAttackDmg;
+    public int chrDefense;
     public List<GameObject> chrCard;
     public List<int> chrCardnum;
-
-    public WeaponType weapon = WeaponType.SWORD;
+    public WeaponType weapon;
     public Sprite img;
     public int imgNum;
 
@@ -30,7 +31,7 @@ public class CharacterData : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void DataInit(int id, string name, int lv, int maxHp, int attackDmg, int defense, List<GameObject> cardList, WeaponType weaponName, Sprite imgNum, List<int> chrCardnum)
+    public void DataInit(int id, string name, int lv, int maxHp, int attackDmg, int defense, WeaponType weaponName, int img, List<int> chrCardnum1)//캐릭터 저장용
     {
         chrId = id;
         chrName = name;
@@ -38,12 +39,35 @@ public class CharacterData : MonoBehaviour
         chrMaxHp = maxHp;
         chrAttackDmg = attackDmg;
         chrDefense = defense;
-        chrCard = cardList;
+        chrCardnum = chrCardnum1;
         weapon = weaponName;
-        img = imgNum;
+        imgNum = img;
+    }
+    public void LoadDataInit(int id, string name, int lv, int maxHp, int attackDmg, int defense, WeaponType weaponName, int img, List<int> chrCardnum1)//캐릭터 저장용
+    {
+        chrId = id;
+        chrName = name;
+        chrLv = lv;
+        chrMaxHp = maxHp;
+        chrAttackDmg = attackDmg;
+        chrDefense = defense;
+        chrCardnum = chrCardnum1;
+        weapon = weaponName;
+        imgNum = img;
     }
 
-    public void Init()
+    public void ChangeData()
+    {
+        GameObject dataObject = GameObject.FindGameObjectWithTag("UiManager");
+        UiManager data = dataObject.GetComponent<UiManager>();
+        img = data.studyViewResources[imgNum];
+        foreach(int a in chrCardnum)
+        {
+            chrCard.Add(data.FindPrefabById(a));
+        }
+    }
+
+    public void Init()//바이너리 저장용
     {
         info = new(chrId, chrName, chrLv, chrMaxHp, chrAttackDmg, chrDefense, chrCardnum, weapon, imgNum);
         Debug.Log(info.chrId);

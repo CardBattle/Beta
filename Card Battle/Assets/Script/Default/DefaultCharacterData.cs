@@ -41,4 +41,11 @@ public class DefaultCharacterData
         this.weapon = weapon;
         this.imgName = img;
     }
+    /*
+    public void Init()//바이너리 저장용
+    {
+        GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
+        info = dataObject.GetComponent<CharacterData>();
+        info.LoadDataInit(chrId, chrName, chrLv, chrMaxHp, chrAttackDmg, chrDefense, weapon, imgName, chrCardIds);//캐릭터 저장용
+    }*/
 }

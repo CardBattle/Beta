@@ -15,17 +15,26 @@ public class UiManager : MonoBehaviour
         third
     }
     private StudyState studyState;
-    
+
     //스터디씬 좌표 0,0
     //검술씬 0,10
     //궁술씬 20,10
     //마술씬 20,00
+    //스타트씬 -20, -10
+    public Image[] loadViewImage;
     public Image[] selectStudyImage;
     public Image studyViewImage;
+    
+
+    
     public Sprite[] studyViewResources;
     public Sprite[] selectStudyResources;
 
+
+
     public Camera mainCamera;
+
+    public Text[] saveInfo;
 
     public Text[] studyInfo;
     public Text[] studingResult;
@@ -33,6 +42,8 @@ public class UiManager : MonoBehaviour
     public Text cardBordeName;
     public Text messageText;
 
+    public GameObject startUi;
+    public GameObject dataUi;
     public GameObject studyUi;
     public GameObject studingUi;
     public GameObject statUi;
@@ -61,25 +72,77 @@ public class UiManager : MonoBehaviour
     private int DefaultPlayerDefense;
     private int studyViewNum;
     private int order;
+    private int saveSlot;
+
+
+
     private CharacterData data;
     private DefaultCharacterData saveData;
 
 
     public void Awake()
     {
+        DataInit();
+        SaveSlot();
         studyReset();
     }
+    public void DataInit()
+    {
+        GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
+        Debug.Log(dataObject);
+        data = dataObject.GetComponent<CharacterData>();
+    }
+
+    public void SaveSlot()
+    {
+        string directoryPath = Path.Combine(Application.persistentDataPath);//검사할 경로
+        int binaryFileCount = CountBinaryFilesInDirectory(directoryPath);
+        Debug.Log("바이너리로 저장된 파일 개수: " + binaryFileCount);
+        saveSlot = binaryFileCount;
+    }
+    int CountBinaryFilesInDirectory(string path)
+    {
+        int binaryFileCount = 0;
+
+        if (Directory.Exists(path))
+        {
+            string[] files = Directory.GetFiles(path);
+            foreach (string file in files)
+            {
+                if (IsBinaryFile(file))
+                {
+                    binaryFileCount++;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("디렉토리가 존재하지 않습니다: " + path);
+        }
+
+        return binaryFileCount;
+    }
+
+    bool IsBinaryFile(string filePath)
+    {
+        // 파일 확장자가 바이너리 파일에 해당하는지 여부를 체크합니다.
+        // 예를 들어, 여기에서는 ".dat" 파일을 바이너리 파일로 간주합니다.
+        string extension = Path.GetExtension(filePath).ToLower();
+        return extension == ".dat"; // 원하는 확장자로 변경해주세요.
+    }
+
 
     public void studyReset()
     {
         studyViewNum = 0;
         studyViewImage.sprite = studyViewResources[studyViewNum];
         selectStudy = new List<int>();
-        cardList = new List<int> { 0, 1, 2, 3, 4, 5 };
         cardListData = new List<GameObject>();
         player.position = new Vector3(-0.86f, 0.56f, 0.0f);
-        mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
-        studyUi.SetActive(true);
+        mainCamera.transform.position = new Vector3(-20.0f, 10.0f, -100.0f);
+        startUi.SetActive(true);
+        dataUi.SetActive(false);
+        studyUi.SetActive(false);
         studingUi.SetActive(false);
         selectCardUi.SetActive(false);
         statUi.SetActive(false);
@@ -89,34 +152,135 @@ public class UiManager : MonoBehaviour
         getCardUi.SetActive(false);
         upgradeCardUi.SetActive(false);
         endStudy.SetActive(false);
-        /*if(GameObject.FindGameObjectWithTag("PlayerData")!=null)
-        {
-            GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
-            data = dataObject.GetComponent<CharacterData>();
-            playerHp = data.chrMaxHp;
-            playerAttack = data.chrAttackDmg;
-            playerDefense = data.chrDefense;
-            DefaultPlayerHp = data.chrMaxHp;
-            DefaultPlayerAttack = data.chrAttackDmg;
-            DefaultPlayerDefense = data.chrDefense;
-            cardListData = data.chrCard;
-        }
-        else*/
-  //      {
-            playerHp = 20;
-            playerAttack = 1;
-            playerDefense = 1;
-            DefaultPlayerHp = 20;
-            DefaultPlayerAttack = 1;
-            DefaultPlayerDefense = 1;
-//        }
-        
         studingResult[0].text = "1회차";
         studingResult[1].text = null;
         studingResult[2].text = null;
         studyState = StudyState.first;
+        cardList= new List<int>();
         order = 0;
     }
+    public void startData()
+    {
+        
+        cardList = data.chrCardnum;
+        playerHp = data.chrMaxHp;
+        playerAttack = data.chrAttackDmg;
+        playerDefense = data.chrDefense;
+        DefaultPlayerHp = data.chrMaxHp;
+        DefaultPlayerAttack = data.chrAttackDmg;
+        DefaultPlayerDefense = data.chrDefense;
+        addNomalCard();
+    }
+    public void addNomalCard()
+    {
+        if (cardList.Count == 0)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                cardList.Add(i);
+                Debug.Log(cardList[0]);
+            }
+        }
+    }
+    public void StartBtn()
+    {
+        startUi.SetActive(false);
+        dataUi.SetActive(true);
+        mainCamera.transform.position = new Vector3(-20.0f, 0.0f, -100.0f);
+
+        if (saveSlot == 0)
+        {
+            LoadCharacterData0();
+            LoadBtn0();
+        }
+        else if (saveSlot == 1)
+        {
+            LoadCharacterData0();
+            loadViewImage[0].sprite = data.img;
+            saveInfo[0].text = data.chrCardnum.Count.ToString();
+            loadViewImage[1].sprite = null;
+            saveInfo[1].text = "데이터가 없습니다";
+            loadViewImage[2].sprite = null;
+            saveInfo[2].text = "데이터가 없습니다";
+
+        }
+        else if (saveSlot == 2)
+        {
+            LoadCharacterData0();
+            loadViewImage[0].sprite = data.img;
+            saveInfo[0].text = data.chrCardnum.Count.ToString(); LoadCharacterData1();
+            loadViewImage[1].sprite = data.img;
+            saveInfo[1].text = data.chrCardnum.Count.ToString();
+            loadViewImage[2].sprite = null;
+            saveInfo[2].text = "데이터가 없습니다";
+        }
+        else if (saveSlot == 3)
+        {
+            LoadCharacterData0();
+            loadViewImage[0].sprite = data.img;
+            saveInfo[0].text = data.chrCardnum[8].ToString();
+            LoadCharacterData1();
+            loadViewImage[1].sprite = data.img;
+            saveInfo[1].text = data.chrCardnum.Count.ToString(); LoadCharacterData2();
+            loadViewImage[2].sprite = data.img;
+            saveInfo[2].text = data.chrCardnum.Count.ToString();
+        }
+    }
+
+    public void LoadBtn0()
+    {
+        dataUi.SetActive(false);
+        studyUi.SetActive(true);
+        LoadCharacterData0();
+        mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
+        saveSlot = 0;
+        startData();
+
+    }
+    public void LoadBtn1()
+    {
+        if (saveSlot == 1)
+        {
+            data.DataInit(0, "test", 1, 1, 1, 1
+                        , WeaponType.SWORD, 0, cardList);
+            saveSlot = 1;
+            dataUi.SetActive(false);
+            studyUi.SetActive(true);
+            mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
+        }
+        else if (saveSlot >1)
+        { 
+        dataUi.SetActive(false);
+        studyUi.SetActive(true);
+        LoadCharacterData1();
+        mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
+        saveSlot = 1;
+        }
+        startData();
+    }
+    public void LoadBtn2()
+    {
+        if (saveSlot == 2)
+        {
+            data.DataInit(0, "test", 1, 1, 1, 1
+                        , WeaponType.SWORD, 0, cardList);
+            saveSlot = 2;
+            dataUi.SetActive(false);
+            studyUi.SetActive(true);
+            mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
+        }
+        else if(saveSlot == 3)
+        {
+            dataUi.SetActive(false);
+            studyUi.SetActive(true);
+            LoadCharacterData2();
+            mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
+            saveSlot = 2;
+        }
+        startData();
+    }
+
+
     public void ChangeStudyImageBtn()
     {
         if (studyViewNum > 1)
@@ -715,21 +879,103 @@ public class UiManager : MonoBehaviour
 
         Debug.Log(dataObject);
         data = dataObject.GetComponent<CharacterData>();
-        data.DataInit(0, "test", 1, DefaultPlayerHp + playerHp, DefaultPlayerAttack + playerAttack, DefaultPlayerDefense + playerDefense, cardListData
-                        ,WeaponType.SWORD, null, cardList);
+        data.DataInit(0, "test", 1, DefaultPlayerHp + playerHp, DefaultPlayerAttack + playerAttack, DefaultPlayerDefense + playerDefense, SelectWeaponType(), SelectSprite(), cardList);
         data.Init();
+        data.ChangeData();
         SaveData();
         SceneManager.LoadScene("TestScene2");
     }
+    public WeaponType SelectWeaponType()
+    {
+        int swordNum = 0;
+        int arrowNum = 0;
+        int magicNum = 0;
+
+        foreach (int a in selectStudy)
+        {
+            if (a == 0)
+            {
+                swordNum++;
+            }
+            else if (a == 1)
+            {
+                arrowNum++;
+            }
+            else
+            {
+                magicNum++;
+            }
+        }
+        if (swordNum > arrowNum && swordNum > magicNum)
+        {
+            return WeaponType.SWORD;
+        }
+        else if (arrowNum > swordNum && arrowNum > magicNum)
+        {
+            return WeaponType.BOW;
+        }
+        else if (magicNum > swordNum && magicNum > arrowNum)
+        {
+            return WeaponType.WAND;
+        }
+        else
+        {
+            return WeaponType.SWORD;
+        }
+    }
+
+
+    public int SelectSprite()
+    {
+        int swordNum = 0;
+        int arrowNum = 0;
+        int magicNum = 0;
+
+        foreach(int a in selectStudy)
+        {
+            if(a == 0)
+            {
+                swordNum++;
+            }
+            else if (a == 1)
+            {
+                arrowNum++;
+            }
+            else 
+            {
+                magicNum++;
+            }
+        }
+        if (swordNum > arrowNum && swordNum > magicNum)
+        {
+            return 0;
+        }
+        else if (arrowNum > swordNum && arrowNum > magicNum)
+        {
+            return 1;
+        }
+        else if (magicNum > swordNum && magicNum > arrowNum)
+        {
+            return 2;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
 
 
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string filePath = Path.Combine(Application.persistentDataPath, "Save");
+
+        string filePath = Path.Combine(Application.persistentDataPath, saveSlot.ToString()+".dat");
         FileStream fileStream = File.Create(filePath);
         saveData = data.info;
         Debug.Log(saveData.chrId);
+        Debug.Log(saveData.chrCardIds[0]);
+        Debug.Log(saveData.chrCardIds[1]);
         Debug.Log(data.info.chrMaxHp);
         Debug.Log(data.info.chrDefense);
 
@@ -742,38 +988,82 @@ public class UiManager : MonoBehaviour
         Debug.Log("캐릭터 데이터를 바이너리로 저장했습니다.");
     }
 
-    private void LoadCharacterData()
+    private int LoadCharacterData0()
     {
-        string filePath = Path.Combine(Application.persistentDataPath, "Save");
+        string filePath = Path.Combine(Application.persistentDataPath, 0.ToString()+".dat");
 
         if (File.Exists(filePath))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream fileStream = File.Open(filePath, FileMode.Open);
-
-            data = (CharacterData)formatter.Deserialize(fileStream);
+            DefaultCharacterData dataLoad;
+            dataLoad = (DefaultCharacterData)formatter.Deserialize(fileStream);
             fileStream.Close();
 
+            data.DataInit(dataLoad.chrId, dataLoad.chrName, dataLoad.chrLv, dataLoad.chrMaxHp, dataLoad.chrAttackDmg, dataLoad.chrDefense, dataLoad.weapon, dataLoad.imgName, dataLoad.chrCardIds);//캐릭터 저장용)
             Debug.Log("캐릭터 데이터를 바이너리에서 로드했습니다.");
+            return 0;
         }
         else
         {
             // 바이너리 파일이 없으면 새로운 CharacterData 클래스 생성
-            data = new CharacterData();
-
             // 예제용 초기화 데이터 적용
-            data.DataInit(0, "test", 1, 1, 1, 1, cardListData
-                        , WeaponType.SWORD, null, cardList);
+
+            data.DataInit(0, "test", 1, 1, 1, 1 
+                        , WeaponType.SWORD, 0, cardList);
             
 
             Debug.Log("저장된 캐릭터 데이터가 없어서 새로 생성했습니다.");
+            return 1;
+        }
+    }
+    private int LoadCharacterData1()
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, 1.ToString() + ".dat");
+
+        if (File.Exists(filePath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream fileStream = File.Open(filePath, FileMode.Open);
+            DefaultCharacterData dataLoad;
+            dataLoad = (DefaultCharacterData)formatter.Deserialize(fileStream);
+            fileStream.Close();
+
+            data.DataInit(dataLoad.chrId, dataLoad.chrName, dataLoad.chrLv, dataLoad.chrMaxHp, dataLoad.chrAttackDmg, dataLoad.chrDefense, dataLoad.weapon, dataLoad.imgName, dataLoad.chrCardIds);//캐릭터 저장용)
+            Debug.Log("캐릭터 데이터를 바이너리에서 로드했습니다.");
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    private int LoadCharacterData2()
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, 2.ToString() + ".dat");
+
+        if (File.Exists(filePath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream fileStream = File.Open(filePath, FileMode.Open);
+            DefaultCharacterData dataLoad;
+            dataLoad = (DefaultCharacterData)formatter.Deserialize(fileStream);
+            fileStream.Close();
+            data.DataInit(dataLoad.chrId, dataLoad.chrName, dataLoad.chrLv, dataLoad.chrMaxHp, dataLoad.chrAttackDmg, dataLoad.chrDefense, dataLoad.weapon, dataLoad.imgName, dataLoad.chrCardIds);//캐릭터 저장용)
+
+            Debug.Log("캐릭터 데이터를 바이너리에서 로드했습니다.");
+            return 0;
+        }
+        else
+        {
+            return 1;
         }
     }
 
     // CharacterData 클래스의 데이터를 설정
-    public void SetCharacterData(int id, string name, int lv, int maxHp, int attackDmg, int defense, List<GameObject> cardList, WeaponType weaponName, Sprite imgNum, List<int> chrCardnum)
+    public void SetCharacterData(int id, string name, int lv, int maxHp, int attackDmg, int defense, WeaponType weaponName, int img, List<int> chrCardnum1)//캐릭터 저장용
     {
-        data.DataInit(id, name, lv, maxHp, attackDmg, defense, cardList, weaponName, imgNum, chrCardnum);
+        data.DataInit(id, name, lv, maxHp, attackDmg, defense, weaponName, img, chrCardnum1);
     }
 
     // CharacterData 클래스 반환
