@@ -1,23 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialImage : MonoBehaviour
 {
     public Sprite[] tutorialImages;
-    private int sprite = 0;
+    public Button battleSceneReturnBtn;
+    public int sprite = 0;
 
     private void OnMouseDown()
     {
+        ++sprite;
+
         if (sprite == 6)
         {
-            gameObject.SetActive(false);
-
+            gameObject.GetComponent<SpriteRenderer>().sprite = tutorialImages[sprite];          
+            battleSceneReturnBtn.gameObject.SetActive(true);
+            gameObject.GetComponent<Collider2D>().enabled = false;
         }
         else
-        {
-            ++sprite;
-
+        {          
             gameObject.GetComponent<SpriteRenderer>().sprite = tutorialImages[sprite];
         }       
     }

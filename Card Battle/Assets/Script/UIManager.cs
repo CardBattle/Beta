@@ -154,6 +154,7 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Stage");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+   
     public void TitleScene()
     {
         PlayerPrefs.DeleteKey("Stage");
@@ -223,7 +224,14 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    
+    public void TutorialBattleSceneReturn()
+    {
+        tutorialImage.SetActive(false);
+        battleUI.SetActive(true);
+        PlayerPrefs.SetInt("Tutorial", 1);
+        PlayerPrefs.Save();
+        Time.timeScale = 1;
+    }
 
     public void ClearRank(int count)
     {
