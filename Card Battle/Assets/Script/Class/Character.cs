@@ -40,7 +40,6 @@ public class Character : MonoBehaviour
 
     public void CharDATA()
     {
-
         cards.Clear();
         _name = data.chrName;
         id = data.chrId;
