@@ -22,6 +22,10 @@ public class BattleManager : MonoBehaviour
 
         //카드 정리
         DestroyCard,
+
+        Menu,
+
+        SelectMenu,
     }
 
     public enum ReadyStart
@@ -43,13 +47,13 @@ public class BattleManager : MonoBehaviour
 
 
     //플레이어, 적 정보와 덱 체크
-    [SerializeField]
     public Character player;
-    [SerializeField]
     public Character enemy;
 
-    //플레이어, 적 카드 정보 체크
     [SerializeField]
+    private GameObject UIObject;
+
+    //플레이어, 적 카드 정보 체크
     public Decision playerDecision;
     public EnemyDecision enemyDecision;
 
@@ -106,13 +110,13 @@ public class BattleManager : MonoBehaviour
     private int enemySortingCard = 0;
 
     // 전전에 쓴 카드 오브젝트 삭제하기 위한 변수
-    private int turnCount = 0;
+    public int turnCount = 0;
 
     // 다이스 체크
     public int playerDice = 0;
     public int enemyDice = 0;
 
-    public int stage = 2;
+    public int stage;
 
     //전체체력 퍼뎀
     public int playerHpPercent;
@@ -145,8 +149,20 @@ public class BattleManager : MonoBehaviour
             Bm = this;
         }
 
+        if (PlayerPrefs.GetInt("Stage") >= 2)
+        {
+            stage = PlayerPrefs.GetInt("Stage");
+        }
+        else
+        {
+            stage = 1;
+        }
+
+        print(stage);
+
+        Time.timeScale = 1;
         PrefabsCharacterInformation();
-        CharcterDataInfomation();      
+        CharcterDataInfomation();
         OnAddCard = Add;
 
         state = State.CardDecision;
@@ -199,6 +215,42 @@ public class BattleManager : MonoBehaviour
     }
     private void DiceTurn()
     {
+        if (playerDecision.card != null && enemyDecision.card != null &&
+            (playerDecision.card.info.Property == PropertyType.HEAL || enemyDecision.card.info.Property == PropertyType.HEAL))
+        {
+            print("으아1");
+            BattleTurn();
+
+            if (enemyDecision.card != null)
+                enemyDecision.card.EnemyCardFront();
+        }
+        else if (playerDecision.card == null || enemyDecision.card == null)
+        {
+            print("으아2");
+            BattleTurn();
+
+            if (enemyDecision.card != null)
+                enemyDecision.card.EnemyCardFront();
+        }
+        else
+        {
+            print("으아3");
+            if (playerDecision.card == null && playerDice == 0) { playerDice = 0; }
+            if (enemyDecision.card == null && enemyDice == 0) { enemyDice = 0; }
+
+            if (enemyDecision.card != null)
+                enemyDecision.card.EnemyCardFront();
+
+            StartCoroutine(UIManager.Um.ShufflingDice());
+        }
+    }
+    public void DiceResult()
+    {
+        StartCoroutine(UIManager.Um.Dice(playerDice, true));
+        StartCoroutine(UIManager.Um.Dice(enemyDice, false));
+    }
+    public void BattleTurn()
+    {
         //존재하는 버프 사용
         if (player.info.buffs.Count > 0)
         {
@@ -214,12 +266,6 @@ public class BattleManager : MonoBehaviour
                 buff.buffUse.Use(enemy);
             }
         }
-
-        if (playerDecision.card == null && playerDice == 0) { playerDice = 0; }
-        if (enemyDecision.card == null && enemyDice == 0) { enemyDice = 0; }
-
-        if (enemyDecision.card != null)
-            enemyDecision.card.EnemyCardFront();
 
         if (playerDecision.card != null && playerDecision.card.info.Property == PropertyType.DEFENSE)
         {
@@ -345,9 +391,9 @@ public class BattleManager : MonoBehaviour
             {
                 if (playerDecision.card.info.Property == PropertyType.ATTACK)
                 {
-                    enemyDecision.card.info.use(player, enemy);
+                    enemyDecision.card.info.use(enemy, player);
                     print("적 방어");
-                    playerDecision.card.info.use(enemy, player);
+                    playerDecision.card.info.use(player, enemy);
                     print("아군 공격");
 
                     playerHpSlider.value = player.info.Hp;
@@ -455,9 +501,9 @@ public class BattleManager : MonoBehaviour
             {
                 if (playerDecision.card.info.Property == PropertyType.ATTACK)
                 {
-                    enemyDecision.card.info.use(player, enemy);
+                    enemyDecision.card.info.use(enemy, player);
                     print("적 회복");
-                    playerDecision.card.info.use(enemy, player);
+                    playerDecision.card.info.use(player, enemy);
                     print("아군 공격");
 
                     playerHpSlider.value = player.info.Hp;
@@ -509,9 +555,26 @@ public class BattleManager : MonoBehaviour
 
     private void BattleResult(int result)
     {
-        if (result == 0) { timerText.text = "패배"; }
-        if (result == 1) { timerText.text = "승리"; }
-        if (result == 2) { timerText.text = "무승부"; }
+        if (result == 0)
+        {
+            state = State.Menu;
+            UIObject.SetActive(true);
+            UIManager.Um.result.text = "패배";
+            UIManager.Um.Defeat();
+        }
+        if (result == 1)
+        {
+            state = State.Menu;
+            UIObject.SetActive(true);
+            UIManager.Um.result.text = "승리";
+            UIManager.Um.Victory();
+        }
+        if (result == 2)
+        {
+            state = State.Menu;
+            UIObject.SetActive(true);
+            UIManager.Um.result.text = "무승부";
+        }
 
         StopAllCoroutines();
     }
@@ -544,7 +607,7 @@ public class BattleManager : MonoBehaviour
 
     public void CardMoustDown(Card card)
     {
-        if (state == State.CardDecision)
+        if (state == State.CardDecision || state == State.Menu || state == State.SelectMenu)
             return;
 
         battleManagerAudio.clip = cardClickClip;
@@ -556,7 +619,7 @@ public class BattleManager : MonoBehaviour
 
             originalPlace = card.originPRS;
 
-            card.originPRS = new PRS(new Vector2(-1.8f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            card.originPRS = new PRS(new Vector2(-1.2f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
             card.MoveTransform(card.originPRS, false);
 
             card.cardSelect = true;
@@ -572,7 +635,7 @@ public class BattleManager : MonoBehaviour
             originalPlace = card.originPRS;
             selectCard = card;
 
-            card.originPRS = new PRS(new Vector2(-1.8f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            card.originPRS = new PRS(new Vector2(-1.2f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
             card.MoveTransform(card.originPRS, false);
 
             card.cardSelect = true;
@@ -582,7 +645,7 @@ public class BattleManager : MonoBehaviour
     void PrefabsCharacterInformation()
     {
         Instantiate(characterPrefabs[0]);
-        Instantiate(characterPrefabs[stage]); 
+        Instantiate(characterPrefabs[stage]);
 
         player = GameObject.FindWithTag("Player").GetComponentInChildren<Character>();
         enemy = GameObject.FindWithTag("Enemy").GetComponentInChildren<Character>();
@@ -600,7 +663,6 @@ public class BattleManager : MonoBehaviour
     void CharcterDataInfomation()
     {
         player.CharDATA();
-        enemy.CharDATA();
         player.Init();
         enemy.Init();
 
@@ -610,13 +672,14 @@ public class BattleManager : MonoBehaviour
         playerHpView.text = player.info.MaxHp.ToString();
         enemyHpView.text = enemy.info.MaxHp.ToString();
 
-        playerHpPercent = player.info.MaxHp / 10;
-        enemyHpPercent = enemy.info.MaxHp / 10;
+        playerHpPercent = Mathf.RoundToInt(player.info.MaxHp / 10);
+        enemyHpPercent = Mathf.RoundToInt(enemy.info.MaxHp / 10);
 
         playerHpSlider.value = player.info.Hp;
         enemyHpSlider.value = enemy.info.Hp;
 
         cardManager.Init();
+        cardManager.DeckCardInit();
     }
 
     public void CardSelectDown(Card card)
@@ -635,7 +698,7 @@ public class BattleManager : MonoBehaviour
         battleManagerAudio2.Play();
     }
     public void CardMouseOver(Card card)
-    {         
+    {
         card.GetComponent<Order>().DragOrder(true);
 
     }
@@ -699,13 +762,16 @@ public class BattleManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        playerDecision.button.gameObject.SetActive(true);
+        playerDecision.timerText.SetActive(true);
+
         ++turnCount;
 
         timer = 10;
 
         if (enemyCards.Count != 0)
         {
-            enemyCards[0].originPRS = new PRS(new Vector2(1.8f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            enemyCards[0].originPRS = new PRS(new Vector2(1.2f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
         }
 
         CardSelectionTurn();
@@ -785,23 +851,31 @@ public class BattleManager : MonoBehaviour
     {
         if (playerCards.Count == 0 && playerDeck.Count == 0)
         {
-            player.info.Hp -= playerHpPercent;
+            if (playerHpPercent == 0)
+                player.info.Hp -= 1;
+            else
+                player.info.Hp -= playerHpPercent;
+
             playerHpSlider.value = player.info.Hp;
             playerHpView.text = player.info.Hp.ToString();
             CardCombine(true);
         }
         if (enemyCards.Count == 0 && enemyDeck.Count == 0)
         {
-            enemy.info.Hp -= enemyHpPercent;
+            if (enemyHpPercent == 0)
+                enemy.info.Hp -= 1;
+            else
+                enemy.info.Hp -= enemyHpPercent;
+
             enemyHpSlider.value = enemy.info.Hp;
             enemyHpView.text = enemy.info.Hp.ToString();
             CardCombine(false);
         }
 
         if (playerDecision.card != null)
-            playerDecision.card.originPRS = new PRS(new Vector2(-4.3f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            playerDecision.card.originPRS = new PRS(new Vector2(-3.5f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
         if (enemyDecision.card != null)
-            enemyDecision.card.originPRS = new PRS(new Vector2(4.3f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
+            enemyDecision.card.originPRS = new PRS(new Vector2(3.5f, 2.7f), Utlis.Qi, Vector3.one * 1.5f);
 
         if (playerDecision.card != null)
             playerDecision.card.GetComponent<Order>().SettingOrder(sortingCard++);
@@ -828,6 +902,7 @@ public class BattleManager : MonoBehaviour
     {
         battleManagerAudio.clip = cardDrawClip;
         battleManagerAudio.Play();
+
         if (myCard && playerDeck.Count != 0 && playerCards.Count < 9)
         {
             var cardObject = Instantiate(playerDeck[0], new Vector2(myDeckPosition.transform.position.x, myDeckPosition.transform.position.y), Utlis.Qi);
@@ -864,9 +939,9 @@ public class BattleManager : MonoBehaviour
         List<PRS> originCardPRSs = new List<PRS>();
 
         if (isMine)
-            originCardPRSs = RoundAlignment(myCardUp, myCardDown, playerCards.Count, -6.74f, Vector3.one); ;
+            originCardPRSs = RoundAlignment(myCardUp, myCardDown, playerCards.Count, -5.5f, Vector3.one); ;
         if (!isMine)
-            originCardPRSs = RoundAlignment(enemyCardUp, enemyCardDown, enemyCards.Count, 6.74f, Vector3.one);
+            originCardPRSs = RoundAlignment(enemyCardUp, enemyCardDown, enemyCards.Count, 5.5f, Vector3.one);
 
         var targetCards = isMine ? playerCards : enemyCards;
 

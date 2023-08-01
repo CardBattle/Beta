@@ -362,7 +362,7 @@ MonoBehaviour:
   id: 1
   level: 1
   defense: 1
-  hp: 20
+  hp: 1
   attackDmg: 1
   weapon: 1
   weaponSprite: {fileID: 1689797716386783912}
@@ -371,19 +371,18 @@ MonoBehaviour:
   cardDATA: {fileID: 5207043119744086873, guid: 5a6cd18f8f4105b4aae296cbc7bc594f, type: 3}
   data: {fileID: 2038502859531863969, guid: 75753aa904219b94a991208126221636, type: 3}
   cards:
-  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
-  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
-  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
-  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
-  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
-  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
-  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
-  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
+  - {fileID: 8356136270429368084, guid: cccd7f063e79abd49b26a5c5f04c9673, type: 3}
+  - {fileID: 7437580933446921501, guid: 73430fec2a9f483419e92a3b45b5ddf0, type: 3}
   - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
   - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
-  - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
+  - {fileID: 8356136270429368084, guid: cccd7f063e79abd49b26a5c5f04c9673, type: 3}
+  - {fileID: 8356136270429368084, guid: cccd7f063e79abd49b26a5c5f04c9673, type: 3}
+  - {fileID: 4078094028994227434, guid: 7510eeca71a308640a5bf49ca3dc98d0, type: 3}
+  - {fileID: 4078094028994227434, guid: 7510eeca71a308640a5bf49ca3dc98d0, type: 3}
+  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
+  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
 --- !u!114 &978846399460753268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,7 +782,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819509622878116129}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.74, y: 3.29, z: -10}
+  m_LocalPosition: {x: -5.5, y: 3.29, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -814,7 +813,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819509622920404110}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.74, y: -3.6, z: -10}
+  m_LocalPosition: {x: -5.5, y: -3.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -881,7 +880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819509623317495960}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.74, y: 3.4, z: -10}
+  m_LocalPosition: {x: -5.5, y: 3.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -912,7 +911,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819509624266344674}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.61, y: -6.69, z: -10}
+  m_LocalPosition: {x: -5.5, y: -6.69, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

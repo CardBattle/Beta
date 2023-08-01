@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - PlayerData
+  - UiManager
   layers:
   - Default
   - TransparentFX
@@ -41,4 +43,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: DeckList
+    uniqueID: 1676826343
+    locked: 0
+  - name: DeckCard
+    uniqueID: 518476469
     locked: 0

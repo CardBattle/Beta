@@ -21,7 +21,8 @@ public class Decision : MonoBehaviour
 
     // 결정 버튼
     [SerializeField]
-    private Button button;
+    public Button button;
+    public GameObject timerText;
 
 
 
@@ -43,6 +44,9 @@ public class Decision : MonoBehaviour
         card = Importedcard;
         cardPresence = true;
         cardCheck = true;
+
+        button.gameObject.SetActive(false);
+        timerText.SetActive(false);
 
         BattleManager.Bm.playerCards.Remove(Importedcard);
         BattleManager.Bm.playerDeleteCards.Add(Importedcard);

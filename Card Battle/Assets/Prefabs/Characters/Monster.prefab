@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2572840270303980726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.74, y: -3.6, z: -10}
+  m_LocalPosition: {x: 5.5, y: -3.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2572840270689421438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.74, y: 3.4, z: -10}
+  m_LocalPosition: {x: 5.5, y: 3.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -182,17 +182,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd092c1855909e4c93465434653c18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: "\uB9C8\uC655"
+  _name: "\uB9C8\uC655\uC758 \uBD84\uC2E0"
   id: 1
-  level: 25
-  defense: 300
-  hp: 3000
-  attackDmg: 250
+  level: 1
+  defense: 1
+  hp: 1
+  attackDmg: 1
   weapon: 4
   weaponSprite: {fileID: 0}
   img: {fileID: 21300000, guid: 9125c204f566db048a92ebcb64d9d14a, type: 3}
   buffs: []
-  cardDATA: {fileID: 5207043119744086873, guid: 5a6cd18f8f4105b4aae296cbc7bc594f, type: 3}
+  cardDATA: {fileID: 0}
   data: {fileID: 1453073742251471924, guid: af035b9a15a6e424ba02352d76c41956, type: 3}
   cards:
   - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
@@ -276,7 +276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2572840271227476756}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.1, y: -6.69, z: -10}
+  m_LocalPosition: {x: 5.5, y: -6.69, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -307,7 +307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2572840271257795856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.74, y: 3.289999, z: -10}
+  m_LocalPosition: {x: 5.5, y: 3.289999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

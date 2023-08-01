@@ -10,8 +10,7 @@ public class Card : MonoBehaviour
 {
     public DefaultCard info;
 
-    [SerializeField]
-    private int id;
+    public int id;
     [SerializeField]
     private PropertyType property;
     [SerializeField]
@@ -95,11 +94,17 @@ public class Card : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (BattleManager.Bm.state == BattleManager.State.Menu || BattleManager.Bm.state == BattleManager.State.SelectMenu)
+            return;
+
         if (myCard && BattleManager.Bm.state != BattleManager.State.CardDecision)
             BattleManager.Bm.CardMouseEnter();
     }
     private void OnMouseOver()
     {
+        if (BattleManager.Bm.state == BattleManager.State.Menu || BattleManager.Bm.state == BattleManager.State.SelectMenu)
+            return;
+
         if (myCard && BattleManager.Bm.state != BattleManager.State.CardDecision)
             BattleManager.Bm.CardMouseOver(this);
         else
@@ -107,11 +112,17 @@ public class Card : MonoBehaviour
     }
     private void OnMouseExit()
     {
+        if (BattleManager.Bm.state == BattleManager.State.Menu || BattleManager.Bm.state == BattleManager.State.SelectMenu)
+            return;
+
         if (myCard && BattleManager.Bm.state != BattleManager.State.CardDecision)
             BattleManager.Bm.CardMouseExit(this);
     }
     private void OnMouseDown()
     {
+        if (BattleManager.Bm.state == BattleManager.State.Menu || BattleManager.Bm.state == BattleManager.State.SelectMenu)
+            return;
+
         if (myCard)
         {
             if (cardSelect)
@@ -140,12 +151,12 @@ public class Card : MonoBehaviour
             CardEffValimg.sprite = cardEffValimg;
             CardTypeSpaceimg.sprite = cardTypeSpaceimg;
             CardTypeimg.sprite = cardTypeimg;
-            
-           
+
+
             _Name.text = _name;
             Buff.text = _buff;
             Level.text = level.ToString();
-            EffVal.text = effVal.ToString();        
+            EffVal.text = effVal.ToString();
         }
         else
         {
@@ -153,7 +164,7 @@ public class Card : MonoBehaviour
             _Name.text = " ";
             EffVal.text = " ";
             Buff.text = " ";
-            Level.text = " ";         
+            Level.text = " ";
         }
     }
 
