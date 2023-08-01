@@ -44,12 +44,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49d6113bcec4f442a8b40494c0d7628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info:
+    chrId: 0
+    chrName: 
+    chrLv: 0
+    chrMaxHp: 0
+    chrAttackDmg: 0
+    chrDefense: 0
+    chrCardIds: 
+    weapon: 0
+    imgName: 0
   chrId: 1
   chrName: "\uC804\uC0AC"
   chrLv: 200
-  chrMaxHp: 200
+  chrMaxHp: 1
   chrAttackDmg: 1
   chrDefense: 1
-  chrCard: 0300000003000000020000000200000002000000
-  WeaponName: SWORD
+  chrCard:
+  - {fileID: 7437580933446921501, guid: 73430fec2a9f483419e92a3b45b5ddf0, type: 3}
+  - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
+  - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
+  - {fileID: 7437580933446921501, guid: 73430fec2a9f483419e92a3b45b5ddf0, type: 3}
+  - {fileID: 4078094028994227434, guid: 7510eeca71a308640a5bf49ca3dc98d0, type: 3}
+  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
+  - {fileID: 3230438190971658476, guid: 98ae2b0c9831d9049a91b9fa113e6d83, type: 3}
+  - {fileID: 278911417288487577, guid: d406de02084334c4bb728fa6f693cc76, type: 3}
+  - {fileID: 4078094028994227434, guid: 7510eeca71a308640a5bf49ca3dc98d0, type: 3}
+  chrCardnum: 
+  weapon: 1
+  img: {fileID: 0}
   imgNum: 1
