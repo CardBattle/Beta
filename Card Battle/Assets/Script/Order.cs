@@ -23,7 +23,7 @@ public class Order : MonoBehaviour
         {
             SettingOrder(1000);
         }
-        if (!drag)
+        else if (!drag)
         {
             SettingOrder(order);
         }
@@ -42,7 +42,25 @@ public class Order : MonoBehaviour
         foreach (var renderer in frontOrders)
         {
             renderer.sortingLayerName = sortingLayerName;
-            renderer.sortingOrder = ++mulOrder;          
+            renderer.sortingOrder = ++mulOrder;
+        }
+    }
+
+    public void DeckSettingOrder(int order)
+    {
+        int mulOrder = order;
+        sortingLayerName = "DeckCard";
+
+        foreach (var renderer in backOrders)
+        {
+            renderer.sortingLayerName = sortingLayerName;
+            renderer.sortingOrder = mulOrder;
+        }
+
+        foreach (var renderer in frontOrders)
+        {
+            renderer.sortingLayerName = sortingLayerName;
+            renderer.sortingOrder = ++mulOrder;
         }
     }
 
