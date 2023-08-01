@@ -57,6 +57,7 @@ MonoBehaviour:
   chrId: 1
   chrName: "\uC804\uC0AC"
   chrLv: 200
+
   chrMaxHp: 1
   chrAttackDmg: 1
   chrDefense: 1

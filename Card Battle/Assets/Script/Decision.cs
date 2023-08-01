@@ -42,7 +42,6 @@ public class Decision : MonoBehaviour
             return;
 
         card = Importedcard;
-        card.defenseCheck = true;
         cardPresence = true;
         cardCheck = true;
 

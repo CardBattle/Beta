@@ -25,7 +25,7 @@ public class DefaultCard
     public List<Buff> buffs;
 
     int effVal; //효과수치
-    public int EffVal { get => effVal; set => effVal = value; }
+    public int EffVal { get => effVal; set => effVal = value < 0 ? 0 : value; }
 
     int level;
     public int Level { get => level; set => level = value; }

@@ -74,8 +74,6 @@ public class Card : MonoBehaviour
     // 내 카드인지 아닌지 체크하는 변수
     private bool myCard;
 
-    // 내 방어카드인지 적 방어카드인지 체크
-    public bool defenseCheck;
     // 카드위치를 바꾸기 위한 변수
     public bool cardSelect;
     // 카드 윈래 위치를 저장하는 클래스

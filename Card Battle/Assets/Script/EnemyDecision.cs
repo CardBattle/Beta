@@ -31,7 +31,6 @@ public class EnemyDecision : MonoBehaviour
             return;
 
         card = Importedcard;
-        card.defenseCheck = false;
         cardCheck = true;
 
         BattleManager.Bm.enemyCards.Remove(Importedcard);

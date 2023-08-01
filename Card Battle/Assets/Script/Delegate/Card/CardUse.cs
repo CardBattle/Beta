@@ -2,9 +2,14 @@ using System.Collections;
 using UnityEngine;
 public class CardUse : MonoBehaviour
 {
+    [HideInInspector]
     public Card card;
+    [HideInInspector]
     public AudioSource sfx;
     public GameObject vfx;
+
+    protected Card senderCard;
+    protected Card receiverCard;
 
     public void Init()
     {
@@ -17,17 +22,33 @@ public class CardUse : MonoBehaviour
         else card.info.use += DefenseAnim;
         
         card.info.use += Use;
-
     }
 
     public virtual void Use(Character sender, Character receiver)
     {
+        BattleManager bm = BattleManager.Bm;
+        if (sender.tag == "Player")
+        {
+            senderCard = bm.playerDecision.card;
+            receiverCard = bm.enemyDecision.card;
+        }
+        else
+        {
+            senderCard = bm.enemyDecision.card;
+            receiverCard = bm.playerDecision.card;
+        }
+
         if (card.info.buffs.Count > 0)
         {
             bool isExist = false;
             foreach (var buff in card.info.buffs)
             {
-                foreach (var exist in receiver.info.buffs)
+                Character c;
+                if (buff.info.Type == BuffType.BUFF)
+                    c = sender;
+                else
+                    c = receiver;
+                foreach (var exist in c.info.buffs)
                 {
                     if (exist.info.Id == buff.info.Id)
                     {
@@ -37,7 +58,7 @@ public class CardUse : MonoBehaviour
                     }
                 }
                 if (!isExist)
-                    receiver.info.buffs.Add(buff);
+                    c.info.buffs.Add(buff);
             }
         }
         sender.GetComponent<SFXVFX>().play += PlaySFX;

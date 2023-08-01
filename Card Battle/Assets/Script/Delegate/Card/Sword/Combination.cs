@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Cut : CardUse
+public class Combination : CardUse
 {
     public override void Use(Character sender, Character receiver)
     {
@@ -9,7 +11,5 @@ public class Cut : CardUse
         receiver.info.Hp -= CalculateDmg(sender.info.AttackDmg, card.info.RandomDice, card.info.EffVal,
         CalculateEffect(card.info.Type, receiver.info.Weapon));
 
-        Debug.Log("Cut");
     }
-
 }

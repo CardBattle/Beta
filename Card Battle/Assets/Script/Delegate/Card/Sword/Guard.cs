@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rest : CardUse
+public class Guard : CardUse
 {
     public override void Use(Character sender, Character receiver)
     {
         base.Use(sender, receiver);
 
-        sender.info.Hp += CalculateDmg(sender.info.Defense, card.info.RandomDice, card.info.EffVal, 1);
-
-        Debug.Log("Rest");
+        if (senderCard.info.Dice < receiverCard.info.Dice)
+            receiverCard.info.EffVal -= 2;
+        else receiverCard.info.EffVal -= 4;
     }
-
 }

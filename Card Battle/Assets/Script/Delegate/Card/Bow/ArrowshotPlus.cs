@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrowshot : CardUse
+public class ArrowshotPlus : CardUse
 {
     public override void Use(Character sender, Character receiver)
     {
@@ -13,7 +13,6 @@ public class Arrowshot : CardUse
         receiver.info.Hp -= CalculateDmg(sender.info.AttackDmg, card.info.RandomDice, card.info.EffVal,
         CalculateEffect(card.info.Type, receiver.info.Weapon));
 
-        Debug.Log("Arrowshot");
     }
 
 }
