@@ -4762,6 +4762,7 @@ GameObject:
   - component: {fileID: 1309811079}
   - component: {fileID: 1309811078}
   - component: {fileID: 1309811081}
+  - component: {fileID: 1309811082}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4931,6 +4932,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1309811082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309811077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba5dc9dec26e5f42bbf0e31b4e0b213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1328920762
 GameObject:
   m_ObjectHideFlags: 0
@@ -5621,7 +5634,6 @@ MonoBehaviour:
   - {fileID: 1577330799}
   cardBordeName: {fileID: 2057012405}
   messageText: {fileID: 763008659}
-  upgradeText: {fileID: 0}
   uiText: {fileID: 532036792}
   startUi: {fileID: 366602865}
   dataUi: {fileID: 156254090}
@@ -5637,7 +5649,6 @@ MonoBehaviour:
   fstCard1: {fileID: 1723772405}
   fstCard2: {fileID: 2134994058}
   endStudy: {fileID: 1091610498}
-  upgradeMessage: {fileID: 0}
   uiMessage: {fileID: 529049108}
   upgradeBox: {fileID: 1857825814}
   player: {fileID: 1809095226}
