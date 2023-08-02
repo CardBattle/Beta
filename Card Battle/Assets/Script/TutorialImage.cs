@@ -13,7 +13,7 @@ public class TutorialImage : MonoBehaviour
     {
         ++sprite;
 
-        if (sprite == 6)
+        if (sprite == 8)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = tutorialImages[sprite];          
             battleSceneReturnBtn.gameObject.SetActive(true);
@@ -23,5 +23,12 @@ public class TutorialImage : MonoBehaviour
         {          
             gameObject.GetComponent<SpriteRenderer>().sprite = tutorialImages[sprite];
         }       
+    }
+
+    private void OnEnable()
+    {
+        sprite = 0;
+        gameObject.GetComponent<SpriteRenderer>().sprite = tutorialImages[sprite];
+        gameObject.GetComponent<Collider2D>().enabled = true;
     }
 }

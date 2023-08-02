@@ -30,12 +30,14 @@ public class UIManager : MonoBehaviour
 
     public GameObject deckListUI;
 
+    
     public GameObject canvasUI;
     public GameObject defeatUI;
     public GameObject victoryUI;
 
     public Slider bgmVol;
     public Slider soundEffVol;
+    public Button battleSceneReturnBtn;
 
     private int row = 7;
     private float xDistance = 2.05f;
@@ -68,6 +70,7 @@ public class UIManager : MonoBehaviour
         else if (BattleManager.Bm.state == BattleManager.State.SelectCard)
             BattleManager.Bm.state = BattleManager.State.SelectMenu;
 
+
         Transform canvasUITransform = canvasUI.transform;
         Time.timeScale = 0;
         battleUI.SetActive(false);
@@ -77,6 +80,7 @@ public class UIManager : MonoBehaviour
         canvasUITransform.transform.GetChild(5).gameObject.SetActive(true);
         canvasUITransform.transform.GetChild(6).gameObject.SetActive(true);
         canvasUITransform.transform.GetChild(7).gameObject.SetActive(true);
+        canvasUITransform.transform.GetChild(8).gameObject.SetActive(true);
     }
     public void DeckCardTransform()
     {
@@ -137,6 +141,7 @@ public class UIManager : MonoBehaviour
         canvasUITransform.transform.GetChild(5).gameObject.SetActive(false);
         canvasUITransform.transform.GetChild(6).gameObject.SetActive(false);
         canvasUITransform.transform.GetChild(7).gameObject.SetActive(false);
+        canvasUITransform.transform.GetChild(8).gameObject.SetActive(false);
         battleUI.SetActive(true);
 
     }
@@ -214,6 +219,23 @@ public class UIManager : MonoBehaviour
         tutorialImage.SetActive(true);
     }
 
+    public void ReTutorial()
+    {
+        Transform canvasUITransform = canvasUI.transform;      
+        menuUI.SetActive(false);
+        canvasUITransform.transform.GetChild(2).gameObject.SetActive(false);
+        canvasUITransform.transform.GetChild(4).gameObject.SetActive(false);
+        canvasUITransform.transform.GetChild(5).gameObject.SetActive(false);
+        canvasUITransform.transform.GetChild(6).gameObject.SetActive(false);
+        canvasUITransform.transform.GetChild(7).gameObject.SetActive(false);
+        canvasUITransform.transform.GetChild(8).gameObject.SetActive(false);
+
+
+
+        battleUI.SetActive(false);
+        tutorialImage.SetActive(true);
+    }
+
     public void NoTutorial()
     {
         tutorial.SetActive(false);
@@ -228,6 +250,8 @@ public class UIManager : MonoBehaviour
     {
         tutorialImage.SetActive(false);
         battleUI.SetActive(true);
+        battleSceneReturnBtn.gameObject.SetActive(false);
+
         PlayerPrefs.SetInt("Tutorial", 1);
         PlayerPrefs.Save();
         Time.timeScale = 1;
