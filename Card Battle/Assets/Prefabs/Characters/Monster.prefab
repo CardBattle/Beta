@@ -186,6 +186,7 @@ MonoBehaviour:
   id: 1
   level: 1
   defense: 1
+
   hp: 80
   attackDmg: 1
   weapon: 4

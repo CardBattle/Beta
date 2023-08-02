@@ -779,14 +779,14 @@ GameObject:
   - component: {fileID: 4078094028994227437}
   - component: {fileID: 4078094028994227435}
   - component: {fileID: 4078094028994227436}
-  - component: {fileID: 4078094028994227438}
   - component: {fileID: 6262175198972282351}
+  - component: {fileID: 6269362776039151570}
+  - component: {fileID: 877631669487597058}
   - component: {fileID: 5414505858910386355}
-  - component: {fileID: -6390726222997971780}
   - component: {fileID: -9136349348350718985}
   - component: {fileID: 1954783938650306315}
   m_Layer: 0
-  m_Name: FireballCard
+  m_Name: Electric shockPlusPlusCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -883,15 +883,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 5
+  id: 32
   property: 0
   type: 3
-  _name: Fireball
-  _buff: 
-  effVal: 4
-  level: 1
+  _name: Electric shock++
+  _buff: "\uC801\uC5D0\uAC8C 3\uD134\uB3D9\uC548 \uC8FC\uC0AC\uC704-2"
+  effVal: 8
+  level: 3
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
-  cardimg: {fileID: 494406316, guid: 91ece539279118a438c900dfb08582ed, type: 3}
+  cardimg: {fileID: 21300000, guid: dbc021c87f35c8d45bf98ac669d91952, type: 3}
   cardTypeSpaceimg: {fileID: 1873686710, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   cardNameSpaceimg: {fileID: -690418764, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardBuffimg: {fileID: -1097064367, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
@@ -913,27 +913,11 @@ MonoBehaviour:
   EffVal: {fileID: 1073504398401050024}
   Buff: {fileID: 5204598919547937262}
   Level: {fileID: 1550715699641015054}
-  defenseCheck: 0
   cardSelect: 0
   originPRS:
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0, w: 0}
     scale: {x: 0, y: 0, z: 0}
---- !u!114 &4078094028994227438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4078094028994227434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b82babadabb5b04cae16159808e5715, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  sfx: {fileID: 0}
-  vfx: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
 --- !u!114 &6262175198972282351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -962,6 +946,33 @@ MonoBehaviour:
   - {fileID: 6338019720671852114}
   - {fileID: 6996774166498546754}
   sortingLayerName: Card
+--- !u!114 &6269362776039151570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078094028994227434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f7d537c5ce58c4ba4c1a51a20e01b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &877631669487597058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078094028994227434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9da24ce4cd391347b2899820b997717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
+  sfx: {fileID: 0}
+  vfx: {fileID: 5824670795371433373, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
 --- !u!114 &5414505858910386355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,23 +985,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 27
   type: 1
-  _name: Burn
-  turns: 3
-  buffUse: {fileID: -6390726222997971780}
---- !u!114 &-6390726222997971780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4078094028994227434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8edb41cba70a05343887510c0a3f84ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _name: ParalysisPlusPlus
+  turns: 2
+  buffUse: {fileID: 6269362776039151570}
 --- !u!60 &-9136349348350718985
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1032,7 +1031,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f1cb5d83282f2904a85f73111d068616, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1652,7 +1651,7 @@ Transform:
   m_GameObject: {fileID: 9164567140047888309}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.021, y: 0.284, z: 0}
-  m_LocalScale: {x: 0.77045625, y: 0.7674429, z: 0.3846154}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4078094028994227437}
@@ -1704,7 +1703,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.54, y: 0.54}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

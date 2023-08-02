@@ -371,6 +371,7 @@ MonoBehaviour:
   cardDATA: {fileID: 5207043119744086873, guid: 5a6cd18f8f4105b4aae296cbc7bc594f, type: 3}
   data: {fileID: 2038502859531863969, guid: 75753aa904219b94a991208126221636, type: 3}
   cards:
+
   - {fileID: 3230438190971658476, guid: 88557e4e62468624ea8feff16ec7dfb4, type: 3}
   - {fileID: 3230438190971658476, guid: a50e914f2f3c62344981d0036cd2ef55, type: 3}
   - {fileID: 3230438190971658476, guid: 88557e4e62468624ea8feff16ec7dfb4, type: 3}
