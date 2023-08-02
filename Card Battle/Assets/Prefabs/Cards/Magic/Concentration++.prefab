@@ -776,6 +776,9 @@ GameObject:
   - component: {fileID: 3230438190971658477}
   - component: {fileID: 3230438190971658474}
   - component: {fileID: 6467222491020728267}
+  - component: {fileID: 6327690931722597472}
+  - component: {fileID: -6781147086756268979}
+  - component: {fileID: -8275496053924799755}
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
   m_Layer: 0
@@ -876,11 +879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 500
-  property: 0
+  id: 34
+  property: 2
   type: 3
-  _name: 
-  _buff: 
+  _name: Concentration++
+  _buff: "\uB2E4\uC74C\uD134 EffVal * 4"
   effVal: 1
   level: 1
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
@@ -939,6 +942,50 @@ MonoBehaviour:
   - {fileID: 7423140894129573004}
   - {fileID: 8379779783463717086}
   sortingLayerName: Card
+--- !u!114 &6327690931722597472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230438190971658476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3b1ba728e9bb6449599732e2d16ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
+  sfx: {fileID: 0}
+  vfx: {fileID: 5824670795371433373, guid: dd996a8b012012a42ab5ec53219035b4, type: 3}
+--- !u!114 &-6781147086756268979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230438190971658476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 34
+  type: 0
+  _name: 
+  turns: 1
+  buffUse: {fileID: -8275496053924799755}
+--- !u!114 &-8275496053924799755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230438190971658476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f48a313b09b49f4188ab028e8b245f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!60 &5931310079769987027
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -980,7 +1027,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
