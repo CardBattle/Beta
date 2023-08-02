@@ -224,8 +224,9 @@ public class UiManager : MonoBehaviour
         else if (saveSlot == 1)
         {
             LoadCharacterData0();
-            loadViewImage[0].sprite = data.img;
-            saveInfo[0].text = data.chrCardnum.Count.ToString();
+            loadViewImage[0].sprite = selectStudyResources[data.imgNum];
+            saveInfo[0].text = "이름 " + data.chrName + "\n" + "레벨 " + data.chrLv.ToString() + "\n" + "카드 개수 " + data.chrCardnum.Count.ToString() + "\n" + "체력 " + data.chrMaxHp.ToString() + "\n" + "공격력 "
+                + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
             loadViewImage[1].sprite = null;
             saveInfo[1].text = "데이터가 없습니다";
             loadViewImage[2].sprite = null;
@@ -235,23 +236,30 @@ public class UiManager : MonoBehaviour
         else if (saveSlot == 2)
         {
             LoadCharacterData0();
-            loadViewImage[0].sprite = data.img;
-            saveInfo[0].text = data.chrCardnum.Count.ToString(); LoadCharacterData1();
-            loadViewImage[1].sprite = data.img;
-            saveInfo[1].text = data.chrCardnum.Count.ToString();
+            loadViewImage[0].sprite = selectStudyResources[data.imgNum];
+            saveInfo[0].text = "이름 " + data.chrName + "\n" + "레벨 " + data.chrLv.ToString() + "\n" + "카드 개수 " + data.chrCardnum.Count.ToString() + "\n" + "체력 " + data.chrMaxHp.ToString() + "\n" + "공격력 "
+                + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
+            LoadCharacterData1();
+            loadViewImage[1].sprite = selectStudyResources[data.imgNum];
+            saveInfo[1].text = "이름 " + data.chrName + "\n" + "레벨 " + data.chrLv.ToString() + "\n" + "카드 개수 " + data.chrCardnum.Count.ToString() + "\n" + "체력 " + data.chrMaxHp.ToString() + "\n" + "공격력 "
+                + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
             loadViewImage[2].sprite = null;
             saveInfo[2].text = "데이터가 없습니다";
         }
         else if (saveSlot == 3)
         {
             LoadCharacterData0();
-            loadViewImage[0].sprite = data.img;
-            saveInfo[0].text = data.chrCardnum[8].ToString();
+            loadViewImage[0].sprite = selectStudyResources[data.imgNum];
+            saveInfo[0].text = "이름 "+data.chrName +"\n" + "레벨 " + data.chrLv.ToString() + "\n" +  "카드 개수 " + data.chrCardnum.Count.ToString() + "\n" + "체력 " + data.chrMaxHp.ToString() + "\n" + "공격력 "
+                + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
             LoadCharacterData1();
-            loadViewImage[1].sprite = data.img;
-            saveInfo[1].text = data.chrCardnum.Count.ToString(); LoadCharacterData2();
-            loadViewImage[2].sprite = data.img;
-            saveInfo[2].text = data.chrCardnum.Count.ToString();
+            loadViewImage[1].sprite = selectStudyResources[data.imgNum];
+            saveInfo[1].text = "이름 " + data.chrName + "\n" + "레벨 " + data.chrLv.ToString() + "\n" + "카드 개수 " + data.chrCardnum.Count.ToString() + "\n" + "체력 " + data.chrMaxHp.ToString() + "\n" + "공격력 "
+                + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
+            LoadCharacterData2();
+            loadViewImage[2].sprite = selectStudyResources[data.imgNum];
+            saveInfo[2].text = "이름 " + data.chrName + "\n" + "레벨 " + data.chrLv.ToString() + "\n" + "카드 개수 " + data.chrCardnum.Count.ToString() + "\n" + "체력 " + data.chrMaxHp.ToString() + "\n" + "공격력 "
+                + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
         }
     }
 
