@@ -127,6 +127,8 @@ public class BattleManager : MonoBehaviour
     public GameObject playerParent;
     public GameObject enemyParent;
 
+    private bool tutorial = false;
+
     // 플레이어 동작
     public State state;
     [SerializeField]
@@ -149,6 +151,8 @@ public class BattleManager : MonoBehaviour
             Bm = this;
         }
 
+        Time.timeScale = 1;
+
         if (PlayerPrefs.GetInt("Stage") >= 2)
         {
             stage = PlayerPrefs.GetInt("Stage");
@@ -157,10 +161,7 @@ public class BattleManager : MonoBehaviour
         {
             stage = 1;
         }
-
-        print(stage);
-
-        Time.timeScale = 1;
+       
         PrefabsCharacterInformation();
         CharcterDataInfomation();
         OnAddCard = Add;
@@ -168,6 +169,20 @@ public class BattleManager : MonoBehaviour
         state = State.CardDecision;
 
         timerText.text = "10.00";
+
+        if (PlayerPrefs.HasKey("Tutorial"))
+        {
+            tutorial = Convert.ToBoolean(PlayerPrefs.GetInt("Tutorial"));
+            Destroy(UIManager.Um.tutorial);
+        }
+        else
+        {
+            if (!tutorial)
+            {
+                UIManager.Um.Tutorial();
+                Time.timeScale = 0;
+            }
+        }
 
     }
     private void Start()

@@ -24,6 +24,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject playerDice;
     public GameObject enemyDice;
+    
+    public GameObject tutorial;
+    public GameObject tutorialImage;
 
     public GameObject deckListUI;
 
@@ -56,6 +59,7 @@ public class UIManager : MonoBehaviour
     public void ReStart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PlayerPrefs.DeleteKey("Tutorial");
     }
     public void Menu()
     {
@@ -150,6 +154,7 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Stage");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+   
     public void TitleScene()
     {
         PlayerPrefs.DeleteKey("Stage");
@@ -195,6 +200,37 @@ public class UIManager : MonoBehaviour
         defeatUI.transform.GetChild(1).
             gameObject.GetComponent<Text>().text = $"지나간 턴 수: {BattleManager.Bm.turnCount}";
         defeatUI.SetActive(true);
+    }
+
+    public void Tutorial()
+    {
+        battleUI.SetActive(false);
+        tutorial.SetActive(true);
+    }
+
+    public void YesTutorial()
+    {
+        tutorial.SetActive(false);
+        tutorialImage.SetActive(true);
+    }
+
+    public void NoTutorial()
+    {
+        tutorial.SetActive(false);
+        battleUI.SetActive(true);
+        PlayerPrefs.SetInt("Tutorial", 1);
+        PlayerPrefs.Save();
+
+        Time.timeScale = 1;
+    }
+
+    public void TutorialBattleSceneReturn()
+    {
+        tutorialImage.SetActive(false);
+        battleUI.SetActive(true);
+        PlayerPrefs.SetInt("Tutorial", 1);
+        PlayerPrefs.Save();
+        Time.timeScale = 1;
     }
 
     public void ClearRank(int count)
