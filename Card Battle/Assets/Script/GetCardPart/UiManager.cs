@@ -12,9 +12,28 @@ public class UiManager : MonoBehaviour
     {
         first,
         second,
-        third
+        third,
+    }
+    enum CardState
+    {
+        get,
+        upgrade
+    }
+    enum UpgradeState
+    {
+        firstSword,
+        secondSword,
+        thirdSword,
+        firstBow,
+        secondBow,
+        thirdBow,
+        firstMagic,
+        secondMagic,
+        thirdMagic,
     }
     private StudyState studyState;
+    private CardState cardState;
+    private UpgradeState upgradeState;
 
     //스터디씬 좌표 0,0
     //검술씬 0,10
@@ -23,12 +42,17 @@ public class UiManager : MonoBehaviour
     //스타트씬 -20, -10
     public Image[] loadViewImage;
     public Image[] selectStudyImage;
-    public Image studyViewImage;
-    
+    public Image[] upgradeBoxImage;
+    public Sprite[] cardSprite;
 
-    
+    public Image studyViewImage;
+
     public Sprite[] studyViewResources;
     public Sprite[] selectStudyResources;
+    
+
+    public Image[] cardResources;
+    public Image[] cardPlusResources;
 
 
 
@@ -41,7 +65,9 @@ public class UiManager : MonoBehaviour
     public Text[] studyResult;
     public Text cardBordeName;
     public Text messageText;
+    public Text uiText;
 
+    
     public GameObject startUi;
     public GameObject dataUi;
     public GameObject studyUi;
@@ -56,7 +82,8 @@ public class UiManager : MonoBehaviour
     public GameObject fstCard1;
     public GameObject fstCard2;
     public GameObject endStudy;
-
+    public GameObject uiMessage;
+    public GameObject upgradeBox;
     public Transform player;
 
     private List<int> selectStudy;
@@ -73,7 +100,7 @@ public class UiManager : MonoBehaviour
     private int studyViewNum;
     private int order;
     private int saveSlot;
-
+    private int searchCount;
 
 
     private CharacterData data;
@@ -146,7 +173,7 @@ public class UiManager : MonoBehaviour
         studingUi.SetActive(false);
         selectCardUi.SetActive(false);
         statUi.SetActive(false);
-        startButton.SetActive(false);;
+        startButton.SetActive(false); ;
         message.SetActive(false);
         cardUi.SetActive(false);
         getCardUi.SetActive(false);
@@ -156,12 +183,13 @@ public class UiManager : MonoBehaviour
         studingResult[1].text = null;
         studingResult[2].text = null;
         studyState = StudyState.first;
-        cardList= new List<int>();
+        cardList = new List<int>();
         order = 0;
+        searchCount = 0;
     }
     public void startData()
     {
-        
+
         cardList = data.chrCardnum;
         playerHp = data.chrMaxHp;
         playerAttack = data.chrAttackDmg;
@@ -248,13 +276,13 @@ public class UiManager : MonoBehaviour
             studyUi.SetActive(true);
             mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
         }
-        else if (saveSlot >1)
-        { 
-        dataUi.SetActive(false);
-        studyUi.SetActive(true);
-        LoadCharacterData1();
-        mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
-        saveSlot = 1;
+        else if (saveSlot > 1)
+        {
+            dataUi.SetActive(false);
+            studyUi.SetActive(true);
+            LoadCharacterData1();
+            mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
+            saveSlot = 1;
         }
         startData();
     }
@@ -269,7 +297,7 @@ public class UiManager : MonoBehaviour
             studyUi.SetActive(true);
             mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
         }
-        else if(saveSlot == 3)
+        else if (saveSlot == 3)
         {
             dataUi.SetActive(false);
             studyUi.SetActive(true);
@@ -353,7 +381,7 @@ public class UiManager : MonoBehaviour
     }
     public void NextSceneBtn()
     {
-        if (selectStudy.Count==3)
+        if (selectStudy.Count == 3)
         {
             if (selectStudy[0] == 0)
             {
@@ -426,7 +454,7 @@ public class UiManager : MonoBehaviour
         statUi.SetActive(false);
         selectCardUi.SetActive(true);
         studyResult[0].text = "결과";
-        studyResult[1].text = "체력"+(playerHp- DefaultPlayerHp).ToString()+"↑ "
+        studyResult[1].text = "체력" + (playerHp - DefaultPlayerHp).ToString() + "↑ "
             + "공격" + (playerAttack - DefaultPlayerAttack).ToString() + "↑ "
             + "방어" + (playerDefense - DefaultPlayerDefense).ToString() + "↑";
     }
@@ -443,6 +471,7 @@ public class UiManager : MonoBehaviour
 
     public void SwordStudyResult()
     {
+
         studingResult[0].text = "SWORD";
         int randomNum = Random.Range(0, 7);
         if (randomNum == 0)
@@ -495,6 +524,9 @@ public class UiManager : MonoBehaviour
     }
     IEnumerator BowStudy(int num)
     {
+        cardResources[0].sprite = cardSprite[3];//활1,2,3
+        cardResources[1].sprite = cardSprite[4];
+        cardResources[2].sprite = cardSprite[5];
         for (int i = 0; i < num; i++)
         {
             BowStudyResult();
@@ -533,6 +565,11 @@ public class UiManager : MonoBehaviour
     }
     IEnumerator MagicStudy(int num)
     {
+        cardResources[0].sprite = cardSprite[6];//마법1,2,3
+        cardResources[1].sprite = cardSprite[7];
+        cardResources[2].sprite = cardSprite[8];
+        cardPlusResources[0].sprite = cardSprite[8];
+        cardPlusResources[1].sprite = cardSprite[8];
         for (int i = 0; i < num; i++)
         {
             MagicStudyResult();
@@ -550,7 +587,7 @@ public class UiManager : MonoBehaviour
             studingResult[1].text = "공격↑";
             studingResult[2].text = "그럭저럭 배운것 같다.";
         }
-        else if (randomNum == 2 || randomNum == 5 ||  randomNum == 6)
+        else if (randomNum == 2 || randomNum == 5 || randomNum == 6)
         {
             studingResult[1].text = " - ";
             studingResult[2].text = "힘들어서 그냥 쉬었다.";
@@ -566,17 +603,641 @@ public class UiManager : MonoBehaviour
 
     public void FirstCardBtn()
     {
-        if (studyState == StudyState.first)
+        Debug.Log(cardState);
+
+        if (cardState == CardState.get)
         {
-            GetFirstCard(0);
+            if (studyState == StudyState.first)
+            {
+                GetFirstCard(0);
+            }
+            else if (studyState == StudyState.second)
+            {
+                GetFirstCard(1);
+            }
+            else if (studyState == StudyState.third)
+            {
+                GetFirstCard(2);
+            }
         }
-        else if (studyState == StudyState.second)
+        else
         {
-            GetFirstCard(1);
+            if (studyState == StudyState.first)
+            {
+                if (selectStudy[0] == 0)
+                {
+                    upgradeState = UpgradeState.firstSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[0] == 1)
+                {
+                    upgradeState = UpgradeState.firstBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[0] == 2)
+                {
+                    upgradeState = UpgradeState.firstMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
+            else if (studyState == StudyState.second)
+            {
+                if (selectStudy[1] == 0)
+                {
+                    upgradeState = UpgradeState.firstSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[1] == 1)
+                {
+                    upgradeState = UpgradeState.firstBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[1] == 2)
+                {
+                    upgradeState = UpgradeState.firstMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
+            else if (studyState == StudyState.third)
+            {
+                if (selectStudy[2] == 0)
+                {
+                    upgradeState = UpgradeState.firstSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[2] == 1)
+                {
+                    upgradeState = UpgradeState.firstBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[2] == 2)
+                {
+                    upgradeState = UpgradeState.firstMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
         }
-        else if (studyState == StudyState.third)
+    }
+    public void UpgradeFirstCard(int num)
+    {
+        if (selectStudy[num] == 0)
         {
-            GetFirstCard(2);
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[4];
+            upgradeBoxImage[1].sprite = cardSprite[11];
+        }
+        else if (selectStudy[num] == 1)
+        {
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[16];
+            upgradeBoxImage[1].sprite = cardSprite[19];
+        }
+        else if (selectStudy[num] == 2)
+        {
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[26];
+            upgradeBoxImage[1].sprite = cardSprite[31];
+        }
+    }
+    public void UpgradeSecondCard(int num)
+    {
+        if (selectStudy[num] == 0)
+        {
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[9];
+            upgradeBoxImage[1].sprite = cardSprite[12];
+        }
+        else if (selectStudy[num] == 1)
+        {
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[17];
+            upgradeBoxImage[1].sprite = cardSprite[20];
+        }
+        else if (selectStudy[num] == 2)
+        {
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[27];
+            upgradeBoxImage[1].sprite = cardSprite[32];
+        }
+    }
+
+    public void UpgradeThirdCard(int num)
+    {
+        if (selectStudy[num] == 0)
+        {
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[10];
+            upgradeBoxImage[1].sprite = cardSprite[13];
+        }
+        else if (selectStudy[num] == 1)
+        {
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[18];
+            upgradeBoxImage[1].sprite = cardSprite[21];
+        }
+        else if (selectStudy[num] == 2)
+        {
+            upgradeBox.SetActive(true);
+            upgradeBoxImage[0].sprite = cardSprite[28];
+            upgradeBoxImage[1].sprite = cardSprite[33];
+        }
+    }
+    public void UpgradeFirstCardBtn(int num)
+    {
+        Debug.Log(upgradeState);
+        if (upgradeState == UpgradeState.firstSword)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 3)
+                {
+                    cardList.Remove(3);
+                    cardList.Add(8);
+                    message.SetActive(true);
+                    messageText.text = "Cut+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Cut카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+        }
+        else if (upgradeState == UpgradeState.firstBow)
+        {
+            Debug.Log("들어온거확인");
+            foreach (int a in cardList)
+            {
+                if (a == 4)
+                {
+                    cardList.Remove(4);
+                    cardList.Add(16);
+                    message.SetActive(true);
+                    messageText.text = "Arrowshot+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Arrowshot카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+        }
+        else if (upgradeState == UpgradeState.firstMagic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 5)
+                {
+                    cardList.Remove(5);
+                    cardList.Add(26);
+                    message.SetActive(true);
+                    messageText.text = "Fireball+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Fireball카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+        }
+        else if (upgradeState == UpgradeState.secondSword)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 6)
+                {
+                    cardList.Remove(6);
+                    cardList.Add(9);
+                    message.SetActive(true);
+                    messageText.text = "Guard+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Guard카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+        else if (upgradeState == UpgradeState.secondBow)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 14)
+                {
+                    cardList.Remove(14);
+                    cardList.Add(17);
+                    message.SetActive(true);
+                    messageText.text = "Hawkeye+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Hawkeye카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+        }
+        else if (upgradeState == UpgradeState.secondMagic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 22)
+                {
+                    cardList.Remove(22);
+                    cardList.Add(27);
+                    message.SetActive(true);
+                    messageText.text = "Electric shock+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Electric shock카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+        else if (upgradeState == UpgradeState.thirdSword)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 7)
+                {
+                    cardList.Remove(7);
+                    cardList.Add(10);
+                    message.SetActive(true);
+                    messageText.text = "ShildStrike+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "ShildStrike카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+
+        else if (upgradeState == UpgradeState.thirdBow)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 15)
+                {
+                    cardList.Remove(15);
+                    cardList.Add(18);
+                    message.SetActive(true);
+                    messageText.text = "Snapshot+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Snapshot카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount=0;
+        }
+        else if (upgradeState == UpgradeState.thirdMagic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 23)
+                {
+                    cardList.Remove(23);
+                    cardList.Add(28);
+                    message.SetActive(true);
+                    messageText.text = "Ice bolt+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Ice bolt카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount=0;
+        }
+    }
+    public void UpgradeSecondCardBtn(int num)
+    {
+        if (upgradeState == UpgradeState.firstSword)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 8)
+                {
+                    cardList.Remove(8);
+                    cardList.Add(11);
+                    message.SetActive(true);
+                    messageText.text = "Cut++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Cut+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount=0;
+        }
+        else if (upgradeState == UpgradeState.firstBow)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 16)
+                {
+                    cardList.Remove(16);
+                    cardList.Add(19);
+                    message.SetActive(true);
+                    messageText.text = "Arrowshot++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Arrowshot+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+        else if (upgradeState == UpgradeState.firstMagic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 26)
+                {
+                    cardList.Remove(26);
+                    cardList.Add(31);
+                    message.SetActive(true);
+                    messageText.text = "Fireball++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Fireball+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount = 0;
+        }
+        else if (upgradeState == UpgradeState.secondSword)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 9)
+                {
+                    cardList.Remove(9);
+                    cardList.Add(12);
+                    message.SetActive(true);
+                    messageText.text = "Guard++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Guard+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+        else if (upgradeState == UpgradeState.secondBow)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 17)
+                {
+                    cardList.Remove(17);
+                    cardList.Add(20);
+                    message.SetActive(true);
+                    messageText.text = "Hawkeye++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Hawkeye+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+        else if (upgradeState == UpgradeState.secondMagic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 27)
+                {
+                    cardList.Remove(27);
+                    cardList.Add(32);
+                    message.SetActive(true);
+                    messageText.text = "Electric shock++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Electric shock+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+        else if (upgradeState == UpgradeState.thirdSword)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 10)
+                {
+                    cardList.Remove(10);
+                    cardList.Add(13);
+                    message.SetActive(true);
+                    messageText.text = "ShildStrike++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "ShildStrike+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount=0;
+
+        }
+        else if (upgradeState == UpgradeState.thirdBow)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 18)
+                {
+                    cardList.Remove(18);
+                    cardList.Add(21);
+                    message.SetActive(true);
+                    messageText.text = "Snapshot++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Snapshot+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount++;
+
+        }
+        else if (upgradeState == UpgradeState.thirdMagic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 28)
+                {
+                    cardList.Remove(28);
+                    cardList.Add(33);
+                    message.SetActive(true);
+                    messageText.text = "Ice bolt++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Ice bolt+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                    }
+                }
+            }
+            searchCount++;
+
         }
     }
 
@@ -604,17 +1265,77 @@ public class UiManager : MonoBehaviour
 
     public void SecondCardBtn()
     {
-        if (studyState == StudyState.first)
+        if (cardState == CardState.get)
         {
-            GetSecondCard(0);
+            if (studyState == StudyState.first)
+            {
+                GetSecondCard(0);
+            }
+            else if (studyState == StudyState.second)
+            {
+                GetSecondCard(1);
+            }
+            else if (studyState == StudyState.third)
+            {
+                GetSecondCard(2);
+            }
         }
-        else if (studyState == StudyState.second)
+        else
         {
-            GetSecondCard(1);
-        }
-        else if (studyState == StudyState.third)
-        {
-            GetSecondCard(2);
+            if (studyState == StudyState.first)
+            {
+                if (selectStudy[0] == 0)
+                {
+                    upgradeState = UpgradeState.secondSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[0] == 1)
+                {
+                    upgradeState = UpgradeState.secondBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[0] == 2)
+                {
+                    upgradeState = UpgradeState.secondMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
+            else if (studyState == StudyState.second)
+            {
+                if (selectStudy[1] == 0)
+                {
+                    upgradeState = UpgradeState.secondSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[1] == 1)
+                {
+                    upgradeState = UpgradeState.secondBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[1] == 2)
+                {
+                    upgradeState = UpgradeState.secondMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
+            else if (studyState == StudyState.third)
+            {
+                if (selectStudy[2] == 0)
+                {
+                    upgradeState = UpgradeState.secondSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[2] == 1)
+                {
+                    upgradeState = UpgradeState.secondBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[2] == 2)
+                {
+                    upgradeState = UpgradeState.secondMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
         }
     }
     public void GetSecondCard(int num)
@@ -642,17 +1363,81 @@ public class UiManager : MonoBehaviour
 
     public void ThirdCardBtn()
     {
-        if (studyState == StudyState.first)
+        if (cardState == CardState.get)
         {
-            GetThirdCard(0);
+            if (studyState == StudyState.first)
+            {
+                GetThirdCard(0);
+                upgradeState = UpgradeState.thirdSword;
+
+            }
+            else if (studyState == StudyState.second)
+            {
+                GetThirdCard(1);
+                upgradeState = UpgradeState.thirdBow;
+            }
+            else if (studyState == StudyState.third)
+            {
+                GetThirdCard(2);
+                upgradeState = UpgradeState.thirdMagic;
+            }
         }
-        else if (studyState == StudyState.second)
+        else
         {
-            GetThirdCard(1);
-        }
-        else if (studyState == StudyState.third)
-        {
-            GetThirdCard(2);
+            if (studyState == StudyState.first)
+            {
+                if (selectStudy[0] == 0)
+                {
+                    upgradeState = UpgradeState.thirdSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[0] == 1)
+                {
+                    upgradeState = UpgradeState.thirdBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[0] == 2)
+                {
+                    upgradeState = UpgradeState.thirdMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
+            else if (studyState == StudyState.second)
+            {
+                if (selectStudy[1] == 0)
+                {
+                    upgradeState = UpgradeState.thirdSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[1] == 1)
+                {
+                    upgradeState = UpgradeState.thirdBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[1] == 2)
+                {
+                    upgradeState = UpgradeState.thirdMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
+            else if (studyState == StudyState.third)
+            {
+                if (selectStudy[2] == 0)
+                {
+                    upgradeState = UpgradeState.thirdSword;
+                    UpgradeFirstCard(0);
+                }
+                else if (selectStudy[2] == 1)
+                {
+                    upgradeState = UpgradeState.thirdBow;
+                    UpgradeFirstCard(1);
+                }
+                else if (selectStudy[2] == 2)
+                {
+                    upgradeState = UpgradeState.thirdMagic;
+                    UpgradeFirstCard(2);
+                }
+            }
         }
     }
 
@@ -700,10 +1485,290 @@ public class UiManager : MonoBehaviour
             messageText.text = "ice bolt카드를 얻었다.";
         }
     }
-
-    public void UpgradeCardBtn()
+    public void CloseUiMassageBtn()
     {
+        uiMessage.SetActive(false);
+    }
+    public void OpenUpgradeCardBtn()
+    {
+        if (studyState == StudyState.first)
+        {
+            if (selectStudy[0] == 0)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 3 || a == 6 || a == 7 || a == 8 || a == 9 || a == 10)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        break;
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount = 0;
+            }
+            else if (selectStudy[0] == 1)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 4 || a == 14 || a == 15 || a == 16 || a == 17 || a == 18)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        break;
 
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount = 0;
+
+            }
+            else if (selectStudy[0] == 2)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 5 || a == 22 || a == 23 || a == 24 || a == 25 || a == 26 || a == 27 || a == 28 || a == 29 || a == 30)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        Debug.Log(cardState);
+                        break;
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount = 0;
+
+            }
+        }
+        else if (studyState == StudyState.second)
+        {
+            if (selectStudy[1] == 0)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 3 || a == 6 || a == 7 || a == 8 || a == 9 || a == 10)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        break;
+
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount = 0;
+
+            }
+            else if (selectStudy[1] == 1)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 4 || a == 14 || a == 15 || a == 16 || a == 17 || a == 18)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        break;
+
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount = 0;
+
+            }
+            else if (selectStudy[1] == 2)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 5 || a == 22 || a == 23 || a == 24 || a == 25 || a == 26 || a == 27 || a == 28 || a == 29 || a == 30)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        break;
+
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount = 0;
+
+            }
+
+        }
+        else if (studyState == StudyState.third)
+        {
+            if (selectStudy[2] == 0)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 3 || a == 6 || a == 7 || a == 8 || a == 9 || a == 10)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        break;
+
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount = 0;
+
+            }
+            else if (selectStudy[2] == 1)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 4 || a == 14 || a == 15 || a == 16 || a == 17 || a == 18)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        break;
+
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount=0;
+
+            }
+            else if (selectStudy[2] == 2)
+            {
+                foreach (int a in cardList)
+                {
+                    if (a == 5 || a == 22 || a == 23 || a == 24 || a == 25 || a == 26 || a == 27 || a == 28 || a == 29 || a == 30)
+                    {
+                        cardUi.SetActive(true);
+                        selectCardUi.SetActive(false);
+                        getCardUi.SetActive(true);
+                        fstCard1.SetActive(true);
+                        cardBordeName.text = "카 드 강 화";
+                        ChangeSprite();
+                        cardState = CardState.upgrade;
+                        break;
+                    }
+                    else
+                    {
+                        searchCount++;
+                        if (searchCount == cardList.Count)
+                        {
+                            uiMessage.SetActive(true);
+                            uiText.text = "강화할 카드가 없습니다.";
+                            break;
+                        }
+                    }
+                }
+                searchCount=0;
+
+            }
+
+        }
     }
 
     public void OpenGetCardBtn()
@@ -713,11 +1778,80 @@ public class UiManager : MonoBehaviour
         getCardUi.SetActive(true);
         fstCard1.SetActive(true);
         cardBordeName.text = "카 드 획 득";
+        ChangeSprite();
+        cardState = CardState.get;
     }
-
-    public void OpenUpgradeCardBtn()
+    public void ChangeSprite()
     {
-
+        if(studyState==StudyState.first)
+        {
+            if(selectStudy[0]==0)
+            {
+                cardResources[0].sprite = cardSprite[0];//검0,1,2
+                cardResources[1].sprite = cardSprite[1];
+                cardResources[2].sprite = cardSprite[2];
+            }
+            else if (selectStudy[0] == 1)
+            {
+                cardResources[0].sprite = cardSprite[3];//활3,4,5
+                cardResources[1].sprite = cardSprite[4];
+                cardResources[2].sprite = cardSprite[5];
+            }
+            else if (selectStudy[0] == 2)
+            {
+                cardResources[0].sprite = cardSprite[6];//마법6,7,8.9,10
+                cardResources[1].sprite = cardSprite[7];
+                cardResources[2].sprite = cardSprite[8];
+                cardResources[3].sprite = cardSprite[9];
+                cardResources[4].sprite = cardSprite[10];
+            }
+        }
+        else if(studyState == StudyState.second)
+        {
+            if (selectStudy[1] == 0)
+            {
+                cardResources[0].sprite = cardSprite[0];//검0,1,2
+                cardResources[1].sprite = cardSprite[1];
+                cardResources[2].sprite = cardSprite[2];
+            }
+            else if (selectStudy[1] == 1)
+            {
+                cardResources[0].sprite = cardSprite[3];//활3,4,5
+                cardResources[1].sprite = cardSprite[4];
+                cardResources[2].sprite = cardSprite[5];
+            }
+            else if (selectStudy[1] == 2)
+            {
+                cardResources[0].sprite = cardSprite[6];//마법6,7,8.9,10
+                cardResources[1].sprite = cardSprite[7];
+                cardResources[2].sprite = cardSprite[8];
+                cardResources[3].sprite = cardSprite[9];
+                cardResources[4].sprite = cardSprite[10];
+            }
+        }
+        else if (studyState == StudyState.third)
+        {
+            if (selectStudy[2] == 0)
+            {
+                cardResources[0].sprite = cardSprite[0];//검0,1,2
+                cardResources[1].sprite = cardSprite[1];
+                cardResources[2].sprite = cardSprite[2];
+            }
+            else if (selectStudy[2] == 1)
+            {
+                cardResources[0].sprite = cardSprite[3];//활3,4,5
+                cardResources[1].sprite = cardSprite[4];
+                cardResources[2].sprite = cardSprite[5];
+            }
+            else if (selectStudy[2] == 2)
+            {
+                cardResources[0].sprite = cardSprite[6];//마법6,7,8.9,10
+                cardResources[1].sprite = cardSprite[7];
+                cardResources[2].sprite = cardSprite[8];
+                cardResources[3].sprite = cardSprite[9];
+                cardResources[4].sprite = cardSprite[10];
+            }
+        }
     }
 
     public void CloseMessageBtn()
@@ -861,7 +1995,7 @@ public class UiManager : MonoBehaviour
             if (prefab != null)
             {
                 Card myScriptComponent = prefab.GetComponent<Card>();
-                myScriptComponent.Init();
+                myScriptComponent.DataInit();
 
                 // 스크립트 컴포넌트가 존재하고, targetId와 일치하는 경우 해당 프리팹 반환
                 if (myScriptComponent != null && myScriptComponent.info.Id == targetId)

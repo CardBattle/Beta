@@ -876,7 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 999
   property: 0
   type: 0
   _name: 
@@ -906,7 +906,6 @@ MonoBehaviour:
   EffVal: {fileID: 4878162506730651874}
   Buff: {fileID: 3543725352389630445}
   Level: {fileID: 7910649463990320945}
-  defenseCheck: 0
   cardSelect: 0
   originPRS:
     pos: {x: 0, y: 0, z: 0}
