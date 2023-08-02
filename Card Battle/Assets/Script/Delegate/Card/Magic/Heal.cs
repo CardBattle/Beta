@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rest : CardUse
+public class Heal : CardUse
 {
     public override void Use(Character sender, Character receiver)
     {
         base.Use(sender, receiver);
+        
+       /* sender.cardDATA.
 
-        sender.info.Hp += CalculateDmg(sender.info.Defense, card.info.RandomDice, card.info.EffVal, 1);
-
-        print(sender.info.MaxHp);
-
+        print(sender.info.Hp);*/
     }
 
 }

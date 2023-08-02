@@ -34,7 +34,7 @@ public class DefaultCharacter
     public int Defense { get => defense; set => defense = value; } //플레이어 방어력
 
     int maxHp;
-    public int MaxHp { get => hp; set => hp = value; }
+    public int MaxHp { get => hp; set => hp = value;}
 
     int hp; //캐릭터 체력 
 
@@ -46,7 +46,7 @@ public class DefaultCharacter
         }
         set
         {
-            hp = value <= 0 ? 0 : (value > MaxHp ? hp = MaxHp : hp = value);
+            hp = value <= 0 ? 0 : (value > maxHp ? hp = maxHp : hp = value);
         }
     }
 

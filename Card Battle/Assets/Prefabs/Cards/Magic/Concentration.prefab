@@ -778,11 +778,11 @@ GameObject:
   - component: {fileID: 6467222491020728267}
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
-  - component: {fileID: 1522303916576256098}
-  - component: {fileID: 8716322762820276355}
-  - component: {fileID: 3988959596877240301}
+  - component: {fileID: -3690291437456017428}
+  - component: {fileID: -7862341410290846337}
+  - component: {fileID: 5839306580193267783}
   m_Layer: 0
-  m_Name: Hawkeye ++
+  m_Name: Concentration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,15 +879,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 20
-  property: 1
-  type: 2
-  _name: Hawkeye
-  _buff: "2\uD134\uB3D9\uC548 \uC8FC\uC0AC\uC704 \uAC12 +3"
-  effVal: 0
+  id: 500
+  property: 0
+  type: 3
+  _name: 
+  _buff: 
+  effVal: 1
   level: 1
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
-  cardimg: {fileID: 21300000, guid: 8c3235661573d7b44bd864536f83d0ea, type: 3}
+  cardimg: {fileID: 0}
   cardTypeSpaceimg: {fileID: 380853605, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   cardNameSpaceimg: {fileID: -690418764, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardBuffimg: {fileID: -1097064367, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
@@ -983,7 +983,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 00e4eb96f4f6cc249a632e4027644cad, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1069,7 +1069,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1522303916576256098
+--- !u!114 &-3690291437456017428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1081,12 +1081,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 20
+  id: 24
   type: 0
-  _name: HawkeyeBuffPlusPlus
-  turns: 2
-  buffUse: {fileID: 8716322762820276355}
---- !u!114 &8716322762820276355
+  _name: Concentration
+  turns: 0
+  buffUse: {fileID: 5839306580193267783}
+--- !u!114 &-7862341410290846337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1095,24 +1095,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 3230438190971658476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a73d171199226394fbf023e1a1d711c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3988959596877240301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddb27234e8967904598d23f3543ca3b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 412e9e3b26d06904cb7db0a99e7a61e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
   sfx: {fileID: 0}
-  vfx: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+  vfx: {fileID: 100000, guid: 77ec3c4e07a36814fb3169ecef41b50a, type: 3}
+--- !u!114 &5839306580193267783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230438190971658476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f230e7955d38eae4bbd1f4e19995ea7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4326520001256105577
 GameObject:
   m_ObjectHideFlags: 0
