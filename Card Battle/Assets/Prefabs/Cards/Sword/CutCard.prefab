@@ -311,7 +311,6 @@ MonoBehaviour:
   EffVal: {fileID: 1649764641532178222}
   Buff: {fileID: 1369147057301381698}
   Level: {fileID: 2033537870953926300}
-  defenseCheck: 0
   cardSelect: 0
   originPRS:
     pos: {x: 0, y: 0, z: 0}

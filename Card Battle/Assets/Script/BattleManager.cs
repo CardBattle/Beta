@@ -127,6 +127,8 @@ public class BattleManager : MonoBehaviour
     public GameObject playerParent;
     public GameObject enemyParent;
 
+    private bool tutorial = false;
+
     // 플레이어 동작
     public State state;
     [SerializeField]
@@ -142,12 +144,17 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private TextMeshPro timerText; //타이머 텍스트
 
+    public TextMeshPro playerDeckCount;
+    public TextMeshPro enemyDeckCount;
+
     private void Awake()
     {
         if (Bm == null)
         {
             Bm = this;
         }
+
+        Time.timeScale = 1;
 
         if (PlayerPrefs.GetInt("Stage") >= 2)
         {
@@ -157,10 +164,7 @@ public class BattleManager : MonoBehaviour
         {
             stage = 1;
         }
-
-        print(stage);
-
-        Time.timeScale = 1;
+       
         PrefabsCharacterInformation();
         CharcterDataInfomation();
         OnAddCard = Add;
@@ -168,6 +172,20 @@ public class BattleManager : MonoBehaviour
         state = State.CardDecision;
 
         timerText.text = "10.00";
+
+        if (PlayerPrefs.HasKey("Tutorial"))
+        {
+            tutorial = Convert.ToBoolean(PlayerPrefs.GetInt("Tutorial"));
+            Destroy(UIManager.Um.tutorial);
+        }
+        else
+        {
+            if (!tutorial)
+            {
+                UIManager.Um.Tutorial();
+                Time.timeScale = 0;
+            }
+        }
 
     }
     private void Start()
@@ -680,6 +698,9 @@ public class BattleManager : MonoBehaviour
 
         cardManager.Init();
         cardManager.DeckCardInit();
+
+        playerDeckCount.text = $"남은 덱 수: {playerDeck.Count}";
+        enemyDeckCount.text = $"남은 덱 수: {enemyDeck.Count}";
     }
 
     public void CardSelectDown(Card card)
@@ -715,6 +736,7 @@ public class BattleManager : MonoBehaviour
         if (playerCards.Count == 0)
         {
             StartCoroutine(DrawFullCard(true));
+
         }
 
         if (enemyCards.Count == 0)
@@ -836,6 +858,9 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             OnAddCard?.Invoke(false);
         }
+
+        playerDeckCount.text = $"남은 덱 수: {playerDeck.Count}";
+        enemyDeckCount.text = $"남은 덱 수: {enemyDeck.Count}";
     }
 
     IEnumerator DrawFullCard(bool myCard)
@@ -844,7 +869,7 @@ public class BattleManager : MonoBehaviour
         {
             OnAddCard?.Invoke(myCard);
             yield return new WaitForSeconds(0.1f);
-        }
+        }       
     }
 
     IEnumerator CardSorting()
@@ -859,6 +884,8 @@ public class BattleManager : MonoBehaviour
             playerHpSlider.value = player.info.Hp;
             playerHpView.text = player.info.Hp.ToString();
             CardCombine(true);
+            playerDeckCount.text = $"남은 덱 수: {playerDeck.Count}";
+            
         }
         if (enemyCards.Count == 0 && enemyDeck.Count == 0)
         {
@@ -870,6 +897,7 @@ public class BattleManager : MonoBehaviour
             enemyHpSlider.value = enemy.info.Hp;
             enemyHpView.text = enemy.info.Hp.ToString();
             CardCombine(false);
+            enemyDeckCount.text = $"남은 덱 수: {enemyDeck.Count}";
         }
 
         if (playerDecision.card != null)
@@ -915,9 +943,10 @@ public class BattleManager : MonoBehaviour
 
             card.GetComponent<Order>().SetOriginOrder(order++);
             CardAlignment(myCard);
+            playerDeckCount.text = $"남은 덱 수: {playerDeck.Count}";           
         }
 
-        if (!myCard && enemyDeck.Count != 0 && enemyCards.Count < 11)
+        if (!myCard && enemyDeck.Count != 0 && enemyCards.Count < 9)
         {
             var cardObject = Instantiate(enemyDeck[0], new Vector2(enemyDeckPosition.transform.position.x, enemyDeckPosition.transform.position.y), Utlis.Qi);
             var card = cardObject.GetComponent<Card>();
@@ -928,7 +957,8 @@ public class BattleManager : MonoBehaviour
             enemyDeck!.RemoveAt(0);
 
             card.GetComponent<Order>().SetOriginOrder(enemyOrder++);
-            CardAlignment(myCard);
+            CardAlignment(myCard);           
+            enemyDeckCount.text = $"남은 덱 수: {enemyDeck.Count}";
         }
 
 
