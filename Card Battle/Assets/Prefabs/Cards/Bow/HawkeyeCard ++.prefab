@@ -622,7 +622,7 @@ Transform:
   m_GameObject: {fileID: 2697552795345152088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.021, y: 0.284, z: 0}
-  m_LocalScale: {x: 0.77045625, y: 0.7674429, z: 0.3846154}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3230438190971658475}
@@ -779,10 +779,10 @@ GameObject:
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
   - component: {fileID: 1522303916576256098}
-  - component: {fileID: 8837065754047261629}
-  - component: {fileID: 3180004624853755449}
+  - component: {fileID: 8716322762820276355}
+  - component: {fileID: 3988959596877240301}
   m_Layer: 0
-  m_Name: Hawkeye +
+  m_Name: HawkeyeCard ++
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,21 +879,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 17
+  id: 20
   property: 1
   type: 2
   _name: Hawkeye
-  _buff: "2\uD134\uB3D9\uC548 \uC8FC\uC0AC\uC704 \uAC12 +2"
+  _buff: "2\uD134\uB3D9\uC548 \uC8FC\uC0AC\uC704 \uAC12 +3"
   effVal: 0
-  level: 2
+  level: 3
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
-  cardimg: {fileID: 21300000, guid: 8c3235661573d7b44bd864536f83d0ea, type: 3}
-  cardTypeSpaceimg: {fileID: 380853605, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  cardimg: {fileID: 21300000, guid: da4c50fc4d8dd264f88ae9268bce91eb, type: 3}
+  cardTypeSpaceimg: {fileID: -616467193, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   cardNameSpaceimg: {fileID: -690418764, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardBuffimg: {fileID: -1097064367, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
-  cardLevelimg: {fileID: -1664420051, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
-  cardTypeimg: {fileID: -1751398833, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
-  cardEffValimg: {fileID: -1893184096, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  cardLevelimg: {fileID: 2118651719, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  cardTypeimg: {fileID: -1024736645, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  cardEffValimg: {fileID: 1050973026, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   frontCard: {fileID: 1169078661, guid: 71ad172f81917dc4c88b385499ba85c4, type: 3}
   backCard: {fileID: -1260174942, guid: 71ad172f81917dc4c88b385499ba85c4, type: 3}
   buffs: []
@@ -1081,12 +1081,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 17
+  id: 20
   type: 0
-  _name: HawkeyeBuff
+  _name: HawkeyeBuffPlusPlus
   turns: 2
-  buffUse: {fileID: 8837065754047261629}
---- !u!114 &8837065754047261629
+  buffUse: {fileID: 8716322762820276355}
+--- !u!114 &8716322762820276355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1095,10 +1095,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3230438190971658476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552eac8659c290b48b3edd73e6dc6121, type: 3}
+  m_Script: {fileID: 11500000, guid: a73d171199226394fbf023e1a1d711c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3180004624853755449
+--- !u!114 &3988959596877240301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3230438190971658476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2208a7471ebc05f438adaa7e20a00db0, type: 3}
+  m_Script: {fileID: 11500000, guid: ddb27234e8967904598d23f3543ca3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}

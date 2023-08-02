@@ -91,6 +91,10 @@ public class Card : MonoBehaviour
 
         GetComponent<CardUse>().Init();
     }
+    public void DataInit()
+    {
+        info = new(id, property, type, _name, buffs, effVal, cardimg);
+    }
 
     private void OnMouseEnter()
     {
