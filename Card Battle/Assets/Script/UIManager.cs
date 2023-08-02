@@ -70,6 +70,7 @@ public class UIManager : MonoBehaviour
         else if (BattleManager.Bm.state == BattleManager.State.SelectCard)
             BattleManager.Bm.state = BattleManager.State.SelectMenu;
 
+
         Transform canvasUITransform = canvasUI.transform;
         Time.timeScale = 0;
         battleUI.SetActive(false);
