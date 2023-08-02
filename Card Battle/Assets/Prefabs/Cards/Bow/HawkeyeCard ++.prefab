@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 20
-  property: 0
+  property: 1
   type: 2
   _name: Hawkeye
   _buff: "2\uD134\uB3D9\uC548 \uC8FC\uC0AC\uC704 \uAC12 +3"
