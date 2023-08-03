@@ -1221,7 +1221,7 @@ MonoBehaviour:
   property: 0
   type: 2
   _name: Arrow
-  _buff: "25% 2.5\uBC30 \uB370\uBBF8\uC9C0"
+  _buff: "25% 2\uBC30 \uB370\uBBF8\uC9C0"
   effVal: 2
   level: 1
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}

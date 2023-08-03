@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 20
   type: 0
-  _name: HawkeyeBuffPlusPlus
+  _name: Hawkeye++
   turns: 2
   buffUse: {fileID: 8716322762820276355}
 --- !u!114 &8716322762820276355

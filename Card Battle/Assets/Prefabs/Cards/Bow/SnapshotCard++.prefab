@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 6467222491020728267}
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
-  - component: {fileID: 1638636341845702788}
+  - component: {fileID: 728650150875212683}
   m_Layer: 0
   m_Name: SnapshotCard++
   m_TagString: Untagged
@@ -1067,7 +1067,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1638636341845702788
+--- !u!114 &728650150875212683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3230438190971658476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a00fd146789de44287ef5f9e33702c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 293db6760b6bad3438a6507369155765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
