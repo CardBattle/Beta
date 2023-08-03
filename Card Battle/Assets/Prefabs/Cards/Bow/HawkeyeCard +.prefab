@@ -882,7 +882,7 @@ MonoBehaviour:
   id: 17
   property: 1
   type: 2
-  _name: Hawkeye
+  _name: Hawkeye+
   _buff: "2\uD134\uB3D9\uC548 \uC8FC\uC0AC\uC704 \uAC12 +2"
   effVal: 0
   level: 2
