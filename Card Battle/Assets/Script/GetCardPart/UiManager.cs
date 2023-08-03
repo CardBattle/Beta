@@ -44,6 +44,7 @@ public class UiManager : MonoBehaviour
     public Image[] selectStudyImage;
     public Image[] upgradeBoxImage;
     public Sprite[] cardSprite;
+    public SpriteRenderer weaponSprite;
 
     public Image studyViewImage;
 
@@ -51,10 +52,7 @@ public class UiManager : MonoBehaviour
     public Sprite[] selectStudyResources;
     
 
-    public Image[] cardResources;
-    public Image[] cardPlusResources;
-
-
+    public Image[] cardImage;
 
     public Camera mainCamera;
 
@@ -84,7 +82,13 @@ public class UiManager : MonoBehaviour
     public GameObject endStudy;
     public GameObject uiMessage;
     public GameObject upgradeBox;
-    public Transform player;
+    public GameObject[] vfx;
+
+
+    public Animator babyAni;
+    public GameObject baby;
+    private Character babydata;
+
 
     private List<int> selectStudy;
     public List<Image> getCardList;
@@ -102,10 +106,9 @@ public class UiManager : MonoBehaviour
     private int saveSlot;
     private int searchCount;
 
-
     private CharacterData data;
     private DefaultCharacterData saveData;
-
+    Transform warriorTransform;
 
     public void Awake()
     {
@@ -127,6 +130,7 @@ public class UiManager : MonoBehaviour
         Debug.Log("바이너리로 저장된 파일 개수: " + binaryFileCount);
         saveSlot = binaryFileCount;
     }
+
     int CountBinaryFilesInDirectory(string path)
     {
         int binaryFileCount = 0;
@@ -165,7 +169,9 @@ public class UiManager : MonoBehaviour
         studyViewImage.sprite = studyViewResources[studyViewNum];
         selectStudy = new List<int>();
         cardListData = new List<GameObject>();
-        player.position = new Vector3(-0.86f, 0.56f, 0.0f);
+        baby.transform.position = new Vector3(-20f, 12.0f, 0.0f);
+        baby.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        weaponSprite.sprite = null;
         mainCamera.transform.position = new Vector3(-20.0f, 10.0f, -100.0f);
         startUi.SetActive(true);
         dataUi.SetActive(false);
@@ -186,6 +192,8 @@ public class UiManager : MonoBehaviour
         cardList = new List<int>();
         order = 0;
         searchCount = 0;
+        warriorTransform = baby.transform.Find("Warrior");
+        babydata = warriorTransform.GetComponent<Character>();
     }
     public void startData()
     {
@@ -212,6 +220,11 @@ public class UiManager : MonoBehaviour
     }
     public void StartBtn()
     {
+        baby.transform.position = new Vector3(-1f, 0.0f, 0.0f);
+        baby.transform.localScale = new Vector3(1f, 1f, 1f);
+        //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
+        babydata.AniInit(0);
+
         startUi.SetActive(false);
         dataUi.SetActive(true);
         mainCamera.transform.position = new Vector3(-20.0f, 0.0f, -100.0f);
@@ -227,9 +240,9 @@ public class UiManager : MonoBehaviour
             loadViewImage[0].sprite = selectStudyResources[data.imgNum];
             saveInfo[0].text = "이름 " + data.chrName + "\n" + "레벨 " + data.chrLv.ToString() + "\n" + "카드 개수 " + data.chrCardnum.Count.ToString() + "\n" + "체력 " + data.chrMaxHp.ToString() + "\n" + "공격력 "
                 + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
-            loadViewImage[1].sprite = null;
+            //loadViewImage[1].sprite = null;
             saveInfo[1].text = "데이터가 없습니다";
-            loadViewImage[2].sprite = null;
+            //loadViewImage[2].sprite = null;
             saveInfo[2].text = "데이터가 없습니다";
 
         }
@@ -243,7 +256,7 @@ public class UiManager : MonoBehaviour
             loadViewImage[1].sprite = selectStudyResources[data.imgNum];
             saveInfo[1].text = "이름 " + data.chrName + "\n" + "레벨 " + data.chrLv.ToString() + "\n" + "카드 개수 " + data.chrCardnum.Count.ToString() + "\n" + "체력 " + data.chrMaxHp.ToString() + "\n" + "공격력 "
                 + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
-            loadViewImage[2].sprite = null;
+            //loadViewImage[2].sprite = null;
             saveInfo[2].text = "데이터가 없습니다";
         }
         else if (saveSlot == 3)
@@ -326,6 +339,11 @@ public class UiManager : MonoBehaviour
             studyInfo[0].text = "SWORD";
             studyInfo[1].text = "공격과 방어의 밸런스가 특징이다.";
             studyInfo[2].text = "모든 스텟 ↑";
+            //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
+            babydata.AniInit(0);
+
+
+
 
         }
         else
@@ -337,13 +355,18 @@ public class UiManager : MonoBehaviour
                 studyInfo[0].text = "SWORD";
                 studyInfo[1].text = "공격과 방어의 밸런스가 특징이다.";
                 studyInfo[2].text = "모든 스텟 ↑";
+                //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
+                babydata.AniInit(0);
+
+
             }
             else if (studyViewNum == 1)
             {
                 studyInfo[0].text = "BOW";
                 studyInfo[1].text = "강력한 공격에 특화되어있다.";
                 studyInfo[2].text = "체력↑ 공격↑";
-
+                //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Bow");
+                babydata.AniInit(1);
 
             }
             else if (studyViewNum == 2)
@@ -351,6 +374,9 @@ public class UiManager : MonoBehaviour
                 studyInfo[0].text = "MAGIC";
                 studyInfo[1].text = "다섯 가지의 기술을 배울 수 있다.";
                 studyInfo[2].text = "공격↑";
+                //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Wand");
+                babydata.AniInit(2);
+
 
             }
         }
@@ -389,6 +415,10 @@ public class UiManager : MonoBehaviour
     }
     public void NextSceneBtn()
     {
+        Debug.Log(selectStudy[0]);
+        Debug.Log(selectStudy[1]);
+        Debug.Log(selectStudy[2]);
+
         if (selectStudy.Count == 3)
         {
             if (selectStudy[0] == 0)
@@ -399,7 +429,7 @@ public class UiManager : MonoBehaviour
                 startButton.SetActive(true); ;
 
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
-                player.position = new Vector3(4.0f, 12.0f, 0.0f);
+                baby.transform.position = new Vector3(4.0f, 12.0f, 0.0f);
             }
             else if (selectStudy[0] == 1)
             {
@@ -408,7 +438,7 @@ public class UiManager : MonoBehaviour
                 statUi.SetActive(true);
                 startButton.SetActive(true); ;
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
-                player.position = new Vector3(4.0f, 12.0f, 0.0f);
+                baby.transform.position = new Vector3(4.0f, 12.0f, 0.0f);
             }
             else if (selectStudy[0] == 2)
             {
@@ -417,7 +447,7 @@ public class UiManager : MonoBehaviour
                 statUi.SetActive(true);
                 startButton.SetActive(true); ;
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
-                player.position = new Vector3(4.0f, 12.0f, 0.0f);
+                baby.transform.position = new Vector3(4.0f, 12.0f, 0.0f);
             }
         }
     }
@@ -467,8 +497,27 @@ public class UiManager : MonoBehaviour
             + "방어" + (playerDefense - DefaultPlayerDefense).ToString() + "↑";
     }
 
+    public void GoodStudy()
+    {
+        babydata.GetComponent<Animator>().SetTrigger("Attack");
+        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[0], baby.transform.position, Quaternion.identity); };
+    }
+    public void NomalStudy()
+    {
+        babydata.GetComponent<Animator>().SetTrigger("Buff");
+        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[1], baby.transform.position, Quaternion.identity); };
+    }
+    public void BadStudy()
+    {
+        babydata.GetComponent<Animator>().SetTrigger("Hurt");
+        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[1], baby.transform.position, Quaternion.identity); };
+    }
+
     IEnumerator SwordStudy(int num)
     {
+        cardImage[0].sprite = cardSprite[3];//활1,2,3
+        cardImage[1].sprite = cardSprite[6];
+        cardImage[2].sprite = cardSprite[7];
         for (int i = 0; i < num; i++)
         {
             SwordStudyResult();
@@ -479,6 +528,8 @@ public class UiManager : MonoBehaviour
 
     public void SwordStudyResult()
     {
+        //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
+        babydata.AniInit(0);
 
         studingResult[0].text = "SWORD";
         int randomNum = Random.Range(0, 7);
@@ -487,18 +538,21 @@ public class UiManager : MonoBehaviour
             playerHp++;
             studingResult[1].text = "체력↑";
             studingResult[2].text = "체력이 붙었다";
+            NomalStudy();
         }
         else if (randomNum == 1)
         {
             playerAttack++;
             studingResult[1].text = "공격↑";
             studingResult[2].text = "공격을 잘하게 된 것 같다.";
+            NomalStudy();
         }
         else if (randomNum == 2)
         {
             playerDefense++;
             studingResult[1].text = "방어↑";
             studingResult[2].text = "방어를 잘하게 된 것 같다.";
+            NomalStudy();
         }
         else if (randomNum == 3)
         {
@@ -506,7 +560,7 @@ public class UiManager : MonoBehaviour
             playerAttack++;
             studingResult[1].text = "체력↑ 공격↑";
             studingResult[2].text = "공격을 열심히 연습했다.";
-
+            NomalStudy();
         }
         else if (randomNum == 4)
         {
@@ -514,6 +568,7 @@ public class UiManager : MonoBehaviour
             playerDefense++;
             studingResult[1].text = "체력↑ 방어↑";
             studingResult[2].text = "방어를 열심히 연습했다.";
+            NomalStudy();
 
         }
         else if (randomNum == 5)
@@ -523,18 +578,20 @@ public class UiManager : MonoBehaviour
             playerHp++;
             studingResult[1].text = "체력↑ 공격↑ 방어↑";
             studingResult[2].text = "완벽하게 해냈다.";
+            GoodStudy();
         }
         else if (randomNum == 6)
         {
             studingResult[1].text = " - ";
             studingResult[2].text = "힘들어서 그냥 쉬었다.";
+            BadStudy();
         }
     }
     IEnumerator BowStudy(int num)
     {
-        cardResources[0].sprite = cardSprite[3];//활1,2,3
-        cardResources[1].sprite = cardSprite[4];
-        cardResources[2].sprite = cardSprite[5];
+        cardImage[0].sprite = cardSprite[4];//활1,2,3
+        cardImage[1].sprite = cardSprite[14];
+        cardImage[2].sprite = cardSprite[15];
         for (int i = 0; i < num; i++)
         {
             BowStudyResult();
@@ -544,6 +601,9 @@ public class UiManager : MonoBehaviour
     }
     public void BowStudyResult()
     {
+        //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Bow");
+        babydata.AniInit(1);
+
         studingResult[0].text = "BOW";
         int randomNum = Random.Range(0, 7);
         if (randomNum == 0)
@@ -551,17 +611,22 @@ public class UiManager : MonoBehaviour
             playerHp++;
             studingResult[1].text = "체력↑";
             studingResult[2].text = "체력이 붙었다";
+            NomalStudy();
+
         }
         else if (randomNum == 1 || randomNum == 4)
         {
             playerAttack++;
             studingResult[1].text = "공격↑";
             studingResult[2].text = "공격을 잘하게 된 것 같다.";
+            NomalStudy();
+
         }
         else if (randomNum == 2 || randomNum == 5 || randomNum == 6)
         {
             studingResult[1].text = " - ";
             studingResult[2].text = "힘들어서 그냥 쉬었다.";
+            BadStudy();
         }
         else if (randomNum == 3)
         {
@@ -569,15 +634,20 @@ public class UiManager : MonoBehaviour
             playerAttack++;
             studingResult[1].text = "체력↑ 공격↑";
             studingResult[2].text = "공격을 열심히 연습했다.";
+            GoodStudy();
+
         }
     }
     IEnumerator MagicStudy(int num)
     {
-        cardResources[0].sprite = cardSprite[6];//마법1,2,3
-        cardResources[1].sprite = cardSprite[7];
-        cardResources[2].sprite = cardSprite[8];
-        cardPlusResources[0].sprite = cardSprite[8];
-        cardPlusResources[1].sprite = cardSprite[8];
+
+        cardImage[0].sprite = cardSprite[5];//마법1,2,3
+        cardImage[1].sprite = cardSprite[22];
+        cardImage[2].sprite = cardSprite[23];
+        cardImage[3].sprite = cardSprite[24];
+        cardImage[4].sprite = cardSprite[25];
+
+
         for (int i = 0; i < num; i++)
         {
             MagicStudyResult();
@@ -587,6 +657,8 @@ public class UiManager : MonoBehaviour
     }
     public void MagicStudyResult()
     {
+        //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Wand");
+        babydata.AniInit(2);
         studingResult[0].text = "Magic";
         int randomNum = Random.Range(0, 7);
         if (randomNum == 1 || randomNum == 4 || randomNum == 0)
@@ -594,11 +666,13 @@ public class UiManager : MonoBehaviour
             playerAttack++;
             studingResult[1].text = "공격↑";
             studingResult[2].text = "그럭저럭 배운것 같다.";
+            NomalStudy();
         }
         else if (randomNum == 2 || randomNum == 5 || randomNum == 6)
         {
             studingResult[1].text = " - ";
             studingResult[2].text = "힘들어서 그냥 쉬었다.";
+            BadStudy();
         }
         else if (randomNum == 3)
         {
@@ -606,13 +680,14 @@ public class UiManager : MonoBehaviour
             playerAttack++;
             studingResult[1].text = "공격↑↑";
             studingResult[2].text = "완벽하게 이해했다.";
+            GoodStudy();
+
         }
     }
 
     public void FirstCardBtn()
     {
-        Debug.Log(cardState);
-
+        
         if (cardState == CardState.get)
         {
             if (studyState == StudyState.first)
@@ -685,22 +760,24 @@ public class UiManager : MonoBehaviour
                 }
             }
         }
+        Debug.Log(cardState);
+        Debug.Log(upgradeState);
     }
     public void UpgradeFirstCard(int num)
     {
-        if (selectStudy[num] == 0)
+        if (upgradeState == UpgradeState.firstSword)
         {
             upgradeBox.SetActive(true);
-            upgradeBoxImage[0].sprite = cardSprite[4];
+            upgradeBoxImage[0].sprite = cardSprite[8];
             upgradeBoxImage[1].sprite = cardSprite[11];
         }
-        else if (selectStudy[num] == 1)
+        else if (upgradeState == UpgradeState.firstBow)
         {
             upgradeBox.SetActive(true);
             upgradeBoxImage[0].sprite = cardSprite[16];
             upgradeBoxImage[1].sprite = cardSprite[19];
         }
-        else if (selectStudy[num] == 2)
+        else if (upgradeState == UpgradeState.firstMagic)
         {
             upgradeBox.SetActive(true);
             upgradeBoxImage[0].sprite = cardSprite[26];
@@ -709,19 +786,19 @@ public class UiManager : MonoBehaviour
     }
     public void UpgradeSecondCard(int num)
     {
-        if (selectStudy[num] == 0)
+        if (upgradeState == UpgradeState.secondSword)
         {
             upgradeBox.SetActive(true);
             upgradeBoxImage[0].sprite = cardSprite[9];
             upgradeBoxImage[1].sprite = cardSprite[12];
         }
-        else if (selectStudy[num] == 1)
+        else if (upgradeState == UpgradeState.secondBow)
         {
             upgradeBox.SetActive(true);
             upgradeBoxImage[0].sprite = cardSprite[17];
             upgradeBoxImage[1].sprite = cardSprite[20];
         }
-        else if (selectStudy[num] == 2)
+        else if(upgradeState == UpgradeState.secondMagic)
         {
             upgradeBox.SetActive(true);
             upgradeBoxImage[0].sprite = cardSprite[27];
@@ -731,19 +808,19 @@ public class UiManager : MonoBehaviour
 
     public void UpgradeThirdCard(int num)
     {
-        if (selectStudy[num] == 0)
+        if (upgradeState == UpgradeState.thirdSword)
         {
             upgradeBox.SetActive(true);
             upgradeBoxImage[0].sprite = cardSprite[10];
             upgradeBoxImage[1].sprite = cardSprite[13];
         }
-        else if (selectStudy[num] == 1)
+        else if (upgradeState == UpgradeState.thirdBow)
         {
             upgradeBox.SetActive(true);
             upgradeBoxImage[0].sprite = cardSprite[18];
             upgradeBoxImage[1].sprite = cardSprite[21];
         }
-        else if (selectStudy[num] == 2)
+        else if (upgradeState == UpgradeState.thirdMagic)
         {
             upgradeBox.SetActive(true);
             upgradeBoxImage[0].sprite = cardSprite[28];
@@ -1295,17 +1372,17 @@ public class UiManager : MonoBehaviour
                 if (selectStudy[0] == 0)
                 {
                     upgradeState = UpgradeState.secondSword;
-                    UpgradeFirstCard(0);
+                    UpgradeSecondCard(0);
                 }
                 else if (selectStudy[0] == 1)
                 {
                     upgradeState = UpgradeState.secondBow;
-                    UpgradeFirstCard(1);
+                    UpgradeSecondCard(1);
                 }
                 else if (selectStudy[0] == 2)
                 {
                     upgradeState = UpgradeState.secondMagic;
-                    UpgradeFirstCard(2);
+                    UpgradeSecondCard(2);
                 }
             }
             else if (studyState == StudyState.second)
@@ -1313,17 +1390,17 @@ public class UiManager : MonoBehaviour
                 if (selectStudy[1] == 0)
                 {
                     upgradeState = UpgradeState.secondSword;
-                    UpgradeFirstCard(0);
+                    UpgradeSecondCard(0);
                 }
                 else if (selectStudy[1] == 1)
                 {
                     upgradeState = UpgradeState.secondBow;
-                    UpgradeFirstCard(1);
+                    UpgradeSecondCard(1);
                 }
                 else if (selectStudy[1] == 2)
                 {
                     upgradeState = UpgradeState.secondMagic;
-                    UpgradeFirstCard(2);
+                    UpgradeSecondCard(2);
                 }
             }
             else if (studyState == StudyState.third)
@@ -1331,20 +1408,23 @@ public class UiManager : MonoBehaviour
                 if (selectStudy[2] == 0)
                 {
                     upgradeState = UpgradeState.secondSword;
-                    UpgradeFirstCard(0);
+                    UpgradeSecondCard(0);
                 }
                 else if (selectStudy[2] == 1)
                 {
                     upgradeState = UpgradeState.secondBow;
-                    UpgradeFirstCard(1);
+                    UpgradeSecondCard(1);
                 }
                 else if (selectStudy[2] == 2)
                 {
                     upgradeState = UpgradeState.secondMagic;
-                    UpgradeFirstCard(2);
+                    UpgradeSecondCard(2);
                 }
             }
         }
+        Debug.Log(studyState);
+        Debug.Log(upgradeState);
+        Debug.Log(selectStudy[0]);
     }
     public void GetSecondCard(int num)
     {
@@ -1376,18 +1456,14 @@ public class UiManager : MonoBehaviour
             if (studyState == StudyState.first)
             {
                 GetThirdCard(0);
-                upgradeState = UpgradeState.thirdSword;
-
             }
             else if (studyState == StudyState.second)
             {
                 GetThirdCard(1);
-                upgradeState = UpgradeState.thirdBow;
             }
             else if (studyState == StudyState.third)
             {
                 GetThirdCard(2);
-                upgradeState = UpgradeState.thirdMagic;
             }
         }
         else
@@ -1397,17 +1473,17 @@ public class UiManager : MonoBehaviour
                 if (selectStudy[0] == 0)
                 {
                     upgradeState = UpgradeState.thirdSword;
-                    UpgradeFirstCard(0);
+                    UpgradeThirdCard(0);
                 }
                 else if (selectStudy[0] == 1)
                 {
                     upgradeState = UpgradeState.thirdBow;
-                    UpgradeFirstCard(1);
+                    UpgradeThirdCard(1);
                 }
                 else if (selectStudy[0] == 2)
                 {
                     upgradeState = UpgradeState.thirdMagic;
-                    UpgradeFirstCard(2);
+                    UpgradeThirdCard(2);
                 }
             }
             else if (studyState == StudyState.second)
@@ -1415,17 +1491,17 @@ public class UiManager : MonoBehaviour
                 if (selectStudy[1] == 0)
                 {
                     upgradeState = UpgradeState.thirdSword;
-                    UpgradeFirstCard(0);
+                    UpgradeThirdCard(0);
                 }
                 else if (selectStudy[1] == 1)
                 {
                     upgradeState = UpgradeState.thirdBow;
-                    UpgradeFirstCard(1);
+                    UpgradeThirdCard(1);
                 }
                 else if (selectStudy[1] == 2)
                 {
                     upgradeState = UpgradeState.thirdMagic;
-                    UpgradeFirstCard(2);
+                    UpgradeThirdCard(2);
                 }
             }
             else if (studyState == StudyState.third)
@@ -1433,20 +1509,22 @@ public class UiManager : MonoBehaviour
                 if (selectStudy[2] == 0)
                 {
                     upgradeState = UpgradeState.thirdSword;
-                    UpgradeFirstCard(0);
+                    UpgradeThirdCard(0);
                 }
                 else if (selectStudy[2] == 1)
                 {
                     upgradeState = UpgradeState.thirdBow;
-                    UpgradeFirstCard(1);
+                    UpgradeThirdCard(1);
                 }
                 else if (selectStudy[2] == 2)
                 {
                     upgradeState = UpgradeState.thirdMagic;
-                    UpgradeFirstCard(2);
+                    UpgradeThirdCard(2);
                 }
             }
         }
+        Debug.Log(cardState);
+        Debug.Log(upgradeState);
     }
 
     public void FourthCardBtn()
@@ -1795,69 +1873,69 @@ public class UiManager : MonoBehaviour
         {
             if(selectStudy[0]==0)
             {
-                cardResources[0].sprite = cardSprite[0];//검0,1,2
-                cardResources[1].sprite = cardSprite[1];
-                cardResources[2].sprite = cardSprite[2];
+                cardImage[0].sprite = cardSprite[3];//검0,1,2
+                cardImage[1].sprite = cardSprite[6];
+                cardImage[2].sprite = cardSprite[7];
             }
             else if (selectStudy[0] == 1)
             {
-                cardResources[0].sprite = cardSprite[3];//활3,4,5
-                cardResources[1].sprite = cardSprite[4];
-                cardResources[2].sprite = cardSprite[5];
+                cardImage[0].sprite = cardSprite[4];//활3,4,5
+                cardImage[1].sprite = cardSprite[14];
+                cardImage[2].sprite = cardSprite[15];
             }
             else if (selectStudy[0] == 2)
             {
-                cardResources[0].sprite = cardSprite[6];//마법6,7,8.9,10
-                cardResources[1].sprite = cardSprite[7];
-                cardResources[2].sprite = cardSprite[8];
-                cardResources[3].sprite = cardSprite[9];
-                cardResources[4].sprite = cardSprite[10];
+                cardImage[0].sprite = cardSprite[5];//마법6,7,8.9,10
+                cardImage[1].sprite = cardSprite[22];
+                cardImage[2].sprite = cardSprite[23];
+                cardImage[3].sprite = cardSprite[24];
+                cardImage[4].sprite = cardSprite[25];
             }
         }
         else if(studyState == StudyState.second)
         {
             if (selectStudy[1] == 0)
             {
-                cardResources[0].sprite = cardSprite[0];//검0,1,2
-                cardResources[1].sprite = cardSprite[1];
-                cardResources[2].sprite = cardSprite[2];
+                cardImage[0].sprite = cardSprite[3];//검0,1,2
+                cardImage[1].sprite = cardSprite[6];
+                cardImage[2].sprite = cardSprite[7];
             }
             else if (selectStudy[1] == 1)
             {
-                cardResources[0].sprite = cardSprite[3];//활3,4,5
-                cardResources[1].sprite = cardSprite[4];
-                cardResources[2].sprite = cardSprite[5];
+                cardImage[0].sprite = cardSprite[4];//활3,4,5
+                cardImage[1].sprite = cardSprite[14];
+                cardImage[2].sprite = cardSprite[15];
             }
             else if (selectStudy[1] == 2)
             {
-                cardResources[0].sprite = cardSprite[6];//마법6,7,8.9,10
-                cardResources[1].sprite = cardSprite[7];
-                cardResources[2].sprite = cardSprite[8];
-                cardResources[3].sprite = cardSprite[9];
-                cardResources[4].sprite = cardSprite[10];
+                cardImage[0].sprite = cardSprite[5];//마법6,7,8.9,10
+                cardImage[1].sprite = cardSprite[22];
+                cardImage[2].sprite = cardSprite[23];
+                cardImage[3].sprite = cardSprite[24];
+                cardImage[4].sprite = cardSprite[25];
             }
         }
         else if (studyState == StudyState.third)
         {
             if (selectStudy[2] == 0)
             {
-                cardResources[0].sprite = cardSprite[0];//검0,1,2
-                cardResources[1].sprite = cardSprite[1];
-                cardResources[2].sprite = cardSprite[2];
+                cardImage[0].sprite = cardSprite[3];//검0,1,2
+                cardImage[1].sprite = cardSprite[6];
+                cardImage[2].sprite = cardSprite[7];
             }
             else if (selectStudy[2] == 1)
             {
-                cardResources[0].sprite = cardSprite[3];//활3,4,5
-                cardResources[1].sprite = cardSprite[4];
-                cardResources[2].sprite = cardSprite[5];
+                cardImage[0].sprite = cardSprite[4];//활3,4,5
+                cardImage[1].sprite = cardSprite[14];
+                cardImage[2].sprite = cardSprite[15];
             }
             else if (selectStudy[2] == 2)
             {
-                cardResources[0].sprite = cardSprite[6];//마법6,7,8.9,10
-                cardResources[1].sprite = cardSprite[7];
-                cardResources[2].sprite = cardSprite[8];
-                cardResources[3].sprite = cardSprite[9];
-                cardResources[4].sprite = cardSprite[10];
+                cardImage[0].sprite = cardSprite[5];//마법6,7,8.9,10
+                cardImage[1].sprite = cardSprite[22];
+                cardImage[2].sprite = cardSprite[23];
+                cardImage[3].sprite = cardSprite[24];
+                cardImage[4].sprite = cardSprite[25];
             }
         }
     }

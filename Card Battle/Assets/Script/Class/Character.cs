@@ -97,6 +97,29 @@ public class Character : MonoBehaviour
         ;
     }
 
+    public void AniInit(int aniNum)
+    {
+        anim = GetComponent<Animator>();
+        if (aniNum == 0)
+        {
+            weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
+            anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Anim/Sword");
+            Debug.Log(anim.runtimeAnimatorController);
+        }
+        else if (aniNum == 1)
+        {
+            weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Bow");
+            anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Anim/Bow");
+            Debug.Log(anim.runtimeAnimatorController);
+        }
+        else if (aniNum == 2)
+        {
+            weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Wand");
+            anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Anim/Wand");
+            Debug.Log(anim.runtimeAnimatorController);
+        }
+    }
+
     public IEnumerator HurtAnim()
     {
         yield return new WaitForSeconds(1f);

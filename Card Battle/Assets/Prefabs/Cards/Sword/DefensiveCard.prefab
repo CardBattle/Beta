@@ -779,8 +779,6 @@ GameObject:
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
   - component: {fileID: 1830646085763184782}
-  - component: {fileID: 1491793740276347745}
-  - component: {fileID: 1923550498386171981}
   - component: {fileID: -6921435709821798319}
   - component: {fileID: 643513279779752326}
   m_Layer: 0
@@ -1085,38 +1083,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   type: 0
-  _name: Defensive-P
+  _name: Defensive
   turns: 2
   buffUse: {fileID: -6921435709821798319}
---- !u!114 &1491793740276347745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 5
-  type: 1
-  _name: Defensive-N
-  turns: 2
-  buffUse: {fileID: 1923550498386171981}
---- !u!114 &1923550498386171981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7891ba8343b9ce4dba6805bd31d0a72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-6921435709821798319
 MonoBehaviour:
   m_ObjectHideFlags: 0

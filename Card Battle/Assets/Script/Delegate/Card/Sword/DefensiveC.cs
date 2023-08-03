@@ -8,6 +8,7 @@ public class DefensiveC : CardUse
     {
         base.Use(sender, receiver);
 
-        receiverCard.info.EffVal -= 2;
+        if(card.info.Level >= 3)
+            receiverCard.info.EffVal -= 2;
     }
 }

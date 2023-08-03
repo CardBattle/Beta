@@ -1115,11 +1115,10 @@ GameObject:
   - component: {fileID: 8356136270429368087}
   - component: {fileID: 8356136270429368085}
   - component: {fileID: 8356136270429368086}
-  - component: {fileID: -8409876455392436375}
-  - component: {fileID: 2234585652985873502}
   - component: {fileID: 4632501163282215815}
   - component: {fileID: 3488638194162408244}
   - component: {fileID: -28577569808446814}
+  - component: {fileID: 5809542120478092624}
   m_Layer: 0
   m_Name: ArrowshotCard +
   m_TagString: Untagged
@@ -1222,7 +1221,7 @@ MonoBehaviour:
   property: 0
   type: 2
   _name: ArrowShot+
-  _buff: "25% 2.5\uBC30 \uB370\uBBF8\uC9C0"
+  _buff: "25% 2\uBC30 \uB370\uBBF8\uC9C0"
   effVal: 5
   level: 2
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
@@ -1253,33 +1252,6 @@ MonoBehaviour:
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0, w: 0}
     scale: {x: 0, y: 0, z: 0}
---- !u!114 &-8409876455392436375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8356136270429368084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552eac8659c290b48b3edd73e6dc6121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2234585652985873502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8356136270429368084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2208a7471ebc05f438adaa7e20a00db0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  sfx: {fileID: 0}
-  vfx: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
 --- !u!114 &4632501163282215815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1435,6 +1407,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5809542120478092624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8356136270429368084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a11e7f939206a40914e3519462963d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
+  sfx: {fileID: 0}
+  vfx: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
 --- !u!1 &8416820208502830858
 GameObject:
   m_ObjectHideFlags: 0

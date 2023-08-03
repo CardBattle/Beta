@@ -22,9 +22,9 @@ public class ShieldStrike : CardUse
         sender.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx, sender.transform.position, Quaternion.identity); };
 
 
-        receiverCard.info.EffVal -= 1;
+        receiverCard.info.EffVal -= card.info.EffVal;
 
-        if (senderCard.info.Dice > receiverCard.info.Dice)
+        if (card.info.Level >= 3 || senderCard.info.Dice > receiverCard.info.Dice)
         {
             if (card.info.buffs.Count > 0)
             {

@@ -779,12 +779,12 @@ GameObject:
   - component: {fileID: 4078094028994227437}
   - component: {fileID: 4078094028994227435}
   - component: {fileID: 4078094028994227436}
-  - component: {fileID: 6088920352930236388}
   - component: {fileID: 6262175198972282351}
   - component: {fileID: 5414505858910386355}
   - component: {fileID: 9078009607437497475}
   - component: {fileID: -9136349348350718985}
   - component: {fileID: 1954783938650306315}
+  - component: {fileID: -1442529324405590395}
   m_Layer: 0
   m_Name: FireballPlusCard
   m_TagString: Untagged
@@ -918,21 +918,6 @@ MonoBehaviour:
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0, w: 0}
     scale: {x: 0, y: 0, z: 0}
---- !u!114 &6088920352930236388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4078094028994227434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8759a44083a1774ebfa07f3e3a185ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  sfx: {fileID: 0}
-  vfx: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
 --- !u!114 &6262175198972282351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1117,6 +1102,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1442529324405590395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078094028994227434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b82babadabb5b04cae16159808e5715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
+  sfx: {fileID: 0}
+  vfx: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
 --- !u!1 &4681487674263327817
 GameObject:
   m_ObjectHideFlags: 0

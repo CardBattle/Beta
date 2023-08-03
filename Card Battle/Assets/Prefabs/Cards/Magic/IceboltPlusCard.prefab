@@ -782,9 +782,9 @@ GameObject:
   - component: {fileID: 6262175198972282351}
   - component: {fileID: 5903802852736098843}
   - component: {fileID: 5414505858910386355}
-  - component: {fileID: -3823223870090088660}
   - component: {fileID: -9136349348350718985}
   - component: {fileID: 1954783938650306315}
+  - component: {fileID: 2840599408324314580}
   m_Layer: 0
   m_Name: IceboltPlusCard
   m_TagString: Untagged
@@ -976,21 +976,6 @@ MonoBehaviour:
   _name: FrostbitePlus
   turns: 2
   buffUse: {fileID: 5903802852736098843}
---- !u!114 &-3823223870090088660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4078094028994227434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34be82203ef445345886d680d471cebb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  sfx: {fileID: 0}
-  vfx: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
 --- !u!60 &-9136349348350718985
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1118,6 +1103,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2840599408324314580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078094028994227434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2316c0f2f02ebae44aae4c7a2df994c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
+  sfx: {fileID: 0}
+  vfx: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
 --- !u!1 &4681487674263327817
 GameObject:
   m_ObjectHideFlags: 0

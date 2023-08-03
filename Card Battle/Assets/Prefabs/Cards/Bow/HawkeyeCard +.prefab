@@ -882,7 +882,7 @@ MonoBehaviour:
   id: 17
   property: 1
   type: 2
-  _name: Hawkeye
+  _name: Hawkeye+
   _buff: "2\uD134\uB3D9\uC548 \uC8FC\uC0AC\uC704 \uAC12 +2"
   effVal: 0
   level: 2
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 17
   type: 0
-  _name: HawkeyeBuff
+  _name: Hawkeye+
   turns: 2
   buffUse: {fileID: 8837065754047261629}
 --- !u!114 &8837065754047261629

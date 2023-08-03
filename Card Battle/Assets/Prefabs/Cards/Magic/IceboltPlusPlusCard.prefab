@@ -782,9 +782,9 @@ GameObject:
   - component: {fileID: 6262175198972282351}
   - component: {fileID: -5800171483367331054}
   - component: {fileID: 5414505858910386355}
-  - component: {fileID: -8633505332289690545}
   - component: {fileID: -9136349348350718985}
   - component: {fileID: 1954783938650306315}
+  - component: {fileID: 3861711618952095423}
   m_Layer: 0
   m_Name: IceboltPlusPlusCard
   m_TagString: Untagged
@@ -889,7 +889,7 @@ MonoBehaviour:
   _name: Icebolt++
   _buff: "\uC801\uC5D0\uAC8C 2\uD134\uB3D9\uC548 3\uD134\uB3D9\uC548  effVal-3"
   effVal: 8
-  level: 2
+  level: 3
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardimg: {fileID: 21300000, guid: b692cd971b3d12e4a849330a7913aca4, type: 3}
   cardTypeSpaceimg: {fileID: 1873686710, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
@@ -976,21 +976,6 @@ MonoBehaviour:
   _name: FrostbitePlus
   turns: 3
   buffUse: {fileID: -5800171483367331054}
---- !u!114 &-8633505332289690545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4078094028994227434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d0ad3bf85bc96408acfc6ff223544f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  sfx: {fileID: 0}
-  vfx: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
 --- !u!60 &-9136349348350718985
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1118,6 +1103,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3861711618952095423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078094028994227434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2316c0f2f02ebae44aae4c7a2df994c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
+  sfx: {fileID: 0}
+  vfx: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
 --- !u!1 &4681487674263327817
 GameObject:
   m_ObjectHideFlags: 0
