@@ -64,8 +64,10 @@ public class UiManager : MonoBehaviour
     public Text cardBordeName;
     public Text messageText;
     public Text uiText;
+    public AudioClip[] audioClips; // 인스펙터에서 오디오 클립을 할당
+    private AudioSource audioSource;
 
-    
+
     public GameObject startUi;
     public GameObject dataUi;
     public GameObject studyUi;
@@ -105,6 +107,7 @@ public class UiManager : MonoBehaviour
     private int order;
     private int saveSlot;
     private int searchCount;
+    private int effect;
 
     private CharacterData data;
     private DefaultCharacterData saveData;
@@ -115,6 +118,7 @@ public class UiManager : MonoBehaviour
         DataInit();
         SaveSlot();
         studyReset();
+        audioSource = GetComponent<AudioSource>();
     }
     public void DataInit()
     {
@@ -197,7 +201,6 @@ public class UiManager : MonoBehaviour
     }
     public void startData()
     {
-
         cardList = data.chrCardnum;
         playerHp = data.chrMaxHp;
         playerAttack = data.chrAttackDmg;
@@ -290,7 +293,7 @@ public class UiManager : MonoBehaviour
     {
         if (saveSlot == 1)
         {
-            data.DataInit(0, "test", 1, 1, 1, 1
+            data.DataInit(0, "test", 1, 20, 1, 1
                         , WeaponType.SWORD, 0, cardList);
             saveSlot = 1;
             dataUi.SetActive(false);
@@ -311,7 +314,7 @@ public class UiManager : MonoBehaviour
     {
         if (saveSlot == 2)
         {
-            data.DataInit(0, "test", 1, 1, 1, 1
+            data.DataInit(0, "test", 1, 20, 1, 1
                         , WeaponType.SWORD, 0, cardList);
             saveSlot = 2;
             dataUi.SetActive(false);
@@ -341,10 +344,6 @@ public class UiManager : MonoBehaviour
             studyInfo[2].text = "모든 스텟 ↑";
             //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
             babydata.AniInit(0);
-
-
-
-
         }
         else
         {
@@ -487,6 +486,11 @@ public class UiManager : MonoBehaviour
         }
 
     }
+    protected void PlaySFX()
+    {
+            audioSource.clip = audioClips[effect];
+            audioSource.Play();
+    }
     public void GetStudyResult()
     {
         statUi.SetActive(false);
@@ -496,21 +500,27 @@ public class UiManager : MonoBehaviour
             + "공격" + (playerAttack - DefaultPlayerAttack).ToString() + "↑ "
             + "방어" + (playerDefense - DefaultPlayerDefense).ToString() + "↑";
     }
-
     public void GoodStudy()
     {
+        effect = 1;
         babydata.GetComponent<Animator>().SetTrigger("Attack");
-        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[0], baby.transform.position, Quaternion.identity); };
+        babydata.GetComponent<SFXVFX>().play += PlaySFX;
+        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[0], warriorTransform.position, Quaternion.identity); };
+
     }
     public void NomalStudy()
     {
-        babydata.GetComponent<Animator>().SetTrigger("Buff");
-        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[1], baby.transform.position, Quaternion.identity); };
+        effect = 2;
+        babydata.GetComponent<Animator>().SetTrigger("Attack");
+        babydata.GetComponent<SFXVFX>().play += PlaySFX;
+        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[0], warriorTransform.position, Quaternion.identity); };
     }
     public void BadStudy()
     {
+        effect = 3;
         babydata.GetComponent<Animator>().SetTrigger("Hurt");
-        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[1], baby.transform.position, Quaternion.identity); };
+        babydata.GetComponent<SFXVFX>().play += PlaySFX;
+        babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[0], warriorTransform.position, Quaternion.identity); };
     }
 
     IEnumerator SwordStudy(int num)
@@ -2229,7 +2239,7 @@ public class UiManager : MonoBehaviour
             // 바이너리 파일이 없으면 새로운 CharacterData 클래스 생성
             // 예제용 초기화 데이터 적용
 
-            data.DataInit(0, "test", 1, 1, 1, 1 
+            data.DataInit(0, "test", 1, 20, 1, 1 
                         , WeaponType.SWORD, 0, cardList);
             
 

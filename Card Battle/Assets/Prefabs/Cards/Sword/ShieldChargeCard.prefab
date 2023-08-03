@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 12
+  id: 501
   property: 1
   type: 1
   _name: ShieldCharge

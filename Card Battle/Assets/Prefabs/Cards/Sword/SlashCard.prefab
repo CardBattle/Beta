@@ -881,7 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 11
+  id: 505
   property: 0
   type: 1
   _name: Slash
