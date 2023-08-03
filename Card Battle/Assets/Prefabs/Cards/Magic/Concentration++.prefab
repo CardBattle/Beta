@@ -211,8 +211,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.5
-  m_fontSizeBase: 2.5
+  m_fontSize: 1.5
+  m_fontSizeBase: 1.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -884,8 +884,9 @@ MonoBehaviour:
   type: 3
   _name: Concentration++
   _buff: "\uB2E4\uC74C\uD134 EffVal * 4"
-  effVal: 9
-  level: 3
+  effVal: 0
+  level: 2
+
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardimg: {fileID: 21300000, guid: 824a48daf7b55394e80e1df5048db839, type: 3}
   cardTypeSpaceimg: {fileID: 1873686710, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}

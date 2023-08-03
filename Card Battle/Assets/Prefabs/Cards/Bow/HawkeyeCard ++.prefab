@@ -211,8 +211,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.5
-  m_fontSizeBase: 2.5
+  m_fontSize: 2
+  m_fontSizeBase: 2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -882,7 +882,7 @@ MonoBehaviour:
   id: 20
   property: 1
   type: 2
-  _name: Hawkeye
+  _name: Hawkeye++
   _buff: "2\uD134\uB3D9\uC548 \uC8FC\uC0AC\uC704 \uAC12 +3"
   effVal: 0
   level: 3
