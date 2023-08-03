@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldStrike : CardUse
+public class ShieldCharge : CardUse
 {
     public override void Use(Character sender, Character receiver)
     {
@@ -22,9 +22,11 @@ public class ShieldStrike : CardUse
         sender.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx, sender.transform.position, Quaternion.identity); };
 
 
-        receiverCard.info.EffVal -= card.info.EffVal;
+        receiverCard.info.EffVal -= 5;
+        receiver.info.Hp -= CalculateDmg(sender.info.AttackDmg, card.info.RandomDice, card.info.EffVal,
+       CalculateEffect(card.info.Type, receiver.info.Weapon));
 
-        if (card.info.Level >= 3 || senderCard.info.Dice > receiverCard.info.Dice)
+        if (senderCard.info.Dice > receiverCard.info.Dice)
         {
             if (card.info.buffs.Count > 0)
             {

@@ -884,6 +884,7 @@ MonoBehaviour:
   type: 3
   _name: Concentration
   _buff: "\uB2E4\uC74C\uD134 EffVal * 2"
+
   effVal: 0
   level: 1
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}

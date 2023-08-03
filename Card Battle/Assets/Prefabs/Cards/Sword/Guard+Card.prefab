@@ -211,8 +211,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.5
-  m_fontSizeBase: 1.5
+  m_fontSize: 2.5
+  m_fontSizeBase: 2.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -621,8 +621,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2697552795345152088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0012, y: 0.37, z: 0}
-  m_LocalScale: {x: 0.3004622, y: 0.3016738, z: 0}
+  m_LocalPosition: {x: -0.021, y: 0.284, z: 0}
+  m_LocalScale: {x: 0.77045625, y: 0.7674429, z: 0.3846154}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3230438190971658475}
@@ -776,13 +776,11 @@ GameObject:
   - component: {fileID: 3230438190971658477}
   - component: {fileID: 3230438190971658474}
   - component: {fileID: 6467222491020728267}
-  - component: {fileID: -8881655777608836623}
-  - component: {fileID: -6298529994568300731}
-  - component: {fileID: -453895833455393912}
+  - component: {fileID: -6506010306448096129}
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
   m_Layer: 0
-  m_Name: Concentration+
+  m_Name: Guard+Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,22 +877,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 29
-  property: 2
-  type: 3
-  _name: Concentration
-  _buff: "\uB2E4\uC74C\uD134 EffVal * 3"
-  effVal: 0
-  level: 1
-
+  id: 6
+  property: 1
+  type: 1
+  _name: Guard+
+  _buff: 
+  effVal: 3
+  level: 2
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
-  cardimg: {fileID: 21300000, guid: 824a48daf7b55394e80e1df5048db839, type: 3}
-  cardTypeSpaceimg: {fileID: 1873686710, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  cardimg: {fileID: -1119638910, guid: 91ece539279118a438c900dfb08582ed, type: 3}
+  cardTypeSpaceimg: {fileID: 380853605, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   cardNameSpaceimg: {fileID: -690418764, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardBuffimg: {fileID: -1097064367, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
-  cardLevelimg: {fileID: 779533456, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  cardLevelimg: {fileID: -1664420051, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   cardTypeimg: {fileID: -1751398833, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
-  cardEffValimg: {fileID: -1156626125, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  cardEffValimg: {fileID: -1893184096, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   frontCard: {fileID: 1169078661, guid: 71ad172f81917dc4c88b385499ba85c4, type: 3}
   backCard: {fileID: -1260174942, guid: 71ad172f81917dc4c88b385499ba85c4, type: 3}
   buffs: []
@@ -943,7 +940,7 @@ MonoBehaviour:
   - {fileID: 7423140894129573004}
   - {fileID: 8379779783463717086}
   sortingLayerName: Card
---- !u!114 &-8881655777608836623
+--- !u!114 &-6506010306448096129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -952,41 +949,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3230438190971658476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39a215fa37258240adca18b5a95328f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f1cbf4d680b5c343a224de94cfbd51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
   sfx: {fileID: 0}
-  vfx: {fileID: 5824670795371433373, guid: dd996a8b012012a42ab5ec53219035b4, type: 3}
---- !u!114 &-6298529994568300731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 29
-  type: 0
-  _name: 
-  turns: 1
-  buffUse: {fileID: -453895833455393912}
---- !u!114 &-453895833455393912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c931d12ded06af408103ccc3adf90de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  vfx: {fileID: 5824670795371433373, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
 --- !u!60 &5931310079769987027
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1028,7 +996,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b7b5a6156961bac44a67504d42ce6fcf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
