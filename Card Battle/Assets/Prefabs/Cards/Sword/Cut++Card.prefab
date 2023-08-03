@@ -290,7 +290,7 @@ MonoBehaviour:
   type: 1
   _name: Cut++
   _buff: 
-  effVal: 3
+  effVal: 11
   level: 3
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardimg: {fileID: 1856826321, guid: 91ece539279118a438c900dfb08582ed, type: 3}
