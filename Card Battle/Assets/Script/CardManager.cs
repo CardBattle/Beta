@@ -13,9 +13,6 @@ public class CardManager : MonoBehaviour
     //Instantiate 된 카드 게임오브젝트 리스트
     public List<GameObject> playerCardObjs;
     public List<GameObject> enemyCardObjs;
-    //선택된 카드들(드로우된 카드들)
-    /*public List<GameObject> playerSelectedCards;
-    public List<GameObject> enemySelectedCards;*/
 
     public void Init()
     {
@@ -24,8 +21,7 @@ public class CardManager : MonoBehaviour
 
         player = BattleManager.Bm.player.gameObject;
         enemy = BattleManager.Bm.enemy.gameObject;
-        /* playerCardPrefabs = player.GetComponent<Character>().cards;
-         enemyCardPrefabs = enemy.GetComponent<Character>().cards;*/
+
 
         Load(playerCardPrefabs, playerCardObjs);
         Load(enemyCardPrefabs, enemyCardObjs);
@@ -48,10 +44,4 @@ public class CardManager : MonoBehaviour
             cardObjs.Add(cardPrefab);
         }
     }
-
-    /*void Test()
-    {
-        foreach (var card in playerCards)
-            card.info.use(player.GetComponent<Character>(), enemy.GetComponent<Character>());
-    }*/
 }

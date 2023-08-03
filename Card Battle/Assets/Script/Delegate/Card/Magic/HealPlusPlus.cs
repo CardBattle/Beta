@@ -8,8 +8,6 @@ public class HealPlusPlus : CardUse
     {
         base.Use(sender, receiver);
 
-        sender.info.Hp += 12 * card.info.EffVal;
-
-        print(sender.info.Hp);
+        sender.info.Hp += 12 * card.info.EffVal;      
     }
 }

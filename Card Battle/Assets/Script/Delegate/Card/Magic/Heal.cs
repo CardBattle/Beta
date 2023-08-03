@@ -7,10 +7,8 @@ public class Heal : CardUse
     public override void Use(Character sender, Character receiver)
     {
         base.Use(sender, receiver);
-        
-       /* sender.cardDATA.
 
-        print(sender.info.Hp);*/
+        sender.info.Hp += 4 * card.info.EffVal;
     }
 
 }

@@ -15,13 +15,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private AudioSource bgm;
 
-    //public CardManager uicardManager;
-
     public Sprite[] playerDiceSprite;
     public Sprite[] enemyDiceSprite;
 
     public List<GameObject> deckList;
-    //  public List<Card> DeckListData;
 
     public GameObject playerDice;
     public GameObject enemyDice;
@@ -71,7 +68,7 @@ public class UIManager : MonoBehaviour
     public void SFXVol()
     {
         float sound = sfxVol.value;
-        print(sound);
+        
         if (sound == -40f)
             battleMixer.SetFloat("SFX", -80f);       
         else 
@@ -83,8 +80,7 @@ public class UIManager : MonoBehaviour
     }
     public void ReStart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //PlayerPrefs.DeleteKey("Tutorial");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);       
     }
     public void Menu()
     {
@@ -337,8 +333,7 @@ public class UIManager : MonoBehaviour
     {
 
         if (player)
-        {
-            print($"플레이어 주사위 {dice}");
+        {            
             SpriteRenderer diceSprite = playerDice.GetComponent<SpriteRenderer>();
             switch (dice)
             {
@@ -365,8 +360,7 @@ public class UIManager : MonoBehaviour
             }
         }
         else if (!player)
-        {
-            print($"적 주사위 {dice}");
+        {         
             SpriteRenderer diceSprite = enemyDice.GetComponent<SpriteRenderer>();
             switch (dice)
             {
