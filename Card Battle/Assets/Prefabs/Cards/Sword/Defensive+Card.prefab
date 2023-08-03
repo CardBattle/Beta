@@ -779,10 +779,8 @@ GameObject:
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
   - component: {fileID: 1830646085763184782}
-  - component: {fileID: 1491793740276347745}
-  - component: {fileID: 1923550498386171981}
-  - component: {fileID: -6921435709821798319}
   - component: {fileID: 643513279779752326}
+  - component: {fileID: -3814430022785401012}
   m_Layer: 0
   m_Name: Defensive+Card
   m_TagString: Untagged
@@ -886,8 +884,8 @@ MonoBehaviour:
   type: 1
   _name: Defensive
   _buff: 
-  effVal: 2
-  level: 2
+  effVal: 4
+  level: 3
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardimg: {fileID: -531863168, guid: 91ece539279118a438c900dfb08582ed, type: 3}
   cardTypeSpaceimg: {fileID: 380853605, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
@@ -1087,48 +1085,7 @@ MonoBehaviour:
   type: 0
   _name: Defensive-P
   turns: 2
-  buffUse: {fileID: -6921435709821798319}
---- !u!114 &1491793740276347745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 5
-  type: 1
-  _name: Defensive-N
-  turns: 2
-  buffUse: {fileID: 1923550498386171981}
---- !u!114 &1923550498386171981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7891ba8343b9ce4dba6805bd31d0a72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-6921435709821798319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230438190971658476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8651730c24184464999540b49e5a95d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  buffUse: {fileID: -3814430022785401012}
 --- !u!114 &643513279779752326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,6 +1101,18 @@ MonoBehaviour:
   card: {fileID: 0}
   sfx: {fileID: 0}
   vfx: {fileID: 3280519133390621005, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
+--- !u!114 &-3814430022785401012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230438190971658476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f635ee69903d94c86f9a4c5b6d677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4326520001256105577
 GameObject:
   m_ObjectHideFlags: 0
