@@ -9,7 +9,17 @@ public class Guard : CardUse
         base.Use(sender, receiver);
 
         if (senderCard.info.Dice < receiverCard.info.Dice)
-            receiverCard.info.EffVal -= 2;
-        else receiverCard.info.EffVal -= 4;
+            receiverCard.info.EffVal -= card.info.EffVal;
+        else 
+        { 
+            if(card.info.Level >= 3)
+            {
+                sender.info.Hp += CalculateDmg(receiver.info.AttackDmg, receiverCard.info.Dice, receiverCard.info.EffVal, CalculateEffect(receiverCard.info.Type, sender.info.Weapon));
+            }
+            else
+            {
+                receiverCard.info.EffVal -= card.info.EffVal * 2;
+            }
+        }
     }
 }
