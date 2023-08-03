@@ -779,6 +779,8 @@ GameObject:
   - component: {fileID: 5931310079769987027}
   - component: {fileID: 594080244386776905}
   - component: {fileID: 4246720995008144752}
+  - component: {fileID: -3423186394536007959}
+  - component: {fileID: -7980688948425388694}
   m_Layer: 0
   m_Name: Binden+Card
   m_TagString: Untagged
@@ -880,10 +882,10 @@ MonoBehaviour:
   id: 10
   property: 1
   type: 1
-  _name: Binden
+  _name: Binden+
   _buff: 
-  effVal: 3
-  level: 2
+  effVal: 4
+  level: 3
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardimg: {fileID: 808807376, guid: 91ece539279118a438c900dfb08582ed, type: 3}
   cardTypeSpaceimg: {fileID: 380853605, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
@@ -1082,6 +1084,35 @@ MonoBehaviour:
   card: {fileID: 0}
   sfx: {fileID: 0}
   vfx: {fileID: 0}
+--- !u!114 &-3423186394536007959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230438190971658476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3992f784fe83085478c421516ac139c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 41
+  type: 0
+  _name: Attack Posture
+  turns: 1
+  buffUse: {fileID: -7980688948425388694}
+--- !u!114 &-7980688948425388694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230438190971658476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f1ab8581cf46c4db6487abb88f49aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4326520001256105577
 GameObject:
   m_ObjectHideFlags: 0
