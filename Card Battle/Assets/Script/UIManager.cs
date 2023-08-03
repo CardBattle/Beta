@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
     public void SFXVol()
     {
         float sound = sfxVol.value;
-        print(sound);
+        
         if (sound == -40f)
             battleMixer.SetFloat("SFX", -80f);       
         else 
