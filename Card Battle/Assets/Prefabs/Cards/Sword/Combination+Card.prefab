@@ -881,13 +881,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81773cfbbd34aa4e8d9c744e88f55b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 8
+  id: 103
   property: 0
   type: 1
   _name: Combination
   _buff: 
   effVal: 8
-  level: 3
+  level: 2
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardimg: {fileID: -963042467, guid: 91ece539279118a438c900dfb08582ed, type: 3}
   cardTypeSpaceimg: {fileID: 380853605, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}

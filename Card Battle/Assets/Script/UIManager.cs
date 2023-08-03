@@ -419,4 +419,8 @@ public class UIManager : MonoBehaviour
         }
         return result;
     }
+    public void GotoStart()
+    {
+        SceneManager.LoadScene("TestScene1");
+    }
 }

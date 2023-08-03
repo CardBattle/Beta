@@ -622,7 +622,7 @@ Transform:
   m_GameObject: {fileID: 2697552795345152088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.021, y: 0.284, z: 0}
-  m_LocalScale: {x: 0.77045625, y: 0.7674429, z: 0.3846154}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.3846154}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3230438190971658475}
@@ -881,11 +881,11 @@ MonoBehaviour:
   property: 1
   type: 1
   _name: Guard
-  _buff: 
+  _buff: "nemy effVal-3  \uD310\uC815\uC131\uACF5\uC2DC Enemy effVal-4"
   effVal: 2
   level: 1
   cardSpaceimg: {fileID: -644079835, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
-  cardimg: {fileID: -1119638910, guid: 91ece539279118a438c900dfb08582ed, type: 3}
+  cardimg: {fileID: 21300000, guid: bbbf85350151bad4aa5414de9d396bd3, type: 3}
   cardTypeSpaceimg: {fileID: 380853605, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
   cardNameSpaceimg: {fileID: -690418764, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
   cardBuffimg: {fileID: -1097064367, guid: d529f63f32c1a2b438dc3ffcf58f7a73, type: 3}
@@ -907,7 +907,6 @@ MonoBehaviour:
   EffVal: {fileID: 4878162506730651874}
   Buff: {fileID: 3543725352389630445}
   Level: {fileID: 7910649463990320945}
-  defenseCheck: 0
   cardSelect: 0
   originPRS:
     pos: {x: 0, y: 0, z: 0}

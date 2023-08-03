@@ -958,7 +958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &86740960
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1271,7 +1271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &116575528
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1485,7 +1485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &146873077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3202,7 +3202,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1002366649}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SelectionScene
+        m_MethodName: GotoStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6380,7 +6380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1616745084
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6472,7 +6472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1633469003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7426,7 +7426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1810523227
 RectTransform:
   m_ObjectHideFlags: 0

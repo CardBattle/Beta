@@ -186,7 +186,7 @@ MonoBehaviour:
   id: 20
   level: 10
   defense: 20
-  hp: 1
+  hp: 100
   attackDmg: 10
   weapon: 4
   weaponSprite: {fileID: 0}
