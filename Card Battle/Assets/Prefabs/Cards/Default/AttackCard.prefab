@@ -1419,7 +1419,6 @@ MonoBehaviour:
   EffVal: {fileID: 7879276327151851021}
   Buff: {fileID: 8578413666829664137}
   Level: {fileID: 4993860382991594218}
-  defenseCheck: 0
   cardSelect: 0
   originPRS:
     pos: {x: 0, y: 0, z: 0}
@@ -1508,7 +1507,7 @@ AudioSource:
   m_GameObject: {fileID: 7437580933446921501}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1015135634338432292, guid: fa0cc4103a217804290bb5a458e866de, type: 2}
   m_audioClip: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
