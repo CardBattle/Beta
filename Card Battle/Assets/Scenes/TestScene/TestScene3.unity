@@ -7761,8 +7761,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemy: {fileID: 0}
-  playerCardObjs: []
-  enemyCardObjs: []
+  playerCardObjs:
+  - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
+  - {fileID: 3230438190971658476, guid: 26506a239b00a214b98b119f264ab331, type: 3}
+  - {fileID: 3230438190971658476, guid: 64d0e54f2d777154da25cd574ed045ec, type: 3}
+  - {fileID: 3230438190971658476, guid: 5cafda75eaa29c64a853a54d22069e81, type: 3}
+  enemyCardObjs:
+  - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
+  - {fileID: 1234368001717940415, guid: f751c750d92869945a5e628b76305f9c, type: 3}
+  - {fileID: 3230438190971658476, guid: 64d0e54f2d777154da25cd574ed045ec, type: 3}
 --- !u!4 &1891885144
 Transform:
   m_ObjectHideFlags: 0
