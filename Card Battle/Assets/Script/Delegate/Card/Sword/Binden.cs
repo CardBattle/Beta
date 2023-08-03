@@ -7,7 +7,7 @@ public class Binden : CardUse
     public override void Use(Character sender, Character receiver)
     {
         base.Use(sender, receiver);
-        if(receiverCard.info.Property == PropertyType.ATTACK)
+        if(receiverCard.info.Property == PropertyType.ATTACK && receiverCard.info.Type == WeaponType.SWORD)
             receiverCard.info.EffVal = 0;
     }
 }
