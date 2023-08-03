@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Um;
@@ -36,8 +37,10 @@ public class UIManager : MonoBehaviour
     public GameObject victoryUI;
 
     public Slider bgmVol;
-    public Slider soundEffVol;
+    public Slider sfxVol;
     public Button battleSceneReturnBtn;
+
+    public AudioMixer battleMixer;
 
     private int row = 7;
     private float xDistance = 2.05f;
@@ -50,18 +53,38 @@ public class UIManager : MonoBehaviour
         }
 
         bgmVol.value = PlayerPrefs.GetFloat("BGMVol");
-        bgm.volume = PlayerPrefs.GetFloat("BGMVol");
+        sfxVol.value = PlayerPrefs.GetFloat("SFXVol");
+        
+        bgm.volume = bgmVol.value;
+        
     }
-    public void BgmVol()
+    public void Start()
+    {
+        SFXVol();
+    }
+    public void BGMVol()
     {
         bgm.volume = bgmVol.value;
         PlayerPrefs.SetFloat("BGMVol", bgmVol.value);
         PlayerPrefs.Save();
     }
+    public void SFXVol()
+    {
+        float sound = sfxVol.value;
+        print(sound);
+        if (sound == -40f)
+            battleMixer.SetFloat("SFX", -80f);       
+        else 
+            battleMixer.SetFloat("SFX", sound);
+
+        PlayerPrefs.SetFloat("SFXVol", sfxVol.value);
+        PlayerPrefs.Save();
+
+    }
     public void ReStart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        PlayerPrefs.DeleteKey("Tutorial");
+        //PlayerPrefs.DeleteKey("Tutorial");
     }
     public void Menu()
     {
