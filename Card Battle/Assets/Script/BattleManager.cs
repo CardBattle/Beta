@@ -212,17 +212,7 @@ public class BattleManager : MonoBehaviour
         playerDecision.cardPresence = false;
         BuffCheck();
         StartCoroutine(WaitTimer());
-    }
-    /*public void DeckCheck()
-    {
-        //플레이어나 적 덱에 카드가 있는지 체크
-        //없으면 DeckPull()로 이동
-    }
-    public void CardDraw()
-    {
-        //카드 드로우 턴
-        //드로우 할 카드 없으면 대기
-    }*/
+    }   
     private void CardSelectionTurn()
     {
         state = State.WaitState;
@@ -275,8 +265,7 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(UIManager.Um.Dice(enemyDice, false));
     }
     public void BattleTurn()
-    {
-        //존재하는 버프 사용
+    {        
         if (player.info.buffs.Count > 0)
         {
             foreach (var buff in player.info.buffs)
