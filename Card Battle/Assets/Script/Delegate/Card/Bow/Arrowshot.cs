@@ -9,6 +9,14 @@ public class Arrowshot : CardUse
         base.Use(sender, receiver);
 
         if (Random.Range(0, 10) <= 2) card.info.EffVal *= 2;
+        if (card.info.Level >= 2)
+        {
+            foreach(var buff in sender.buffs)
+            {
+                if (buff.info.Id == 14)
+                    card.info.EffVal *= 2;
+            }
+        }
 
         receiver.info.Hp -= CalculateDmg(sender.info.AttackDmg, card.info.RandomDice, card.info.EffVal,
         CalculateEffect(card.info.Type, receiver.info.Weapon));
