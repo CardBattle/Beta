@@ -118,6 +118,8 @@ public class BattleManager : MonoBehaviour
 
     public int stage;
 
+    public int battleCount = 0;
+
     //전체체력 퍼뎀
     public int playerHpPercent;
     public int enemyHpPercent;
@@ -242,6 +244,15 @@ public class BattleManager : MonoBehaviour
             if (enemyDecision.card != null)
                 enemyDecision.card.EnemyCardFront();
         }
+        else if (playerDecision.card != null && enemyDecision.card != null &&
+            (playerDecision.card.info.Property == PropertyType.DEFENSE && enemyDecision.card.info.Property == PropertyType.DEFENSE))
+        {
+            print("으아5");
+            BattleTurn();
+
+            if (enemyDecision.card != null)
+                enemyDecision.card.EnemyCardFront();
+        }
         else if (playerDecision.card == null || enemyDecision.card == null)
         {
             print("으아2");
@@ -282,28 +293,32 @@ public class BattleManager : MonoBehaviour
             foreach (var buff in enemy.info.buffs)
             {
                 buff.buffUse.Use(enemy);
-            }
+            }           
         }
 
         if (playerDecision.card != null && playerDecision.card.info.Property == PropertyType.DEFENSE)
         {
-            DefenceCard(true);
+            StartCoroutine(DefenceCard(true));
+            print("플레이어가 방어를 쓴다");
             return;
         }
         else if (enemyDecision.card != null && enemyDecision.card.info.Property == PropertyType.DEFENSE)
         {
-            DefenceCard(false);
+            print("적이 방어를 쓴다");
+            StartCoroutine(DefenceCard(false));           
             return;
         }
 
         if (playerDecision.card != null && playerDecision.card.info.Property == PropertyType.HEAL)
         {
-            HeelCard(true);
+            StartCoroutine(HeelCard(true));
+            print("여기로 넘어가야 되는데");
             return;
         }
         else if (enemyDecision.card != null && enemyDecision.card.info.Property == PropertyType.HEAL)
         {
-            HeelCard(false);
+            StartCoroutine(HeelCard(false));
+            print("적으로 넘어가야 되는데");
             return;
         }
 
@@ -346,7 +361,7 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(CardSorting());
     }
 
-    private void DefenceCard(bool myCard)
+    IEnumerator DefenceCard(bool myCard)
     {
         if (myCard)
         {
@@ -358,8 +373,13 @@ public class BattleManager : MonoBehaviour
 
                     Debug.Log($"{playerDecision.card.info.Name}: EffVal = {playerDecision.card.info.EffVal}");
                     Debug.Log($"{enemyDecision.card.info.Name}: EffVal = {enemyDecision.card.info.EffVal}");
+                   
                     print("플레이어 방어");
+
+                    yield return new WaitForSeconds(1f);
+                   
                     enemyDecision.card.info.use(enemy, player);
+                    
                     print("적 공격");
 
                     playerHpSlider.value = player.info.Hp;
@@ -373,11 +393,13 @@ public class BattleManager : MonoBehaviour
                     enemyDice = 0;
 
                     StartCoroutine(CardSorting());
-                    return;
+                    yield break;
                 }
                 else if (enemyDecision.card.info.Property == PropertyType.HEAL)
                 {
                     enemyDecision.card.info.use(enemy, player);
+
+                    yield return new WaitForSeconds(1f);
 
                     playerHpSlider.value = player.info.Hp;
                     enemyHpSlider.value = enemy.info.Hp;
@@ -392,7 +414,7 @@ public class BattleManager : MonoBehaviour
                     print("적 힐");
 
                     StartCoroutine(CardSorting());
-                    return;
+                    yield break;
                 }
             }
 
@@ -408,9 +430,13 @@ public class BattleManager : MonoBehaviour
             if (playerDecision.card != null && playerDecision.card.info.Property != PropertyType.DEFENSE)
             {
                 if (playerDecision.card.info.Property == PropertyType.ATTACK)
-                {
+                {             
                     enemyDecision.card.info.use(enemy, player);
                     print("적 방어");
+
+                    yield return new WaitForSeconds(1f);
+
+
                     playerDecision.card.info.use(player, enemy);
                     print("아군 공격");
 
@@ -425,16 +451,19 @@ public class BattleManager : MonoBehaviour
                     enemyDice = 0;
 
                     StartCoroutine(CardSorting());
-                    return;
+                    yield break;
                 }
                 else if (playerDecision.card.info.Property == PropertyType.HEAL)
                 {
-                    playerDecision.card.info.use(enemy, player);
+                    print("지금 여기로 넘어가진거잖아");
+                    playerDecision.card.info.use(player, enemy);
+                    playerHpSlider.value = player.info.Hp;
+                    playerHpView.text = player.info.Hp.ToString();
                     print("플레이어 힐");
 
-                    playerHpSlider.value = player.info.Hp;
+                    yield return new WaitForSeconds(1f);                    
+                  
                     enemyHpSlider.value = enemy.info.Hp;
-                    playerHpView.text = player.info.Hp.ToString();
                     enemyHpView.text = enemy.info.Hp.ToString();
 
                     Debug.Log($"CardUse 결과: 플레이어Hp:{player.info.Hp}\n에너미Hp:{enemy.info.Hp}");
@@ -443,7 +472,7 @@ public class BattleManager : MonoBehaviour
                     enemyDice = 0;
 
                     StartCoroutine(CardSorting());
-                    return;
+                    yield break;
                 }
             }
 
@@ -456,7 +485,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void HeelCard(bool myCard)
+    IEnumerator HeelCard(bool myCard)
     {
         if (myCard)
         {
@@ -465,7 +494,12 @@ public class BattleManager : MonoBehaviour
                 if (enemyDecision.card.info.Property == PropertyType.ATTACK)
                 {
                     playerDecision.card.info.use(player, enemy);
+                    playerHpSlider.value = player.info.Hp;
+                    playerHpView.text = player.info.Hp.ToString();
                     print("플레이어 회복");
+
+                    yield return new WaitForSeconds(1f);
+
                     enemyDecision.card.info.use(enemy, player);
                     print("적 공격");
 
@@ -480,20 +514,22 @@ public class BattleManager : MonoBehaviour
                     enemyDice = 0;
 
                     StartCoroutine(CardSorting());
-                    return;
+                    yield break;
                 }
                 else if (enemyDecision.card.info.Property == PropertyType.HEAL)
                 {
                     playerDecision.card.info.use(player, enemy);
+                    playerHpSlider.value = player.info.Hp;
+                    playerHpView.text = player.info.Hp.ToString();
                     print("플레이어 회복");
+
+                    yield return new WaitForSeconds(1f);
 
                     enemyDecision.card.info.use(enemy, player);
 
                     print("적 회복");
 
-                    playerHpSlider.value = player.info.Hp;
                     enemyHpSlider.value = enemy.info.Hp;
-                    playerHpView.text = player.info.Hp.ToString();
                     enemyHpView.text = enemy.info.Hp.ToString();
 
                     Debug.Log($"CardUse 결과: 플레이어Hp:{player.info.Hp}\n에너미Hp:{enemy.info.Hp}");
@@ -502,12 +538,15 @@ public class BattleManager : MonoBehaviour
                     enemyDice = 0;
 
                     StartCoroutine(CardSorting());
-                    return;
+                    yield break;
                 }
             }
 
             playerDecision.card.info.use(player, enemy);
-            print("플레이어 회복");
+            playerHpSlider.value = player.info.Hp;
+            playerHpView.text = player.info.Hp.ToString();
+            print("으악 회복");
+           
             playerDice = 0;
             enemyDice = 0;
 
@@ -520,7 +559,12 @@ public class BattleManager : MonoBehaviour
                 if (playerDecision.card.info.Property == PropertyType.ATTACK)
                 {
                     enemyDecision.card.info.use(enemy, player);
+                    enemyHpSlider.value = enemy.info.Hp;
+                    enemyHpView.text = enemy.info.Hp.ToString();
                     print("적 회복");
+
+                    yield return new WaitForSeconds(1f);
+
                     playerDecision.card.info.use(player, enemy);
                     print("아군 공격");
 
@@ -535,31 +579,37 @@ public class BattleManager : MonoBehaviour
                     enemyDice = 0;
 
                     StartCoroutine(CardSorting());
-                    return;
+                    yield break;
                 }
                 else if (playerDecision.card.info.Property == PropertyType.HEAL)
                 {
                     enemyDecision.card.info.use(enemy, player);
+                    enemyHpSlider.value = enemy.info.Hp;
+                    enemyHpView.text = enemy.info.Hp.ToString();
                     print("적 회복");
+
+                    yield return new WaitForSeconds(1f);
+
                     playerDecision.card.info.use(enemy, player);
                     print("아군 회복");
 
                     playerHpSlider.value = player.info.Hp;
-                    enemyHpSlider.value = enemy.info.Hp;
+                    
                     playerHpView.text = player.info.Hp.ToString();
-                    enemyHpView.text = enemy.info.Hp.ToString();
-
+                   
                     Debug.Log($"CardUse 결과: 플레이어Hp:{player.info.Hp}\n에너미Hp:{enemy.info.Hp}");
 
                     playerDice = 0;
                     enemyDice = 0;
 
                     StartCoroutine(CardSorting());
-                    return;
+                    yield break;
                 }
             }
-
+            
             enemyDecision.card.info.use(enemy, player);
+            enemyHpSlider.value = enemy.info.Hp;
+            enemyHpView.text = enemy.info.Hp.ToString();
             print("적군 회복");
 
             playerDice = 0;
@@ -568,8 +618,6 @@ public class BattleManager : MonoBehaviour
             StartCoroutine(CardSorting());
         }
     }
-
-
 
     private void BattleResult(int result)
     {
