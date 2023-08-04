@@ -16,7 +16,6 @@ public class CardUse : MonoBehaviour
         card = GetComponent<Card>();
 
         sfx = GetComponent<AudioSource>();
-        
         if (card.info.Property == PropertyType.ATTACK)
             card.info.use += AttackAnim;
         else card.info.use += DefenseAnim;
@@ -70,7 +69,8 @@ public class CardUse : MonoBehaviour
 
     protected void PlaySFX()
     {
-        sfx.Play();
+        if(sfx != null)
+            sfx.Play();
     }
 
     protected void AttackAnim(Character sender, Character receiver)
