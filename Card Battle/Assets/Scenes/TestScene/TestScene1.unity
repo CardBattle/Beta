@@ -6449,7 +6449,7 @@ GameObject:
   - component: {fileID: 1428414391}
   - component: {fileID: 1428414392}
   m_Layer: 0
-  m_Name: UiManager
+  m_Name: StudyUIManager
   m_TagString: UiManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
