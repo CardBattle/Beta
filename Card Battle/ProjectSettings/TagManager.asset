@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PlayerData
-  - UiManager
+  - StudyUIManager
   layers:
   - Default
   - TransparentFX
