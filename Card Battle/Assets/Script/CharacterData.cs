@@ -4,7 +4,7 @@ using UnityEngine;
 public class CharacterData : MonoBehaviour
 {
     public DefaultCharacterData info;
-    public UiManager ui;
+    public StudyUIManager ui;
 
     public int chrId;
     public string chrName;
@@ -58,8 +58,8 @@ public class CharacterData : MonoBehaviour
 
     public void ChangeData()
     {
-        GameObject dataObject = GameObject.FindGameObjectWithTag("UiManager");
-        UiManager data = dataObject.GetComponent<UiManager>();
+        GameObject dataObject = GameObject.FindGameObjectWithTag("StudyUIManager");
+        StudyUIManager data = dataObject.GetComponent<StudyUIManager>();
         img = data.studyViewResources[imgNum];
         foreach(int a in chrCardnum)
         {

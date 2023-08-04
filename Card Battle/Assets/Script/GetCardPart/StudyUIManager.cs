@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-public class UiManager : MonoBehaviour
+public class StudyUIManager : MonoBehaviour
 {
     enum StudyState
     {
@@ -2086,6 +2086,7 @@ public class UiManager : MonoBehaviour
 
     public GameObject FindPrefabById(int targetId)
     {
+        /* AssetDatabase는 유니티에서만 실행됨
         string searchFolderPath = "Assets/Prefabs/Cards";
         string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new string[] { searchFolderPath });
 
@@ -2110,9 +2111,36 @@ public class UiManager : MonoBehaviour
                 }
             }
         }
+        return null;*/
+        string[] searchFolderPaths = new string[]
+ {
+    "Prefabs/Cards/Sword",
+    "Prefabs/Cards/Bow",
+    "Prefabs/Cards/Magic",
+    "Prefabs/Cards/Default"
+ };
+
+        foreach (string searchFolderPath in searchFolderPaths)
+        {
+            GameObject[] prefabArray = Resources.LoadAll<GameObject>(searchFolderPath);
+            foreach (GameObject prefab in prefabArray)
+            {
+                Card myScriptComponent = prefab.GetComponent<Card>();
+                myScriptComponent.Init();
+                Debug.Log(myScriptComponent);
+                Debug.Log(myScriptComponent.info.Id);
+
+                if (myScriptComponent != null && myScriptComponent.info.Id == targetId)
+                {
+                    cardListData.Add(prefab);
+                    myScriptComponent.DataInit();
+                    return prefab;
+                }
+            }
+        }
+
         return null;
     }
-
     public void EndStudy()
     {
         GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
