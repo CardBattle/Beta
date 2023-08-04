@@ -8,7 +8,9 @@ public class Rest : CardUse
     {
         base.Use(sender, receiver);
 
-        sender.info.Hp += CalculateDmg(sender.info.Defense, card.info.RandomDice, card.info.EffVal, 1);
+        sender.info.Hp += 2 * card.info.EffVal;
+
+        
     }
 
 }
