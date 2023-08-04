@@ -173,8 +173,8 @@ public class StudyUIManager : MonoBehaviour
         studyViewImage.sprite = studyViewResources[studyViewNum];
         selectStudy = new List<int>();
         cardListData = new List<GameObject>();
-        baby.transform.position = new Vector3(-20f, 12.0f, 0.0f);
-        baby.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        baby.transform.position = new Vector3(-19f, 14.0f, 0.0f);
+        baby.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
         weaponSprite.sprite = null;
         mainCamera.transform.position = new Vector3(-20.0f, 10.0f, -100.0f);
         startUi.SetActive(true);
@@ -428,7 +428,7 @@ public class StudyUIManager : MonoBehaviour
                 startButton.SetActive(true); ;
 
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
-                baby.transform.position = new Vector3(4.0f, 12.0f, 0.0f);
+                baby.transform.position = new Vector3(3.5f, 11.0f, 0.0f);
             }
             else if (selectStudy[0] == 1)
             {
@@ -437,7 +437,7 @@ public class StudyUIManager : MonoBehaviour
                 statUi.SetActive(true);
                 startButton.SetActive(true); ;
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
-                baby.transform.position = new Vector3(4.0f, 12.0f, 0.0f);
+                baby.transform.position = new Vector3(3.5f, 11.0f, 0.0f);
             }
             else if (selectStudy[0] == 2)
             {
@@ -446,7 +446,7 @@ public class StudyUIManager : MonoBehaviour
                 statUi.SetActive(true);
                 startButton.SetActive(true); ;
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
-                baby.transform.position = new Vector3(4.0f, 12.0f, 0.0f);
+                baby.transform.position = new Vector3(3.5f, 11.0f, 0.0f);
             }
         }
     }
