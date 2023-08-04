@@ -2051,6 +2051,16 @@ public class UiManager : MonoBehaviour
             var card = getCard.GetComponent<Card>();
             card.CardFront(true);
             card.GetComponent<Order>().SetOriginOrder(order++);
+            PolygonCollider2D colliderToRemove = getCard.GetComponent<PolygonCollider2D>();
+            if (colliderToRemove != null)
+            {
+                Destroy(colliderToRemove);
+                Debug.Log("PolygonCollider2D removed from the spawned object.");
+            }
+            else
+            {
+                Debug.LogWarning("No PolygonCollider2D found on the spawned object.");
+            }
             count++;
         }
     }

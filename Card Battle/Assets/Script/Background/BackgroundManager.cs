@@ -38,4 +38,30 @@ public class BackgroundManager : MonoBehaviour
         object1.sprite = imageList[10];
         object2.sprite = imageList[11];
     }
+    private void Start()
+    {
+        ChangeMap();
+    }
+    public void ChangeMap()
+    {
+        
+        int a = Random.Range(0, 3);
+        Debug.Log(a);
+        switch (a)
+        {
+            case 0:
+                ChangeMap1();
+                break;
+            case 1:
+                ChangeMap2();
+                break;
+            case 2:
+                ChangeMap3();
+                break;
+            default:
+                ChangeMap4();
+                break;
+        }
+    }
 }
+

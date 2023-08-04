@@ -370,7 +370,8 @@ MonoBehaviour:
   buffs: []
   cardDATA: {fileID: 5207043119744086873, guid: 5a6cd18f8f4105b4aae296cbc7bc594f, type: 3}
   data: {fileID: 2038502859531863969, guid: 75753aa904219b94a991208126221636, type: 3}
-  cards: []
+  cards:
+  - {fileID: 1234368001717940415, guid: 36c8507422012a04da659492747e5c55, type: 3}
 --- !u!114 &978846399460753268
 MonoBehaviour:
   m_ObjectHideFlags: 0
