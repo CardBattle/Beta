@@ -11,6 +11,10 @@ public class SFXVFX : MonoBehaviour
     public void PlaySFXVFX() 
     {
         play();
+    }
+
+    public void DeleteSFXVFX()
+    {
         play = null;
     }
 
