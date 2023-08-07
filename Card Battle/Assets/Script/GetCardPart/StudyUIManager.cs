@@ -30,6 +30,8 @@ public class StudyUIManager : MonoBehaviour
         firstMagic,
         secondMagic,
         thirdMagic,
+        fourthMagic,
+        fifthMaigic
     }
     private StudyState studyState;
     private CardState cardState;
@@ -120,6 +122,7 @@ public class StudyUIManager : MonoBehaviour
         studyReset();
         audioSource = GetComponent<AudioSource>();
     }
+
     public void DataInit()
     {
         GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
@@ -1090,6 +1093,62 @@ public class StudyUIManager : MonoBehaviour
             }
             searchCount=0;
         }
+        else if (upgradeState == UpgradeState.fourthMagic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 24)
+                {
+                    cardList.Remove(24);
+                    cardList.Add(29);
+                    message.SetActive(true);
+                    messageText.text = "Concentration+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Concentration카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+        else if (upgradeState == UpgradeState.fifthMaigic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 25)
+                {
+                    cardList.Remove(25);
+                    cardList.Add(30);
+                    message.SetActive(true);
+                    messageText.text = "Heal+카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Heal카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+        }
+
     }
     public void UpgradeSecondCardBtn(int num)
     {
@@ -1334,6 +1393,61 @@ public class StudyUIManager : MonoBehaviour
             searchCount++;
 
         }
+        else if (upgradeState == UpgradeState.fourthMagic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 29)
+                {
+                    cardList.Remove(29);
+                    cardList.Add(34);
+                    message.SetActive(true);
+                    messageText.text = "Concentration++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Concentration+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+
+        }
+        else if (upgradeState == UpgradeState.fifthMaigic)
+        {
+            foreach (int a in cardList)
+            {
+                if (a == 30)
+                {
+                    cardList.Remove(30);
+                    cardList.Add(35);
+                    message.SetActive(true);
+                    messageText.text = "Heal++카드를 얻었다.";
+                    upgradeBox.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    searchCount++;
+                    if (searchCount == cardList.Count)
+                    {
+                        uiMessage.SetActive(true);
+                        uiText.text = "Heal+카드가 없습니다.";
+                        upgradeBox.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            searchCount = 0;
+        }
     }
 
     public void GetFirstCard(int num)
@@ -1533,17 +1647,44 @@ public class StudyUIManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log(cardState);
-        Debug.Log(upgradeState);
     }
 
     public void FourthCardBtn()
     {
-        GetFourthCard();
+        if (cardState == CardState.get)
+        {
+            GetFourthCard();
+        }
+        else
+        {
+            UpgradeFourthCard();
+        }
     }
     public void FifthCardBtn()
     {
-        GetFifthCard();
+        if (cardState == CardState.get)
+        {
+            GetFifthCard();
+        }
+        else
+        {
+            UpgradeFifthCard();
+        }
+    }
+
+    public void UpgradeFourthCard()
+    {
+        upgradeBox.SetActive(true);
+        upgradeBoxImage[0].sprite = cardSprite[29];
+        upgradeBoxImage[1].sprite = cardSprite[34];
+        upgradeState = UpgradeState.fourthMagic;
+    }
+    public void UpgradeFifthCard()
+    {
+        upgradeBox.SetActive(true);
+        upgradeBoxImage[0].sprite = cardSprite[30];
+        upgradeBoxImage[1].sprite = cardSprite[35];
+        upgradeState = UpgradeState.fifthMaigic;
     }
 
     public void GetFourthCard()
@@ -2147,7 +2288,7 @@ public class StudyUIManager : MonoBehaviour
 
         Debug.Log(dataObject);
         data = dataObject.GetComponent<CharacterData>();
-        data.DataInit(0, "test", 1, DefaultPlayerHp + playerHp, DefaultPlayerAttack + playerAttack, DefaultPlayerDefense + playerDefense, SelectWeaponType(), SelectSprite(), cardList);
+        data.DataInit(0, "test", 1, playerHp, playerAttack, playerDefense, SelectWeaponType(), SelectSprite(), cardList);
         data.Init();
         data.ChangeData();
         SaveData();

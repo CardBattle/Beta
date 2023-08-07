@@ -460,13 +460,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 70
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Weapon Master\r"
+  m_Text: Card Battle
 --- !u!222 &63972503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -996,6 +996,7 @@ RectTransform:
   - {fileID: 1328920763}
   - {fileID: 629958124}
   - {fileID: 72829413}
+  - {fileID: 1611391068}
   m_Father: {fileID: 171031955}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1229,8 +1230,8 @@ Canvas:
   m_GameObject: {fileID: 171031951}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1309811079}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1239,7 +1240,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!224 &171031955
 RectTransform:
@@ -1260,7 +1261,6 @@ RectTransform:
   - {fileID: 176193688}
   - {fileID: 156254091}
   - {fileID: 529049109}
-  - {fileID: 1611391068}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3387,7 +3387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 100}
+  m_AnchoredPosition: {x: 5, y: 80}
   m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &705614085
@@ -4434,7 +4434,7 @@ RectTransform:
   m_GameObject: {fileID: 1039075531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.048125, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1012887259}
@@ -4573,8 +4573,8 @@ Canvas:
   m_GameObject: {fileID: 1091610498}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1309811079}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -4583,7 +4583,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!1 &1097070916
 GameObject:
@@ -5869,7 +5869,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1309811077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba5dc9dec26e5f42bbf0e31b4e0b213, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e476161baab43f43a5a4d61af397dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1328920762
@@ -6519,15 +6519,17 @@ MonoBehaviour:
   - {fileID: -1556214816, guid: 673eabdb08b055f448614b4050dff506, type: 3}
   - {fileID: -1882270097, guid: 673eabdb08b055f448614b4050dff506, type: 3}
   - {fileID: -1029550724, guid: 673eabdb08b055f448614b4050dff506, type: 3}
-  - {fileID: -1084016231, guid: 673eabdb08b055f448614b4050dff506, type: 3}
+  - {fileID: -254744578, guid: 2ec7d5bc3efca094caba8a66f84c2db0, type: 3}
   - {fileID: -460643272, guid: 673eabdb08b055f448614b4050dff506, type: 3}
   - {fileID: -337623007, guid: 673eabdb08b055f448614b4050dff506, type: 3}
   - {fileID: -1736611760, guid: 673eabdb08b055f448614b4050dff506, type: 3}
-  - {fileID: -753850290, guid: 673eabdb08b055f448614b4050dff506, type: 3}
-  - {fileID: 242266853, guid: 673eabdb08b055f448614b4050dff506, type: 3}
+  - {fileID: 1581476271, guid: 2ec7d5bc3efca094caba8a66f84c2db0, type: 3}
+  - {fileID: 292440650, guid: 2ec7d5bc3efca094caba8a66f84c2db0, type: 3}
   - {fileID: 267814392, guid: 673eabdb08b055f448614b4050dff506, type: 3}
   - {fileID: 619185573, guid: 673eabdb08b055f448614b4050dff506, type: 3}
   - {fileID: -1392975799, guid: 673eabdb08b055f448614b4050dff506, type: 3}
+  - {fileID: -922167831, guid: 2ec7d5bc3efca094caba8a66f84c2db0, type: 3}
+  - {fileID: -636420917, guid: 2ec7d5bc3efca094caba8a66f84c2db0, type: 3}
   weaponSprite: {fileID: 1689797715306024399}
   studyViewImage: {fileID: 1709586615}
   studyViewResources:
@@ -7763,7 +7765,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611391067}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7773,8 +7775,8 @@ RectTransform:
   - {fileID: 651030902}
   - {fileID: 1283575340}
   - {fileID: 1915421985}
-  m_Father: {fileID: 171031955}
-  m_RootOrder: 7
+  m_Father: {fileID: 156254091}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
