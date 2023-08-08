@@ -145,9 +145,11 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshPro timerText; //타이머 텍스트
+    public TextMeshPro enemyNameText;
 
     public TextMeshPro playerDeckCount;
     public TextMeshPro enemyDeckCount;
+
 
     private void Awake()
     {
@@ -674,6 +676,8 @@ public class BattleManager : MonoBehaviour
 
         playerHpSlider.value = player.info.Hp;
         enemyHpSlider.value = enemy.info.Hp;
+
+        enemyNameText.text = $"{enemy.info.Name}";
 
         cardManager.Init();
         cardManager.DeckCardInit();
