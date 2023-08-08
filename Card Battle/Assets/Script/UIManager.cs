@@ -173,16 +173,15 @@ public class UIManager : MonoBehaviour
         print(BattleManager.Bm.stage);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    public void SelectionScene()
-    {
-        PlayerPrefs.DeleteKey("Stage");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    public void TitleScene()
+    {      
+        SceneManager.LoadScene(0);
     }
    
-    public void TitleScene()
+    public void ClearTitleScene()
     {
         PlayerPrefs.DeleteKey("Stage");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(0);
     }
 
     public void Victory()
@@ -436,8 +435,5 @@ public class UIManager : MonoBehaviour
         }
         return result;
     }
-    public void GotoStart()
-    {
-        SceneManager.LoadScene("TestScene1");
-    }
+    
 }
