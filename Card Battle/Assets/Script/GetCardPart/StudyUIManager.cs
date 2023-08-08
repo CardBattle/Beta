@@ -8,17 +8,20 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 public class StudyUIManager : MonoBehaviour
 {
+    //몇번째 수업인지 확인용
     enum StudyState
     {
         first,
         second,
         third,
     }
+    //카드획득인지 강화인지 확인용
     enum CardState
     {
         get,
         upgrade
     }
+    //어떤 카드를 강화할 것인지 확인용
     enum UpgradeState
     {
         firstSword,
@@ -37,50 +40,49 @@ public class StudyUIManager : MonoBehaviour
     private CardState cardState;
     private UpgradeState upgradeState;
 
-    //스터디씬 좌표 0,0
-    //검술씬 0,10
-    //궁술씬 20,10
-    //마술씬 20,00
-    //스타트씬 -20, -10
+    //캔버스에서 사용할 이미지 오브젝트
     public Image[] loadViewImage;
     public Image[] selectStudyImage;
     public Image[] upgradeBoxImage;
-    public Sprite[] cardSprite;
-    public SpriteRenderer weaponSprite;
-
     public Image studyViewImage;
+    public Image[] cardImage;
 
+    //이미지 으브젝트에서 사용할 스프라이트 리소스
+    public Sprite[] cardSprite;
     public Sprite[] studyViewResources;
     public Sprite[] selectStudyResources;
     
+    //캐릭터가 사용할 무기 스프라이트
+    public SpriteRenderer weaponSprite;
 
-    public Image[] cardImage;
-
+    //카메라 위치 이동을 위한 변수
     public Camera mainCamera;
 
+    //캔버스에서 사용할 텍스트 오브젝트
     public Text[] saveInfo;
-
     public Text[] studyInfo;
     public Text[] studingResult;
     public Text[] studyResult;
     public Text cardBordeName;
     public Text messageText;
     public Text uiText;
-    public AudioClip[] audioClips; // 인스펙터에서 오디오 클립을 할당
+
+    //육성중 재생할 효과음
+    public AudioClip[] audioClips; 
     private AudioSource audioSource;
 
-
-    public GameObject startUi;
-    public GameObject dataUi;
-    public GameObject studyUi;
-    public GameObject studingUi;
-    public GameObject statUi;
-    public GameObject selectCardUi;
+    //UI사용을 구현할 게임 오브젝트, SetActive를 이용해서 활성화, 비활성화한다.
+    public GameObject startUI;
+    public GameObject dataUI;
+    public GameObject studyUI;
+    public GameObject studingUI;
+    public GameObject statUI;
+    public GameObject selectCardUI;
     public GameObject startButton;
     public GameObject message;
-    public GameObject cardUi;
-    public GameObject getCardUi;
-    public GameObject upgradeCardUi;
+    public GameObject cardUI;
+    public GameObject getCardUI;
+    public GameObject upgradeCardUI;
     public GameObject fstCard1;
     public GameObject fstCard2;
     public GameObject endStudy;
@@ -88,34 +90,41 @@ public class StudyUIManager : MonoBehaviour
     public GameObject upgradeBox;
     public GameObject[] vfx;
 
-
-    public Animator babyAni;
+    //플레이어 오브젝트
     public GameObject baby;
     private Character babydata;
 
-
+    //과목 선택 확인용 리스트
     private List<int> selectStudy;
     public List<Image> getCardList;
+
+    //카드저장 확인 및 저장용 리스트
     private List<int> cardList;
     private List<GameObject> cardListData;
 
+    //스텟 구현용 int 변수
     private int playerHp;
     private int playerAttack;
     private int playerDefense;
     private int DefaultPlayerHp;
     private int DefaultPlayerAttack;
     private int DefaultPlayerDefense;
+
+    //메소드 구현용 변수
     private int studyViewNum;
     private int order;
     private int saveSlot;
     private int searchCount;
     private int effect;
 
+    //데이터 저장 및 불러오기 용 변수
     private CharacterData data;
     private DefaultCharacterData saveData;
+
+    //애니메이션 적용에 사용할 캐릭터 위치 변수
     Transform warriorTransform;
 
-    public void Awake()
+    public void Start()
     {
         DataInit();
         SaveSlot();
@@ -123,6 +132,7 @@ public class StudyUIManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    //데이터 참조
     public void DataInit()
     {
         GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
@@ -130,6 +140,7 @@ public class StudyUIManager : MonoBehaviour
         data = dataObject.GetComponent<CharacterData>();
     }
 
+    //몇번 파일에 저장할지 저장하는 메소드
     public void SaveSlot()
     {
         string directoryPath = Path.Combine(Application.persistentDataPath);//검사할 경로
@@ -137,7 +148,7 @@ public class StudyUIManager : MonoBehaviour
         Debug.Log("바이너리로 저장된 파일 개수: " + binaryFileCount);
         saveSlot = binaryFileCount;
     }
-
+    //저장된 세이브파일이 몇개 있는지 카운트하는 메소드
     int CountBinaryFilesInDirectory(string path)
     {
         int binaryFileCount = 0;
@@ -160,7 +171,7 @@ public class StudyUIManager : MonoBehaviour
 
         return binaryFileCount;
     }
-
+    //바이너리 파일인지 판단하는 메소드
     bool IsBinaryFile(string filePath)
     {
         // 파일 확장자가 바이너리 파일에 해당하는지 여부를 체크합니다.
@@ -169,7 +180,7 @@ public class StudyUIManager : MonoBehaviour
         return extension == ".dat"; // 원하는 확장자로 변경해주세요.
     }
 
-
+    //변수 초기화
     public void studyReset()
     {
         studyViewNum = 0;
@@ -180,17 +191,17 @@ public class StudyUIManager : MonoBehaviour
         baby.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
         weaponSprite.sprite = null;
         mainCamera.transform.position = new Vector3(-20.0f, 10.0f, -100.0f);
-        startUi.SetActive(true);
-        dataUi.SetActive(false);
-        studyUi.SetActive(false);
-        studingUi.SetActive(false);
-        selectCardUi.SetActive(false);
-        statUi.SetActive(false);
+        startUI.SetActive(true);
+        dataUI.SetActive(false);
+        studyUI.SetActive(false);
+        studingUI.SetActive(false);
+        selectCardUI.SetActive(false);
+        statUI.SetActive(false);
         startButton.SetActive(false); ;
         message.SetActive(false);
-        cardUi.SetActive(false);
-        getCardUi.SetActive(false);
-        upgradeCardUi.SetActive(false);
+        cardUI.SetActive(false);
+        getCardUI.SetActive(false);
+        upgradeCardUI.SetActive(false);
         endStudy.SetActive(false);
         studingResult[0].text = "1회차";
         studingResult[1].text = null;
@@ -202,6 +213,8 @@ public class StudyUIManager : MonoBehaviour
         warriorTransform = baby.transform.Find("Warrior");
         babydata = warriorTransform.GetComponent<Character>();
     }
+
+    //스텟 초기화
     public void startData()
     {
         cardList = data.chrCardnum;
@@ -213,6 +226,7 @@ public class StudyUIManager : MonoBehaviour
         DefaultPlayerDefense = data.chrDefense;
         addNomalCard();
     }
+    //캐릭터 최초생성시 기본카드 추가하는 메소드
     public void addNomalCard()
     {
         if (cardList.Count == 0)
@@ -224,6 +238,7 @@ public class StudyUIManager : MonoBehaviour
             }
         }
     }
+    //시작버튼을 누르면 바이너리 파일을 돌면서 어떤것이 저장되어있는지 텍스트로 보여주는 메소드
     public void StartBtn()
     {
         baby.transform.position = new Vector3(-1f, 0.0f, 0.0f);
@@ -231,8 +246,8 @@ public class StudyUIManager : MonoBehaviour
         //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
         babydata.AniInit(0);
 
-        startUi.SetActive(false);
-        dataUi.SetActive(true);
+        startUI.SetActive(false);
+        dataUI.SetActive(true);
         mainCamera.transform.position = new Vector3(-20.0f, 0.0f, -100.0f);
 
         if (saveSlot == 0)
@@ -281,17 +296,18 @@ public class StudyUIManager : MonoBehaviour
                 + data.chrAttackDmg.ToString() + "\n" + "방어력 " + data.chrDefense.ToString();
         }
     }
-
+    //첫번쨰 파일을 불러오는 메소드
     public void LoadBtn0()
     {
-        dataUi.SetActive(false);
-        studyUi.SetActive(true);
+        dataUI.SetActive(false);
+        studyUI.SetActive(true);
         LoadCharacterData0();
         mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
         saveSlot = 0;
         startData();
-
     }
+    //비어있는 두번째 슬롯을 누른다면 새로운 캐릭터를 생성하는 메소드
+
     public void LoadBtn1()
     {
         if (saveSlot == 1)
@@ -299,20 +315,21 @@ public class StudyUIManager : MonoBehaviour
             data.DataInit(0, "test", 1, 20, 1, 1
                         , WeaponType.SWORD, 0, cardList);
             saveSlot = 1;
-            dataUi.SetActive(false);
-            studyUi.SetActive(true);
+            dataUI.SetActive(false);
+            studyUI.SetActive(true);
             mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
         }
         else if (saveSlot > 1)
         {
-            dataUi.SetActive(false);
-            studyUi.SetActive(true);
+            dataUI.SetActive(false);
+            studyUI.SetActive(true);
             LoadCharacterData1();
             mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
             saveSlot = 1;
         }
         startData();
     }
+    //비어있는 세번째 슬롯을 누른다면 새로운 캐릭터를 생성하는 메소드
     public void LoadBtn2()
     {
         if (saveSlot == 2)
@@ -320,14 +337,14 @@ public class StudyUIManager : MonoBehaviour
             data.DataInit(0, "test", 1, 20, 1, 1
                         , WeaponType.SWORD, 0, cardList);
             saveSlot = 2;
-            dataUi.SetActive(false);
-            studyUi.SetActive(true);
+            dataUI.SetActive(false);
+            studyUI.SetActive(true);
             mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
         }
         else if (saveSlot == 3)
         {
-            dataUi.SetActive(false);
-            studyUi.SetActive(true);
+            dataUI.SetActive(false);
+            studyUI.SetActive(true);
             LoadCharacterData2();
             mainCamera.transform.position = new Vector3(0.0f, 0.0f, -100.0f);
             saveSlot = 2;
@@ -335,7 +352,7 @@ public class StudyUIManager : MonoBehaviour
         startData();
     }
 
-
+    //과목을 선택할때 이미지를 바꿔주는 메소드
     public void ChangeStudyImageBtn()
     {
         if (studyViewNum > 1)
@@ -383,6 +400,7 @@ public class StudyUIManager : MonoBehaviour
             }
         }
     }
+    //과목을 선택했을때 무엇을 골랐는지 보여주는 메소드
     public void SlectStudyBtn()
     {
         if (selectStudyImage[0].sprite == null)
@@ -404,7 +422,7 @@ public class StudyUIManager : MonoBehaviour
             selectStudy.Add(studyViewNum);
         }
     }
-
+    //선택한 과목을 지우는 메소드
     public void ResetStudyBtn()
     {
         selectStudyImage[0].sprite = null;
@@ -415,19 +433,16 @@ public class StudyUIManager : MonoBehaviour
         selectStudyImage[2].color = new Color(255, 255, 255, 0);
         selectStudy.Clear();
     }
+    //3가지 과목을 선택했을때 다음 상황으로 넘어가는 메소드
     public void NextSceneBtn()
     {
-        Debug.Log(selectStudy[0]);
-        Debug.Log(selectStudy[1]);
-        Debug.Log(selectStudy[2]);
-
         if (selectStudy.Count == 3)
         {
             if (selectStudy[0] == 0)
             {
-                studyUi.SetActive(false);
-                studingUi.SetActive(true);
-                statUi.SetActive(true);
+                studyUI.SetActive(false);
+                studingUI.SetActive(true);
+                statUI.SetActive(true);
                 startButton.SetActive(true); ;
 
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
@@ -435,24 +450,26 @@ public class StudyUIManager : MonoBehaviour
             }
             else if (selectStudy[0] == 1)
             {
-                studyUi.SetActive(false);
-                studingUi.SetActive(true);
-                statUi.SetActive(true);
+                studyUI.SetActive(false);
+                studingUI.SetActive(true);
+                statUI.SetActive(true);
                 startButton.SetActive(true); ;
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
                 baby.transform.position = new Vector3(3.5f, 11.0f, 0.0f);
             }
             else if (selectStudy[0] == 2)
             {
-                studyUi.SetActive(false);
-                studingUi.SetActive(true);
-                statUi.SetActive(true);
+                studyUI.SetActive(false);
+                studingUI.SetActive(true);
+                statUI.SetActive(true);
                 startButton.SetActive(true); ;
                 mainCamera.transform.position = new Vector3(0.0f, 10.0f, -100.0f);
                 baby.transform.position = new Vector3(3.5f, 11.0f, 0.0f);
             }
         }
     }
+    //어떤과목을 선택했는지 확인하고 시작하는 메소드
+
     public void StudyStartBtn()
     {
         startButton.SetActive(false);
@@ -469,6 +486,7 @@ public class StudyUIManager : MonoBehaviour
             StartStudy(2);
         }
     }
+    //수업 코루틴을 실행하는 메소드
 
     private void StartStudy(int num)
     {
@@ -487,22 +505,24 @@ public class StudyUIManager : MonoBehaviour
             StartCoroutine(MagicStudy(5));
             StopCoroutine(MagicStudy(5));
         }
-
     }
+    //캐릭터 애니메이션 용 특수효과를 넣는 메소드
     protected void PlaySFX()
     {
             audioSource.clip = audioClips[effect];
             audioSource.Play();
     }
+    //수업 종료 후 어떤 스텟이 올랐는지 보여주는 메소드
     public void GetStudyResult()
     {
-        statUi.SetActive(false);
-        selectCardUi.SetActive(true);
+        statUI.SetActive(false);
+        selectCardUI.SetActive(true);
         studyResult[0].text = "결과";
         studyResult[1].text = "체력" + (playerHp - DefaultPlayerHp).ToString() + "↑ "
             + "공격" + (playerAttack - DefaultPlayerAttack).ToString() + "↑ "
             + "방어" + (playerDefense - DefaultPlayerDefense).ToString() + "↑";
     }
+    //수업 결과에 따라 보여줄 애니메이션을 재생하는 메소드
     public void GoodStudy()
     {
         effect = 1;
@@ -525,7 +545,7 @@ public class StudyUIManager : MonoBehaviour
         babydata.GetComponent<SFXVFX>().play += PlaySFX;
         babydata.GetComponent<SFXVFX>().play += delegate () { Instantiate(vfx[0], warriorTransform.position, Quaternion.identity); };
     }
-
+    //수업간 스텟을 오르게하는 메소드
     IEnumerator SwordStudy(int num)
     {
         cardImage[0].sprite = cardSprite[3];//활1,2,3
@@ -538,7 +558,7 @@ public class StudyUIManager : MonoBehaviour
         }
         GetStudyResult();
     }
-
+    //수업간 오른스텟을 확인하는 메소드
     public void SwordStudyResult()
     {
         //weaponSprite.sprite = Resources.Load<Sprite>("Sprites/Weapon-Sword");
@@ -697,7 +717,7 @@ public class StudyUIManager : MonoBehaviour
 
         }
     }
-
+    //카드를 얻을지 강화할지 판단하여 호출하는 메소드
     public void FirstCardBtn()
     {
         
@@ -773,9 +793,9 @@ public class StudyUIManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log(cardState);
-        Debug.Log(upgradeState);
     }
+
+    //카드를 업그레이드할때 어떤 수업을 골랐는지 확인하고 그에 맞는 카드를 불러오는 메소드
     public void UpgradeFirstCard(int num)
     {
         if (upgradeState == UpgradeState.firstSword)
@@ -840,6 +860,7 @@ public class StudyUIManager : MonoBehaviour
             upgradeBoxImage[1].sprite = cardSprite[33];
         }
     }
+    //업그레이드 할 카드가 있는지 판단하고 없으면 전화면으로, 있으면 그 카드를 리스트에서 지우고 업그레이드한 카드를 추가하는 메소드
     public void UpgradeFirstCardBtn(int num)
     {
         Debug.Log(upgradeState);
@@ -1726,6 +1747,8 @@ public class StudyUIManager : MonoBehaviour
     {
         uiMessage.SetActive(false);
     }
+    
+    //처음 카드강화를 눌렀을때 강화 가능한 카드가 있는지 판단하는 메소드
     public void OpenUpgradeCardBtn()
     {
         if (studyState == StudyState.first)
@@ -1736,9 +1759,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 3 || a == 6 || a == 7 || a == 8 || a == 9 || a == 10)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -1764,9 +1787,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 4 || a == 14 || a == 15 || a == 16 || a == 17 || a == 18)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -1794,9 +1817,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 5 || a == 22 || a == 23 || a == 24 || a == 25 || a == 26 || a == 27 || a == 28 || a == 29 || a == 30)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -1827,9 +1850,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 3 || a == 6 || a == 7 || a == 8 || a == 9 || a == 10)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -1857,9 +1880,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 4 || a == 14 || a == 15 || a == 16 || a == 17 || a == 18)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -1887,9 +1910,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 5 || a == 22 || a == 23 || a == 24 || a == 25 || a == 26 || a == 27 || a == 28 || a == 29 || a == 30)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -1921,9 +1944,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 3 || a == 6 || a == 7 || a == 8 || a == 9 || a == 10)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -1951,9 +1974,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 4 || a == 14 || a == 15 || a == 16 || a == 17 || a == 18)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -1981,9 +2004,9 @@ public class StudyUIManager : MonoBehaviour
                 {
                     if (a == 5 || a == 22 || a == 23 || a == 24 || a == 25 || a == 26 || a == 27 || a == 28 || a == 29 || a == 30)
                     {
-                        cardUi.SetActive(true);
-                        selectCardUi.SetActive(false);
-                        getCardUi.SetActive(true);
+                        cardUI.SetActive(true);
+                        selectCardUI.SetActive(false);
+                        getCardUI.SetActive(true);
                         fstCard1.SetActive(true);
                         cardBordeName.text = "카 드 강 화";
                         ChangeSprite();
@@ -2007,17 +2030,18 @@ public class StudyUIManager : MonoBehaviour
 
         }
     }
-
+    //CardUI를 활성화하는 메소드
     public void OpenGetCardBtn()
     {
-        cardUi.SetActive(true);
-        selectCardUi.SetActive(false);
-        getCardUi.SetActive(true);
+        cardUI.SetActive(true);
+        selectCardUI.SetActive(false);
+        getCardUI.SetActive(true);
         fstCard1.SetActive(true);
         cardBordeName.text = "카 드 획 득";
         ChangeSprite();
         cardState = CardState.get;
     }
+    //선택한 수업에 맞게 얻을 수 있는 카드 이미지를 변경하는 메소드
     public void ChangeSprite()
     {
         if(studyState==StudyState.first)
@@ -2090,15 +2114,15 @@ public class StudyUIManager : MonoBehaviour
             }
         }
     }
-
+    //획득,강화를 끝냈을때 UI를 정리하고 다음 상황을 준비하는 메소드
     public void CloseMessageBtn()
     {
         message.SetActive(false);
-        cardUi.SetActive(false);
-        getCardUi.SetActive(false);
-        selectCardUi.SetActive(false);
+        cardUI.SetActive(false);
+        getCardUI.SetActive(false);
+        selectCardUI.SetActive(false);
         startButton.SetActive(true);
-        statUi.SetActive(true);
+        statUI.SetActive(true);
         fstCard1.SetActive(false);
         fstCard2.SetActive(false);
 
@@ -2117,12 +2141,13 @@ public class StudyUIManager : MonoBehaviour
         else if (studyState == StudyState.third)
         {
             startButton.SetActive(false);
-            statUi.SetActive(false);
-            studingUi.SetActive(false);
+            statUI.SetActive(false);
+            studingUI.SetActive(false);
             mainCamera.transform.position = new Vector3(0.0f, -10.0f, -100.0f);
             DeckList();
         }
     }
+    //강화확인 버튼을 눌렀을때 UI를 실행시키는 메소드
     public void RightCardBtn()
     {
         if (studyState == StudyState.first)
@@ -2178,7 +2203,7 @@ public class StudyUIManager : MonoBehaviour
             }
         }
     }
-
+    //모든수업이 끝나고 생성한 카드를 생성하여 카드를 확인하는 메소드
     public void DeckList()
     {
         endStudy.SetActive(true);
@@ -2196,16 +2221,16 @@ public class StudyUIManager : MonoBehaviour
             if (colliderToRemove != null)
             {
                 Destroy(colliderToRemove);
-                Debug.Log("PolygonCollider2D removed from the spawned object.");
             }
             else
             {
-                Debug.LogWarning("No PolygonCollider2D found on the spawned object.");
+                Debug.Log("카드가 없습니다");
             }
             count++;
         }
     }
 
+    //카드확인시 생성한 카드의 위치를 잡아주는 메소드
     public Vector3 PositionCheck(int count)
     {
         float positionX = -5.0f;
@@ -2225,41 +2250,16 @@ public class StudyUIManager : MonoBehaviour
         return position;
     }
 
+    //카드 생성시 List<int>인 카드리스트에서 ID를 불러와 리소스 폴더에 있는 프리팹들의 ID와 비교해서 카드리스트에 저장하는 메소드
     public GameObject FindPrefabById(int targetId)
     {
-        /* AssetDatabase는 유니티에서만 실행됨
-        string searchFolderPath = "Assets/Prefabs/Cards";
-        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new string[] { searchFolderPath });
-
-        foreach (string prefabGUID in prefabGUIDs)
-        {
-            // 프리팹 경로를 실제 프리팹으로 변환
-            string prefabPath = AssetDatabase.GUIDToAssetPath(prefabGUID);
-
-            // 프리팹을 가져오기
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-            cardListData.Add(prefab);
-            // 프리팹이 유효하고, 해당 프리팹이 해당 조건을 만족하는 경우 반환
-            if (prefab != null)
-            {
-                Card myScriptComponent = prefab.GetComponent<Card>();
-                myScriptComponent.DataInit();
-
-                // 스크립트 컴포넌트가 존재하고, targetId와 일치하는 경우 해당 프리팹 반환
-                if (myScriptComponent != null && myScriptComponent.info.Id == targetId)
-                {
-                    return prefab;
-                }
-            }
-        }
-        return null;*/
         string[] searchFolderPaths = new string[]
- {
-    "Prefabs/Cards/Sword",
-    "Prefabs/Cards/Bow",
-    "Prefabs/Cards/Magic",
-    "Prefabs/Cards/Default"
- };
+         {
+            "Prefabs/Cards/Sword",
+            "Prefabs/Cards/Bow",
+            "Prefabs/Cards/Magic",
+            "Prefabs/Cards/Default"
+         };
 
         foreach (string searchFolderPath in searchFolderPaths)
         {
@@ -2268,9 +2268,6 @@ public class StudyUIManager : MonoBehaviour
             {
                 Card myScriptComponent = prefab.GetComponent<Card>();
                 myScriptComponent.Init();
-                Debug.Log(myScriptComponent);
-                Debug.Log(myScriptComponent.info.Id);
-
                 if (myScriptComponent != null && myScriptComponent.info.Id == targetId)
                 {
                     cardListData.Add(prefab);
@@ -2282,6 +2279,7 @@ public class StudyUIManager : MonoBehaviour
 
         return null;
     }
+    //모든 작업이 긑나고 데이터를 저장한뒤 배틀씬으로 넘어가는 메소드
     public void EndStudy()
     {
         GameObject dataObject = GameObject.FindGameObjectWithTag("PlayerData");
@@ -2294,6 +2292,8 @@ public class StudyUIManager : MonoBehaviour
         SaveData();
         SceneManager.LoadScene("TestScene2");
     }
+
+    //가지고있는 카드의 종류에 따라 캐릭터가 어떤 무기를 들어야 하는지 결정하는 메소드
     public WeaponType SelectWeaponType()
     {
         int swordNum = 0;
@@ -2332,8 +2332,7 @@ public class StudyUIManager : MonoBehaviour
             return WeaponType.SWORD;
         }
     }
-
-
+    //캐릭터가 가진 카드에 따라 무기스프라이트를 변경하는 메소드
     public int SelectSprite()
     {
         int swordNum = 0;
@@ -2373,30 +2372,21 @@ public class StudyUIManager : MonoBehaviour
         }
     }
 
-
-
+    //CaracterData에 저장한 변수를 직렬화하여 바이너리로 저장하는 메소드
     public void SaveData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
         string filePath = Path.Combine(Application.persistentDataPath, saveSlot.ToString()+".dat");
         FileStream fileStream = File.Create(filePath);
-        saveData = data.info;
-        Debug.Log(saveData.chrId);
-        Debug.Log(saveData.chrCardIds[0]);
-        Debug.Log(saveData.chrCardIds[1]);
-        Debug.Log(data.info.chrMaxHp);
-        Debug.Log(data.info.chrDefense);
-
-
         // 이제 SaveData() 메서드 내에서 직렬화할 데이터는 DefaultCharacterData 인스턴스인 info입니다.
+        saveData = data.info;
         formatter.Serialize(fileStream, saveData);
         fileStream.Close();
         string dataPath = Application.persistentDataPath;
-        Debug.Log("Persistent Data Path: " + dataPath);
-        Debug.Log("캐릭터 데이터를 바이너리로 저장했습니다.");
     }
-
+    
+    //1번 데이터 파일을 불러오는 메소드
     private int LoadCharacterData0()
     {
         string filePath = Path.Combine(Application.persistentDataPath, 0.ToString()+".dat");
@@ -2426,6 +2416,7 @@ public class StudyUIManager : MonoBehaviour
             return 1;
         }
     }
+    //2번 데이터 파일을 불러오는 메소드
     private int LoadCharacterData1()
     {
         string filePath = Path.Combine(Application.persistentDataPath, 1.ToString() + ".dat");
@@ -2447,6 +2438,7 @@ public class StudyUIManager : MonoBehaviour
             return 1;
         }
     }
+    //3번 데이터 파일을 불러오는 메소드
     private int LoadCharacterData2()
     {
         string filePath = Path.Combine(Application.persistentDataPath, 2.ToString() + ".dat");
@@ -2469,7 +2461,7 @@ public class StudyUIManager : MonoBehaviour
         }
     }
 
-    // CharacterData 클래스의 데이터를 설정
+    // CharacterData 클래스의 데이터를 입력하는 메소드
     public void SetCharacterData(int id, string name, int lv, int maxHp, int attackDmg, int defense, WeaponType weaponName, int img, List<int> chrCardnum1)//캐릭터 저장용
     {
         data.DataInit(id, name, lv, maxHp, attackDmg, defense, weaponName, img, chrCardnum1);

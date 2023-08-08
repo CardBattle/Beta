@@ -975,7 +975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156254091}
   m_Layer: 5
-  m_Name: DataUi
+  m_Name: DataUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2065,7 +2065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366602866}
   m_Layer: 5
-  m_Name: StartUi
+  m_Name: StartUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2368,7 +2368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 529049109}
   m_Layer: 5
-  m_Name: UiMassage
+  m_Name: UIMassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4365,7 +4365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1012887259}
   m_Layer: 5
-  m_Name: StudingUi
+  m_Name: StudingUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5012,7 +5012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1209525329}
   m_Layer: 5
-  m_Name: StudyUi
+  m_Name: StudyUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6562,6 +6562,13 @@ MonoBehaviour:
   upgradeBoxImage:
   - {fileID: 534457289}
   - {fileID: 848240211}
+  studyViewImage: {fileID: 1709586615}
+  cardImage:
+  - {fileID: 57512281}
+  - {fileID: 1262382775}
+  - {fileID: 1521783682}
+  - {fileID: 163418759}
+  - {fileID: 1390714319}
   cardSprite:
   - {fileID: 236560719, guid: 673eabdb08b055f448614b4050dff506, type: 3}
   - {fileID: -1926269897, guid: 673eabdb08b055f448614b4050dff506, type: 3}
@@ -6599,8 +6606,6 @@ MonoBehaviour:
   - {fileID: -1392975799, guid: 673eabdb08b055f448614b4050dff506, type: 3}
   - {fileID: -922167831, guid: 2ec7d5bc3efca094caba8a66f84c2db0, type: 3}
   - {fileID: -636420917, guid: 2ec7d5bc3efca094caba8a66f84c2db0, type: 3}
-  weaponSprite: {fileID: 1689797715306024399}
-  studyViewImage: {fileID: 1709586615}
   studyViewResources:
   - {fileID: 21300000, guid: 066cc7941702be2409b4c86b8dac4ea9, type: 3}
   - {fileID: 21300000, guid: 44bc22e752a59fb4e810a3fd590b3f2c, type: 3}
@@ -6609,12 +6614,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 066cc7941702be2409b4c86b8dac4ea9, type: 3}
   - {fileID: 21300000, guid: 44bc22e752a59fb4e810a3fd590b3f2c, type: 3}
   - {fileID: 21300000, guid: 51daaa8b123334840bb1c886b42422e8, type: 3}
-  cardImage:
-  - {fileID: 57512281}
-  - {fileID: 1262382775}
-  - {fileID: 1521783682}
-  - {fileID: 163418759}
-  - {fileID: 1390714319}
+  weaponSprite: {fileID: 1689797715306024399}
   mainCamera: {fileID: 1309811079}
   saveInfo:
   - {fileID: 455737561}
@@ -6639,17 +6639,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
   - {fileID: 8300000, guid: b0e62ed71b1538648b719821f4f63b4c, type: 3}
   - {fileID: 8300000, guid: aa967a280457c054bb646d57611f5bd0, type: 3}
-  startUi: {fileID: 366602865}
-  dataUi: {fileID: 156254090}
-  studyUi: {fileID: 1209525328}
-  studingUi: {fileID: 1012887258}
-  statUi: {fileID: 53914493}
-  selectCardUi: {fileID: 1611714699}
+  startUI: {fileID: 366602865}
+  dataUI: {fileID: 156254090}
+  studyUI: {fileID: 1209525328}
+  studingUI: {fileID: 1012887258}
+  statUI: {fileID: 53914493}
+  selectCardUI: {fileID: 1611714699}
   startButton: {fileID: 1190053642}
   message: {fileID: 176193687}
-  cardUi: {fileID: 1572722269}
-  getCardUi: {fileID: 1657214373}
-  upgradeCardUi: {fileID: 1857825814}
+  cardUI: {fileID: 1572722269}
+  getCardUI: {fileID: 1657214373}
+  upgradeCardUI: {fileID: 1857825814}
   fstCard1: {fileID: 1723772405}
   fstCard2: {fileID: 2134994058}
   endStudy: {fileID: 1091610498}
@@ -7568,7 +7568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1572722270}
   m_Layer: 5
-  m_Name: CardUi
+  m_Name: CardUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7821,7 +7821,7 @@ GameObject:
   - component: {fileID: 1611391068}
   - component: {fileID: 1611391069}
   m_Layer: 5
-  m_Name: TutorialUi
+  m_Name: TutorialUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
