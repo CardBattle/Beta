@@ -996,7 +996,6 @@ RectTransform:
   - {fileID: 1328920763}
   - {fileID: 629958124}
   - {fileID: 72829413}
-  - {fileID: 1611391068}
   m_Father: {fileID: 171031955}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1261,6 +1260,7 @@ RectTransform:
   - {fileID: 176193688}
   - {fileID: 156254091}
   - {fileID: 529049109}
+  - {fileID: 1611391068}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3871,18 +3871,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bb4b7a8022af82e409e02fe14748dc33, type: 3}
-    m_FontSize: 26
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 2
+    m_MaxSize: 220
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SLECT
+  m_Text: SELECT
 --- !u!222 &898756482
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6659,7 +6659,6 @@ MonoBehaviour:
   - {fileID: 6263782476919498309, guid: 1fd2749f2a4056446881dce86ed70c39, type: 3}
   - {fileID: 5824670795371433373, guid: dd996a8b012012a42ab5ec53219035b4, type: 3}
   - {fileID: 5824670795371433373, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
-  babyAni: {fileID: 1501314691422479791}
   baby: {fileID: 1819509624209304849}
   getCardList:
   - {fileID: 0}
@@ -7844,8 +7843,8 @@ RectTransform:
   - {fileID: 651030902}
   - {fileID: 1283575340}
   - {fileID: 1915421985}
-  m_Father: {fileID: 156254091}
-  m_RootOrder: 3
+  m_Father: {fileID: 171031955}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

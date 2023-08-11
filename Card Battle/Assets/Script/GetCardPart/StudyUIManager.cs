@@ -183,6 +183,7 @@ public class StudyUIManager : MonoBehaviour
     //변수 초기화
     public void studyReset()
     {
+        Time.timeScale = 1;
         studyViewNum = 0;
         studyViewImage.sprite = studyViewResources[studyViewNum];
         selectStudy = new List<int>();
@@ -207,6 +208,7 @@ public class StudyUIManager : MonoBehaviour
         studingResult[1].text = null;
         studingResult[2].text = null;
         studyState = StudyState.first;
+        
         cardList = new List<int>();
         order = 0;
         searchCount = 0;
